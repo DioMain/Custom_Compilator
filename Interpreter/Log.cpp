@@ -79,16 +79,24 @@ namespace Log {
 		*stream << " -log: " << nowstr << endl;
 	}
 
-	//void Logging::WriteIn(log lg, In::in inner) {
-	//	if (stream == nullptr || !stream->is_open()) return;
-	//}
+	void Logging::WriteIn(In::InFile in) {
+		if (stream == nullptr || !stream->is_open()) return;
 
-	void Logging::WriteError(Error::ErrorBase error) {
+		*stream << "<-------------- Исходные данные --------------->" << endl;
+
+		*stream << " Кол-во символов: " << in.SizeOfCode << endl;
+		*stream << " Кол-во строк: " << in.LinesCount << endl;
+		*stream << " Проигнорировано: " << in.IgnoreCount << endl;
+	}
+
+	void Logging::WriteError(Error::ErrorBase* error) {
 		if (stream == nullptr || !stream->is_open()) return;
 
 		*stream << endl;
 
-		*stream << error.ToString() << endl;
+		*stream << "<------------- Информация об ошибке -------------->" << endl;
+
+		*stream << error->ToString() << endl;
 	}
 
 	void Logging::Close() {

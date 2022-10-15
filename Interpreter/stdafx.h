@@ -10,4 +10,5 @@
 
 #include "Error.h"
 #include "ParmAnalyzer.h"
+#include "InFile.h"
 #include "Log.h"

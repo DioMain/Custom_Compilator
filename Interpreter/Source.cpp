@@ -5,6 +5,7 @@ using namespace std;
 using namespace Error;
 using namespace Parm;
 using namespace Log;
+using namespace In;
 
 int _tmain(int argc, TCHAR* argv[]) {
 	setlocale(LC_ALL, "RUS");
@@ -13,6 +14,7 @@ int _tmain(int argc, TCHAR* argv[]) {
 
 	ParmAnalyzer parm(argv, argc);
 	Logging log;
+	InFile in;
 
 	try
 	{
@@ -23,18 +25,27 @@ int _tmain(int argc, TCHAR* argv[]) {
 		log.WriteHeader();
 		log.WriteParm(parm);
 
+		in = InFile(parm.InPath);
+
+		in.Invoke();
+		in.Close();
+
+		log.WriteIn(in);
+
+		cout << in.Code << endl;
+
 		cout << "Завершено без ошибок!" << endl;
 	}
 	catch (LineError err)
 	{
-		log.WriteError(err);
+		log.WriteError(&err);
 
 		cout << "Работа завершина с ошибками!" << endl;
 		cout << err.ToString() << endl;
 	}
 	catch (ErrorBase err)
 	{
-		log.WriteError(err);
+		log.WriteError(&err);
 
 		cout << "Работа завершина с ошибками!" << endl;
 		cout << err.ToString() << endl;

@@ -4,7 +4,7 @@
 #define PARM_OUT L"-out:"
 #define PARM_LOG L"-log:"
 
-#define PARM_MAX_SIZE 1 // Максимальный размер аргумента ключа
+#define PARM_MAX_SIZE 300 // Максимальный размер аргумента ключа
 
 #define PARM_OUT_DEF_EXT L".out" // Стандартное расширение выходного файла
 #define PARM_LOG_DEF_EXT L".log" // Стандартное расширение файла журнала

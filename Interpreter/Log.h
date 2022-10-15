@@ -20,10 +20,10 @@ namespace Log {
 		void WriteParm(Parm::ParmAnalyzer parm);
 
 		// Записывает в log фаил инфармацию об входных данных
-		//void WriteIn(log lg, In::in inner);
+		void WriteIn(In::InFile in);
 
 		// Записывает в log фаил инфармацию об ошибке
-		void WriteError(Error::ErrorBase error);
+		void WriteError(Error::ErrorBase* error);
 
 		// Закрывает поток log файла
 		void Close();
