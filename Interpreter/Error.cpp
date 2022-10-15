@@ -5,9 +5,9 @@ using namespace std;
 namespace Error {
 
 	// Legacy
-	static ErrorBase ErrorsPool[MAX_ERRORS_COUNT]{
-		ERROR_THROW(0, "Недопустимый код ошибки"),
-		ERROR_THROW(1, "Системный збой"),
+	static ErrorBase ErrorsPool[MAX_ERRORS_COUNT] = {
+		ERROR_THROW_C(0, "Недопустимый код ошибки"),
+		ERROR_THROW_C(1, "Системный збой"),
 
 		ERROR_THROW_NODEF(2), ERROR_THROW_NODEF(3), ERROR_THROW_NODEF(4), ERROR_THROW_NODEF(5),
 		ERROR_THROW_NODEF(6), ERROR_THROW_NODEF(7), ERROR_THROW_NODEF(8), ERROR_THROW_NODEF(9),
@@ -15,18 +15,18 @@ namespace Error {
 		ERROR_THROW_NODEF10(10), ERROR_THROW_NODEF10(20), ERROR_THROW_NODEF10(30), ERROR_THROW_NODEF10(40), ERROR_THROW_NODEF10(50),
 		ERROR_THROW_NODEF10(60), ERROR_THROW_NODEF10(70), ERROR_THROW_NODEF10(80), ERROR_THROW_NODEF10(90),
 
-		ERROR_THROW(100, "Параметр -IN должен быть задан!"),
+		ERROR_THROW_C(100, "Параметр -IN должен быть задан!"),
 
 		ERROR_THROW_NODEF(101), ERROR_THROW_NODEF(102), ERROR_THROW_NODEF(103),
 
-		ERROR_THROW(104, "Превышена длинна входного пораметра!"),
+		ERROR_THROW_C(104, "Превышена длинна входного пораметра!"),
 
 		ERROR_THROW_NODEF(105), ERROR_THROW_NODEF(106), ERROR_THROW_NODEF(107), ERROR_THROW_NODEF(108), ERROR_THROW_NODEF(109),
 
-		ERROR_THROW(110, "Ошибка при открытии файла [-IN]"),
-		ERROR_THROW(111, "Недопустимый символ в исходном файле [-IN]"),
-		ERROR_THROW(112, "Ошибка при создании файла протакола [-log]"),
-		ERROR_THROW(113, "Ошибка при создании файла результата трансляции [-out]"),
+		ERROR_THROW_C(110, "Ошибка при открытии файла [-IN]"),
+		ERROR_THROW_C(111, "Недопустимый символ в исходном файле [-IN]"),
+		ERROR_THROW_C(112, "Ошибка при создании файла протакола [-log]"),
+		ERROR_THROW_C(113, "Ошибка при создании файла результата трансляции [-out]"),
 
 		ERROR_THROW_NODEF(114), ERROR_THROW_NODEF(115),
 		ERROR_THROW_NODEF(116), ERROR_THROW_NODEF(117), ERROR_THROW_NODEF(118), ERROR_THROW_NODEF(119),

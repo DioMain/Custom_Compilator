@@ -3,10 +3,13 @@
 #define ERROR_MAXSIZE_MESSAGE 300	// Максимальный размер сообщения ошибки
 
 #define ERROR_THROW_EMPTY Error::ErrorBase()
-#define ERROR_THROW(id, message) Error::ErrorBase(id, message)
-#define ERROR_THROW_IN(id, message, line, letter) Error::LineError(id, message, line, letter)
+#define ERROR_THROW_C(id, message) Error::ErrorBase(id, message)
+#define ERROR_THROW_IN_C(id, message, line, letter) Error::LineError(id, message, line, letter)
 
-#define ERROR_THROW_NODEF(id) ERROR_ENTRY(id, "Неопределённая ошибка")	// Далее идёт генерация пустых ошибок
+#define ERROR_THROW(id) Error::GetError(id)
+#define ERROR_THROW_IN(id, line, letter) Error::GetError(id, line, letter)
+
+#define ERROR_THROW_NODEF(id) ERROR_THROW(id, "Неопределённая ошибка")	// Далее идёт генерация пустых ошибок
 
 #define ERROR_THROW_NODEF10(id) ERROR_THROW_NODEF(id + 0), ERROR_THROW_NODEF(id + 1), ERROR_THROW_NODEF(id + 2), ERROR_THROW_NODEF(id + 3), ERROR_THROW_NODEF(id + 4), \
 								ERROR_THROW_NODEF(id + 5), ERROR_THROW_NODEF(id + 6), ERROR_THROW_NODEF(id + 7), ERROR_THROW_NODEF(id + 8), ERROR_THROW_NODEF(id + 9)
@@ -45,7 +48,6 @@ namespace Error {
 	};
 
 
-	static ErrorBase GetError(int id);
-
-	static LineError GetError(int id, int line, int letter);
+	ErrorBase GetError(int id);
+	LineError GetError(int id, int line, int letter);
 }
