@@ -1,5 +1,21 @@
 #pragma once
 
+#define ERROR_MAXSIZE_MESSAGE 300	// Максимальный размер сообщения ошибки
+
+#define ERROR_THROW_EMPTY Error::ErrorBase()
+#define ERROR_THROW(id, message) Error::ErrorBase(id, message)
+#define ERROR_THROW_IN(id, message, line, letter) Error::LineError(id, message, line, letter)
+
+#define ERROR_THROW_NODEF(id) ERROR_ENTRY(id, "Неопределённая ошибка")	// Далее идёт генерация пустых ошибок
+
+#define ERROR_THROW_NODEF10(id) ERROR_THROW_NODEF(id + 0), ERROR_THROW_NODEF(id + 1), ERROR_THROW_NODEF(id + 2), ERROR_THROW_NODEF(id + 3), ERROR_THROW_NODEF(id + 4), \
+								ERROR_THROW_NODEF(id + 5), ERROR_THROW_NODEF(id + 6), ERROR_THROW_NODEF(id + 7), ERROR_THROW_NODEF(id + 8), ERROR_THROW_NODEF(id + 9)
+
+#define ERROR_THROW_NODEF100(id) ERROR_THROW_NODEF10(id + 0), ERROR_THROW_NODEF10(id + 10), ERROR_THROW_NODEF10(id + 20), ERROR_THROW_NODEF10(id + 30), ERROR_THROW_NODEF10(id + 40), \
+								 ERROR_THROW_NODEF10(id + 50), ERROR_THROW_NODEF10(id + 60), ERROR_THROW_NODEF10(id + 70), ERROR_THROW_NODEF10(id + 80), ERROR_THROW_NODEF10(id + 90)
+
+#define MAX_ERRORS_COUNT 1000
+
 namespace Error {
 	class ErrorBase
 	{
@@ -27,4 +43,9 @@ namespace Error {
 
 		std::string ToString() override;
 	};
+
+
+	static ErrorBase GetError(int id);
+
+	static LineError GetError(int id, int line, int letter);
 }
