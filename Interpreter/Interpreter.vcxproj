@@ -131,6 +131,7 @@
   <ItemGroup>
     <ClCompile Include="Error.cpp" />
     <ClCompile Include="InFile.cpp" />
+    <ClCompile Include="Data.cpp" />
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="ParmAnalyzer.cpp" />
     <ClCompile Include="Source.cpp">
@@ -138,8 +139,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CodeAnalyzer.h" />
     <ClInclude Include="Error.h" />
     <ClInclude Include="InFile.h" />
+    <ClInclude Include="Data.h" />
     <ClInclude Include="Log.h" />
     <ClInclude Include="ParmAnalyzer.h" />
     <ClInclude Include="stdafx.h" />

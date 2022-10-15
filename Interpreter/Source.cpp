@@ -6,6 +6,7 @@ using namespace Error;
 using namespace Parm;
 using namespace Log;
 using namespace In;
+using namespace Parsing;
 
 int _tmain(int argc, TCHAR* argv[]) {
 	setlocale(LC_ALL, "RUS");
