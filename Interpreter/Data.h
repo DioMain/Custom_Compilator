@@ -1,8 +1,10 @@
 #pragma once
 
+#define PARSING_UNDEF_LEXEM_NAME "$$$"
+
 namespace Parsing {
 	enum class LexemType {
-		Void, Var, VarType, Indefier, Literal, Equals, LineEnd
+		Void, Var, VarType, Indefier, Literal, Equals, CommandEnd
 	};
 
 	enum class LinkType {

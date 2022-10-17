@@ -9,9 +9,9 @@ namespace Log {
 		Logging(wchar_t* path);
 
 		// «аписывает массив строк в log фаил, последн€€ строка должна быть пустой (char)
-		void WriteLine(char* str ...);
+		void WriteLine(const char* str ...);
 		// «аписывает массив строк в log фаил, последн€€ строка должна быть пустой (wchar_t)
-		void WriteLine(wchar_t* str ...);
+		void WriteLine(const wchar_t* str ...);
 
 		// «аписывает в log фаил инфармацию о протоколе
 		void WriteHeader();

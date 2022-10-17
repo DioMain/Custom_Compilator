@@ -9,7 +9,7 @@ namespace Log {
 		if (!stream->is_open()) throw ERROR_THROW(112);
 	}
 
-	void Logging::WriteLine(char* str ...) {
+	void Logging::WriteLine(const char* str ...) {
 		if (stream == nullptr || !stream->is_open()) return;
 
 		char* nowstr = nullptr;
@@ -17,7 +17,7 @@ namespace Log {
 		int n = 0;
 		do
 		{
-			nowstr = *(&str + n);
+			nowstr = (char*)(*(&str + n));
 
 			*stream << nowstr;
 
@@ -25,7 +25,7 @@ namespace Log {
 
 		} while (strlen(nowstr) != 0);
 	}
-	void Logging::WriteLine(wchar_t* str ...) {
+	void Logging::WriteLine(const wchar_t* str ...) {
 		if (stream == nullptr || !stream->is_open()) return;
 
 		char* nowstr = nullptr;
