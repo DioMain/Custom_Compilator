@@ -135,6 +135,7 @@
     <ClCompile Include="Data.cpp" />
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="ParmAnalyzer.cpp" />
+    <ClCompile Include="PolandNatation.cpp" />
     <ClCompile Include="Source.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
@@ -146,6 +147,7 @@
     <ClInclude Include="Data.h" />
     <ClInclude Include="Log.h" />
     <ClInclude Include="ParmAnalyzer.h" />
+    <ClInclude Include="PolandNatation.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

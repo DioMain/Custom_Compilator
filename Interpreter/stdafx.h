@@ -7,10 +7,12 @@
 #include <string>
 #include <strstream>
 #include <vector>
+#include <stack>
 
 #include "Error.h"
 #include "ParmAnalyzer.h"
 #include "InFile.h"
 #include "Log.h"
+#include "PolandNatation.h"
 #include "Data.h"
 #include "CodeAnalyzer.h"

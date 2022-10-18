@@ -11,7 +11,8 @@ namespace Parsing {
 		bool LEX_END = false,
 			COM_END = false,
 			CODE_END = false,
-			LINE_END = false;
+			LINE_END = false,
+			POLAND = false;
 
 		int index = 0,
 			letI = 0,
@@ -28,8 +29,7 @@ namespace Parsing {
 
 			if (CODE_END) break;
 
-			// Some calculate
-	
+			// Some calculate	
 
 			if (!LINE_END) letI++;
 			else {

@@ -4,7 +4,7 @@
 
 namespace Parsing {
 	enum class LexemType {
-		Void, Var, VarType, Indefier, Literal, Equals, CommandEnd
+		Void, Var, VarType, Indefier, Literal, Poland, Equals, CommandEnd
 	};
 
 	enum class LinkType {

@@ -7,6 +7,7 @@ using namespace Parm;
 using namespace Log;
 using namespace In;
 using namespace Parsing;
+using namespace poland;
 
 int _tmain(int argc, TCHAR* argv[]) {
 	setlocale(LC_ALL, "RUS");
@@ -53,6 +54,12 @@ int _tmain(int argc, TCHAR* argv[]) {
 		cout << in.Code << endl;
 
 		cout << "Завершено без ошибок!" << endl;
+
+		PolandNatation pol("1+2*3+4-5");
+
+		cout << pol.ToString() << endl;
+
+		cout << pol.CalculateResult() << endl;
 	}
 	catch (LineError err)
 	{

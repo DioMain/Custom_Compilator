@@ -15,6 +15,7 @@ namespace Parsing {
 		BasicLexems.push_back(Lexem(LexemType::Equals, "="));
 
 		BasicLexems.push_back(Lexem(LexemType::Literal, PARSING_UNDEF_LEXEM_NAME));
+		BasicLexems.push_back(Lexem(LexemType::Poland, PARSING_UNDEF_LEXEM_NAME));
 
 		BasicLexems.push_back(Lexem(LexemType::CommandEnd, ";"));
 	}
