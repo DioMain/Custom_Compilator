@@ -129,7 +129,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="CodeAnalyzer.cpp" />
+    <ClCompile Include="LexAnalyzer.cpp" />
     <ClCompile Include="Error.cpp" />
     <ClCompile Include="InFile.cpp" />
     <ClCompile Include="Data.cpp" />
@@ -141,7 +141,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CodeAnalyzer.h" />
+    <ClInclude Include="LexAnalyzer.h" />
     <ClInclude Include="Error.h" />
     <ClInclude Include="InFile.h" />
     <ClInclude Include="Data.h" />

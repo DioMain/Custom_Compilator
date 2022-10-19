@@ -15,4 +15,4 @@
 #include "Log.h"
 #include "PolandNatation.h"
 #include "Data.h"
-#include "CodeAnalyzer.h"
+#include "LexAnalyzer.h"

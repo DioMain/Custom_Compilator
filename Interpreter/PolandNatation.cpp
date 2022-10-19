@@ -155,6 +155,8 @@ namespace poland {
 		{
 			if (str[i] != ' ' && str[i] != '\0') check += str[i];
 			else {
+				if (check.empty()) break;
+
 				if (IsNumber(check)) {
 					a = 0;
 

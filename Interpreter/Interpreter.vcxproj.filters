@@ -33,7 +33,7 @@
     <ClCompile Include="Data.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="CodeAnalyzer.cpp">
+    <ClCompile Include="LexAnalyzer.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="PolandNatation.cpp">
@@ -56,7 +56,7 @@
     <ClInclude Include="InFile.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="CodeAnalyzer.h">
+    <ClInclude Include="LexAnalyzer.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Data.h">

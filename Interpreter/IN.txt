@@ -1,1 +1,1 @@
-declare integer      HESOYAM =      26    ;
+declare integer HESOYAM = 26;

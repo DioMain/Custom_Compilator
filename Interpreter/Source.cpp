@@ -17,7 +17,7 @@ int _tmain(int argc, TCHAR* argv[]) {
 	ParmAnalyzer parm(argv, argc);
 	Logging log;
 	InFile in;
-	CodeAnalyzer analyzer;
+	LexAnalyzer lex;
 
 	DataContainer* container = nullptr;
 
@@ -47,19 +47,13 @@ int _tmain(int argc, TCHAR* argv[]) {
 
 		container->Init();
 
-		analyzer = CodeAnalyzer(in.Code, container);
+		lex = LexAnalyzer(in.Code, container);
 
-		analyzer.Invoke();
+		lex.Invoke();
 
 		cout << in.Code << endl;
 
 		cout << "Завершено без ошибок!" << endl;
-
-		PolandNatation pol("1+2*3+4-5");
-
-		cout << pol.ToString() << endl;
-
-		cout << pol.CalculateResult() << endl;
 	}
 	catch (LineError err)
 	{
