@@ -51,7 +51,8 @@ int _tmain(int argc, TCHAR* argv[]) {
 
 		lex.Invoke();
 
-		cout << in.Code << endl;
+		log.WriteLine("\n\n<===== Результат лексического анализатора =====>\n", "");
+		log.WriteData(*container);
 
 		cout << "Завершено без ошибок!" << endl;
 	}

@@ -19,6 +19,8 @@ namespace Log {
 		// Записывает в log фаил инфармацию о входных параметрах
 		void WriteParm(Parm::ParmAnalyzer parm);
 
+		void WriteData(Parsing::DataContainer data);
+
 		// Записывает в log фаил инфармацию об входных данных
 		void WriteIn(In::InFile in);
 

@@ -160,9 +160,9 @@ namespace poland {
 				if (IsNumber(check)) {
 					a = 0;
 
-					for (int j = check.size() - 1; j >= 0; j--)
+					for (int j = 0; j < check.size(); j++)
 					{
-						a += (check[j] - 0x30) * (pow(10, j));
+						a += (check[j] - 0x30) * (pow(10, check.size() - 1 - j));
 					}
 
 					numbers.push(a);

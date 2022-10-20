@@ -1,10 +1,15 @@
 #pragma once
 
 #define PARSING_UNDEF_LEXEM_NAME "$$$"
+#define PARSING_COMMAND_END_LEXEM Parsing::Lexem(Parsing::LexemType::CommandEnd, ";")
+#define PARSING_VOID_LEXEM Parsing::Lexem(Parsing::LexemType::Void, "void")
+#define PARSING_VAR_LEXEM Parsing::Lexem(Parsing::LexemType::Var, "Var")
+
+#define PARSING_VAR_UNINIT -1
 
 namespace Parsing {
 	enum class LexemType {
-		Void, Error, Var, VarType, Indefier, Literal, Poland, Equals, CommandEnd
+		Void, Declare, Var, VarType, Indefier, Literal, Poland, Equals, CommandEnd
 	};
 
 	enum class LinkType {
@@ -20,18 +25,20 @@ namespace Parsing {
 	{
 		std::string data;
 
-		Literal() : data() { }
+		Literal() : data("") { }
 	};
 
 	struct Var
 	{
 		VarType type;
 
-		std::string name;
+		std::string indefier;
 
 		int literalIndex;
 
-		Var() : type(VarType::Void), name(), literalIndex(-1) { }
+		Var() : type(VarType::Void), indefier(), literalIndex(PARSING_VAR_UNINIT) { }
+
+		Var(std::string typeName);
 	};
 
 	struct Lexem {
@@ -57,6 +64,10 @@ namespace Parsing {
 		std::vector<Lexem*> Lexems;
 		std::vector<Var*> Vars;
 		std::vector<Literal*> Literals;
+
+		Lexem GetBasicLexem(std::string name);
+
+		Var* GetVar(std::string indifier);
 
 		void Init();
 

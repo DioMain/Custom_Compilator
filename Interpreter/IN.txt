@@ -1,1 +1,11 @@
-declare integer HESOYAM = 26;
+declare declare declare declare integer i0 = 1251;
+
+integer i1;
+integer i2 = 24;
+
+i1 = 573;
+
+integer result = ( i2 + i1 ) * i0;
+
+declare string str = "Im boss of the gym!!!";
+

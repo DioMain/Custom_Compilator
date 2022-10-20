@@ -79,6 +79,51 @@ namespace Log {
 		*stream << " -log: " << nowstr << endl;
 	}
 
+	void Logging::WriteData(Parsing::DataContainer data) {
+		if (stream == nullptr || !stream->is_open()) return;
+
+		*stream << endl;
+
+		*stream << "--------------------------------------------" << endl;
+		*stream << "                Таблица лексем" << endl;
+		*stream << "#-Тип---Цепочка----Тип ссылки----Ссылка-----" << endl;
+		*stream << "--------------------------------------------" << endl;
+		
+		for (int i = 0; i < data.Lexems.size(); i++)
+		{
+			*stream << "|" << i << "| " 
+				<< (int)data.Lexems[i]->type
+				<< " " << data.Lexems[i]->name 
+				<< " " << (int)data.Lexems[i]->linkType 
+				<< " " << data.Lexems[i]->linkIndex << endl;
+		}
+
+		*stream << "--------------------------------------------" << endl;
+		*stream << "              Таблица переменных" << endl;
+		*stream << "#-Тип---Идентификатор---Ссылка на литерал---" << endl;
+		*stream << "--------------------------------------------" << endl;
+
+		for (int i = 0; i < data.Vars.size(); i++)
+		{
+			*stream << "|" << i << "| " 
+				<< (int)data.Vars[i]->type
+				<< " " << data.Vars[i]->indefier
+				<< " " << data.Vars[i]->literalIndex << endl;
+		}
+
+
+		*stream << "--------------------------------------------" << endl;
+		*stream << "              Таблица литералов" << endl;
+		*stream << "#----Данные---------------------------------" << endl;
+		*stream << "--------------------------------------------" << endl;
+
+		for (int i = 0; i < data.Literals.size(); i++)
+		{
+			*stream << "|" << i << "| "
+				<< data.Literals[i]->data << endl;
+		}
+	}
+
 	void Logging::WriteIn(In::InFile in) {
 		if (stream == nullptr || !stream->is_open()) return;
 

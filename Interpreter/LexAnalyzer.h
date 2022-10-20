@@ -6,6 +6,8 @@
 #define PARSING_CODE_END '\0'
 #define PARSING_STRING '\"'
 
+#define PARSING_LITERA_LEXEM(id) Parsing::Lexem(Parsing::LexemType::Literal, PARSING_UNDEF_LEXEM_NAME, Parsing::LinkType::Literal, id)
+
 namespace Parsing {
 	class LexAnalyzer
 	{
@@ -19,21 +21,30 @@ namespace Parsing {
 
 	private:
 
-		void LexSwitch(Lexem lex);
+		std::string ExpressionConvert(std::string exp);
 
-		Lexem GetLexem(std::string lexString);
+		void LexSwitch(Lexem lex);
 
 		Lexem CreateVar(std::string indefier);
 
-		Lexem CreateLiteral(std::string literal);
+		Lexem CreateLiteral();
+
+		Var* CurVar = nullptr;
+
+		std::string databuffer;
 
 		bool LEX_END = false,
 			COM_END = false,
 			CODE_END = false,
 			LINE_END = false,
+			ISRIGHT_EXP = false,
 			LITERAL = false,
 			EXPRESSION = false,
 			INDEFIER = false;
+
+		int index = 0,
+			letI = 0,
+			lineI = 0;
 
 		char* code;
 
