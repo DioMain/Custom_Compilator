@@ -5,9 +5,13 @@ namespace poland {
 	{
 	public:
 
-		PolandNatation(std::string str) : str(str) { CONVERT(); }
+		Error::PolandError error;
+
+		bool failed;
 
 		std::string ToString() { return str; }
+
+		PolandNatation(std::string str) : str(str), error(), failed(false) { CONVERT(); }
 
 		int CalculateResult();
 
@@ -19,8 +23,8 @@ namespace poland {
 
 	private:
 
-		void CONVERT();
-
 		std::string str;
+
+		void CONVERT();
 	};
 }

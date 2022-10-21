@@ -129,6 +129,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AdditionFunctions.cpp" />
     <ClCompile Include="LexAnalyzer.cpp" />
     <ClCompile Include="Error.cpp" />
     <ClCompile Include="InFile.cpp" />
@@ -141,6 +142,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AdditionFunctions.h" />
     <ClInclude Include="LexAnalyzer.h" />
     <ClInclude Include="Error.h" />
     <ClInclude Include="InFile.h" />

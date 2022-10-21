@@ -47,6 +47,21 @@ namespace Error {
 		std::string ToString() override;
 	};
 
+	class PolandError : public ErrorBase
+	{
+	public:
+
+		int offset;
+
+		PolandError() : ErrorBase(), offset(0) { }
+
+		PolandError(int id, std::string message, int offset) : ErrorBase(id, message), offset(offset) { }
+
+		std::string ToString() override;
+
+	private:
+
+	};
 
 	ErrorBase GetError(int id);
 	LineError GetError(int id, int line, int letter);

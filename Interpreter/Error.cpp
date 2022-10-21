@@ -46,14 +46,23 @@ namespace Error {
 
 		return result.str();
 	}
-
 	string LineError::ToString()
 	{
 		string base = ErrorBase::ToString();
 
 		strstream result;
 
-		result << endl << "Line index: " << lineIndex << ", Letter index: " << letterIndex << '\0';
+		result << endl << "Line index: " << lineIndex + 1 << ", Letter index: " << letterIndex + 1 << '\0';
+
+		return base + result.str();
+	}
+	string PolandError::ToString()
+	{
+		string base = ErrorBase::ToString();
+
+		strstream result;
+
+		result << endl << "Expression offset: " << offset << '\0';
 
 		return base + result.str();
 	}

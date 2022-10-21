@@ -13,34 +13,15 @@ namespace Parsing {
 	{
 	public:
 
-		LexAnalyzer() : data(nullptr), code(nullptr) { }
+		LexAnalyzer() : data(nullptr), code(nullptr), varTypeBuffer(VarType::Void) { }
 
-		LexAnalyzer(char* code, DataContainer* data) : code(code), data(data) { }
+		LexAnalyzer(char* code, DataContainer* data) : code(code), data(data), varTypeBuffer(VarType::Void) { }
 
 		void Invoke();
 
 	private:
 
-		std::string ExpressionConvert(std::string exp);
-
-		void LexSwitch(Lexem lex);
-
-		Lexem CreateVar(std::string indefier);
-
-		Lexem CreateLiteral();
-
-		Var* CurVar = nullptr;
-
-		std::string databuffer;
-
-		bool LEX_END = false,
-			COM_END = false,
-			CODE_END = false,
-			LINE_END = false,
-			ISRIGHT_EXP = false,
-			LITERAL = false,
-			EXPRESSION = false,
-			INDEFIER = false;
+		DataContainer* data;
 
 		int index = 0,
 			letI = 0,
@@ -48,7 +29,19 @@ namespace Parsing {
 
 		char* code;
 
-		DataContainer* data;
+		std::string dataBuffer;
+		std::string indefierBuffer;
+		std::string namespaceBuffer;
+		VarType varTypeBuffer;
 
+		std::vector<std::string> namespaces;
+
+		bool IsHaveEqualLiteral(std::string exp);
+
+		//std::string ExpressionParse(std::string exp);
+
+		void SetDefaultNamespaceBuffer(std::string spacename);
+
+		bool IsReactiveSymbol(char letter);
 	};
 }

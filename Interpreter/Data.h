@@ -1,15 +1,18 @@
 #pragma once
 
 #define PARSING_UNDEF_LEXEM_NAME "$$$"
-#define PARSING_COMMAND_END_LEXEM Parsing::Lexem(Parsing::LexemType::CommandEnd, ";")
+#define PARSING_COMMAND_END_LEXEM Parsing::Lexem(Parsing::LexemType::RuleEnd, ";")
 #define PARSING_VOID_LEXEM Parsing::Lexem(Parsing::LexemType::Void, "void")
 #define PARSING_VAR_LEXEM Parsing::Lexem(Parsing::LexemType::Var, "Var")
+#define PARSING_FUNC_LEXEM Parsing::Lexem(Parsing::LexemType::Function, "function")
+#define PARSING_NAMESPACE_LEXEM Parsing::Lexem(Parsing::LexemType::Namespace, "namespace")
 
 #define PARSING_VAR_UNINIT -1
 
 namespace Parsing {
 	enum class LexemType {
-		Void, Declare, Var, VarType, Indefier, Literal, Poland, Equals, CommandEnd
+		Void, Var, VarType, Indefier, Literal, Equals, RuleEnd, Function,
+		FuncIn, FuncOut, SpaceIn, SpaceOut, Namespace, And, Main, Return, IgnoreMain
 	};
 
 	enum class LinkType {
@@ -33,12 +36,27 @@ namespace Parsing {
 		VarType type;
 
 		std::string indefier;
+		std::string locationSpace;
 
 		int literalIndex;
 
 		Var() : type(VarType::Void), indefier(), literalIndex(PARSING_VAR_UNINIT) { }
 
-		Var(std::string typeName);
+		Var(VarType type) : type(type), indefier(), literalIndex(PARSING_VAR_UNINIT) { }
+	};
+
+	struct Func
+	{
+		Var retVar;
+
+		std::vector<int> argsIndexes;
+
+		std::string indefier;
+		std::string locationSpace;
+
+		Func() : retVar(VarType::Void), indefier() { }
+
+		Func(VarType retType) : retVar(retType), indefier() { }
 	};
 
 	struct Lexem {
@@ -46,6 +64,7 @@ namespace Parsing {
 		LinkType linkType;
 
 		std::string name;
+		std::string locationSpace;
 
 		int linkIndex;
 
@@ -61,13 +80,10 @@ namespace Parsing {
 
 		std::vector<Lexem> BasicLexems;
 
-		std::vector<Lexem*> Lexems;
-		std::vector<Var*> Vars;
-		std::vector<Literal*> Literals;
+		std::vector<std::vector<Lexem*>> LexemsStable;
+		std::vector<Literal*> RawLiterals;
 
 		Lexem GetBasicLexem(std::string name);
-
-		Var* GetVar(std::string indifier);
 
 		void Init();
 

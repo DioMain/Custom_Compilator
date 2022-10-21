@@ -32,6 +32,8 @@ namespace In {
 
 			if (stream->eof()) break;
 
+			if (currentLetter == '\t') continue;
+
 			// Удаление лишних пробелов
 			if (currentLetter == IN_SPACE) {
 				if (HaveSpace_Flag) {

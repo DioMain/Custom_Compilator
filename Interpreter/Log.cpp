@@ -84,43 +84,32 @@ namespace Log {
 
 		*stream << endl;
 
-		*stream << "--------------------------------------------" << endl;
-		*stream << "                Таблица лексем" << endl;
-		*stream << "#-Тип---Цепочка----Тип ссылки----Ссылка-----" << endl;
-		*stream << "--------------------------------------------" << endl;
-		
-		for (int i = 0; i < data.Lexems.size(); i++)
+		*stream << "--------------------------------------------------------" << endl;
+		*stream << "			Таблица лексем | Table of lexems" << endl;
+		*stream << "<------------[ТИП|ЦЕПОЧКА|ПРОСТРАНСТВО ИМЁН]----------->" << endl;
+		*stream << "--------------------------------------------------------" << endl;
+
+		for (size_t i = 0; i < data.LexemsStable.size(); i++)
 		{
-			*stream << "|" << i << "| " 
-				<< (int)data.Lexems[i]->type
-				<< " " << data.Lexems[i]->name 
-				<< " " << (int)data.Lexems[i]->linkType 
-				<< " " << data.Lexems[i]->linkIndex << endl;
+			*stream << "|" << i << "|";
+			for (size_t j = 0; j < data.LexemsStable[i].size(); j++)
+			{
+				*stream << " [" << (int)data.LexemsStable[i][j]->type
+					<< "|" << data.LexemsStable[i][j]->name
+					<< "|" << data.LexemsStable[i][j]->locationSpace << "] ";
+			}
+			*stream << endl;
 		}
 
-		*stream << "--------------------------------------------" << endl;
-		*stream << "              Таблица переменных" << endl;
-		*stream << "#-Тип---Идентификатор---Ссылка на литерал---" << endl;
-		*stream << "--------------------------------------------" << endl;
+		*stream << "--------------------------------------------------------" << endl;
+		*stream << "		   Список литералов | Literals list" << endl;
+		*stream << "#----Данные---------------------------------------------" << endl;
+		*stream << "--------------------------------------------------------" << endl;
 
-		for (int i = 0; i < data.Vars.size(); i++)
-		{
-			*stream << "|" << i << "| " 
-				<< (int)data.Vars[i]->type
-				<< " " << data.Vars[i]->indefier
-				<< " " << data.Vars[i]->literalIndex << endl;
-		}
-
-
-		*stream << "--------------------------------------------" << endl;
-		*stream << "              Таблица литералов" << endl;
-		*stream << "#----Данные---------------------------------" << endl;
-		*stream << "--------------------------------------------" << endl;
-
-		for (int i = 0; i < data.Literals.size(); i++)
+		for (int i = 0; i < data.RawLiterals.size(); i++)
 		{
 			*stream << "|" << i << "| "
-				<< data.Literals[i]->data << endl;
+				<< data.RawLiterals[i]->data << endl;
 		}
 	}
 

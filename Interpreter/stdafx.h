@@ -16,3 +16,5 @@
 #include "Data.h"
 #include "LexAnalyzer.h"
 #include "Log.h"
+
+#include "AdditionFunctions.h"

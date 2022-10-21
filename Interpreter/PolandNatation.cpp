@@ -30,8 +30,13 @@ namespace poland {
 			if (READING) checkstr += cur;
 			else {
 				if (checkstr.size() > 0) {
-					if (!IsNumber(checkstr)) 
-						throw ERROR_THROW_IN_C(5, "Не верное вырожение", 0, i);
+					// Ошибка если вырожение не число
+					if (!IsNumber(checkstr)) {
+						error = Error::PolandError(550, "Не верное вырожение", i);
+						failed = true;
+
+						return;
+					}					
 
 					result += checkstr;
 					result += ' ';
@@ -40,8 +45,13 @@ namespace poland {
 				}
 
 				if (OPERATOR) {
-					if ((operators.empty() && cur == ')')) 
-						throw ERROR_THROW_IN_C(5, "Не верное вырожение", 0, i);
+					// Ошибка если неожиданно вретилась закр. скобка
+					if ((operators.empty() && cur == ')')) {
+						error = Error::PolandError(550, "Не верное вырожение", i);
+						failed = true;
+
+						return;
+					}
 
 					if (operators.empty() || cur == '(') operators.push(cur);
 					else if (cur == ')') {
@@ -60,16 +70,26 @@ namespace poland {
 							}
 						}
 
-						if (!FIND_CLOSE) 
-							throw ERROR_THROW_IN_C(5, "Не верное вырожение", 0, i);
+						// Ошибка если откр. скобка не была закрыта
+						if (!FIND_CLOSE) {
+							error = Error::PolandError(550, "Не верное вырожение", i);
+							failed = true;
+
+							return;
+						}
 
 						operators.pop();
 					}
 					else {
 						while (GetOperatorPriority(cur) <= GetOperatorPriority(operators.top()))
 						{
-							if (operators.top() == '(' || operators.top() == ')') 
-								throw ERROR_THROW_IN_C(5, "Не верное вырожение", 0, i);
+							// Ошибка если на этом этапе встретиться откр. или закр. скобка
+							if (operators.top() == '(' || operators.top() == ')') {
+								error = Error::PolandError(550, "Не верное вырожение", i);
+								failed = true;
+
+								return;
+							}
 
 							result += operators.top();
 							result += ' ';
@@ -92,8 +112,13 @@ namespace poland {
 
 		while (!operators.empty())
 		{
-			if (operators.top() == '(' || operators.top() == ')') 
-				throw ERROR_THROW_C(5, "Не верное вырожение");
+			// Ошибка если на этом этапе встретиться откр. или закр. скобка
+			if (operators.top() == '(' || operators.top() == ')') {
+				error = Error::PolandError(550, "Не верное вырожение", 0);
+				failed = true;
+
+				return;
+			}
 
 			result += operators.top();
 
@@ -143,6 +168,8 @@ namespace poland {
 
 	int PolandNatation::CalculateResult()
 	{
+		if (str.empty()) return 0;
+
 		strstream stream;
 
 		stack<int> numbers;
@@ -168,8 +195,13 @@ namespace poland {
 					numbers.push(a);
 				}
 				else {
-					if (numbers.size() < 2) 
-						throw ERROR_THROW_C(5, "Не верное вырожение");
+					// Ошибка если не хватает чисел для вычисления
+					if (numbers.size() < 2) {
+						error = Error::PolandError(550, "Не верное вырожение", i);
+						failed = true;
+
+						return 0;
+					}
 
 					b = numbers.top();
 					numbers.pop();
