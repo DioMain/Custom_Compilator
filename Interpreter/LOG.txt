@@ -1,5 +1,5 @@
 <------------------ Протокол ------------------>
- Дата создания протокола: 21.10.2022 6:08:20
+ Дата создания протокола: 01.11.2022 21:35:33
 <------------- Входные параметры -------------->
  -in: IN.txt
  -out: OUT.txt
@@ -7,9 +7,9 @@
 
 <======= Проверка текста на доступность =======>
 <-------------- Исходные данные --------------->
- Кол-во символов: 337
- Кол-во строк: 34
- Проигнорировано: 16
+ Кол-во символов: 106
+ Кол-во строк: 10
+ Проигнорировано: 0
 
 <========= Проверка текста завершена! =========>
 
@@ -19,61 +19,23 @@
 			Таблица лексем | Table of lexems
 <------------[ТИП|ЦЕПОЧКА|ПРОСТРАНСТВО ИМЁН]----------->
 --------------------------------------------------------
-|0| [2|integer|GLOBAL]  [3|indefier|GLOBAL]  [8|(|GLOBAL]  [2|integer|GLOBAL]  [3|indefier|GLOBAL]  [13|,|GLOBAL]  [2|integer|GLOBAL]  [3|indefier|GLOBAL]  [9|)|GLOBAL]  [10|{|Func.fi] 
-|1| [2|integer|Func.fi]  [3|indefier|Func.fi]  [6|;|Func.fi] 
-|2| [3|indefier|Func.fi]  [5|=|Func.fi]  [4|expression|Func.fi]  [6|;|Func.fi] 
-|3| [15|return|Func.fi]  [4|expression|Func.fi]  [6|;|Func.fi] 
-|4| [11|}|GLOBAL] 
-|5| [6|;|GLOBAL] 
-|6| [2|string|GLOBAL]  [3|indefier|GLOBAL]  [8|(|GLOBAL]  [2|string|GLOBAL]  [3|indefier|GLOBAL]  [13|,|GLOBAL]  [2|string|GLOBAL]  [3|indefier|GLOBAL]  [9|)|GLOBAL]  [10|{|Func.fs] 
-|7| [2|string|Func.fs]  [3|indefier|Func.fs]  [5|=|Func.fs]  [4|expression|Func.fs]  [6|;|Func.fs] 
-|8| [15|return|Func.fs]  [4|expression|Func.fs]  [6|;|Func.fs] 
-|9| [11|}|GLOBAL] 
-|10| [14|Main|GLOBAL]  [10|{|MAIN] 
-|11| [2|integer|MAIN]  [3|indefier|MAIN]  [6|;|MAIN] 
-|12| [2|integer|MAIN]  [3|indefier|MAIN]  [6|;|MAIN] 
-|13| [2|integer|MAIN]  [3|indefier|MAIN]  [6|;|MAIN] 
-|14| [2|string|MAIN]  [3|indefier|MAIN]  [6|;|MAIN] 
-|15| [2|string|MAIN]  [3|indefier|MAIN]  [6|;|MAIN] 
-|16| [2|string|MAIN]  [3|indefier|MAIN]  [6|;|MAIN] 
-|17| [2|integer|MAIN]  [3|indefier|MAIN]  [8|(|MAIN]  [2|string|MAIN]  [3|indefier|MAIN]  [9|)|MAIN]  [6|;|MAIN] 
-|18| [3|indefier|MAIN]  [5|=|MAIN]  [4|expression|MAIN]  [6|;|MAIN] 
-|19| [3|indefier|MAIN]  [5|=|MAIN]  [4|expression|MAIN]  [6|;|MAIN] 
-|20| [3|indefier|MAIN]  [5|=|MAIN]  [4|expression|MAIN]  [6|;|MAIN] 
-|21| [3|indefier|MAIN]  [5|=|MAIN]  [4|expression|MAIN]  [6|;|MAIN] 
-|22| [3|indefier|MAIN]  [5|=|MAIN]  [4|expression|MAIN]  [6|;|MAIN] 
-|23| [3|indefier|MAIN]  [5|=|MAIN]  [4|expression|MAIN]  [6|;|MAIN] 
-|24| [15|return|MAIN]  [4|expression|MAIN]  [6|;|MAIN] 
-|25| [11|}|GLOBAL] 
-|26|
+|0| [2|void|GLOBAL]  [3|indefier|GLOBAL]  [8|(|GLOBAL]  [2|string|GLOBAL]  [3|indefier|GLOBAL]  [9|)|GLOBAL]  [10|{|UNDEFINE.1] 
+|1| [2|string|UNDEFINE.1]  [3|indefier|UNDEFINE.1]  [5|=|UNDEFINE.1]  [4|expression|UNDEFINE.1]  [6|;|UNDEFINE.1] 
+|2| [15|return|UNDEFINE.1]  [4|expression|UNDEFINE.1]  [6|;|UNDEFINE.1] 
+|3| [11|}|GLOBAL] 
+|4| [14|Main|GLOBAL]  [10|{|MAIN] 
+|5| [2|string|MAIN]  [3|indefier|MAIN]  [5|=|MAIN]  [4|expression|MAIN]  [6|;|MAIN] 
+|6| [3|indefier|MAIN]  [8|(|MAIN]  [3|indefier|MAIN]  [9|)|MAIN]  [6|;|MAIN] 
+|7| [11|}|GLOBAL] 
+|8|
 --------------------------------------------------------
 		   Список литералов | Literals list
 #----Данные---------------------------------------------
 --------------------------------------------------------
-|0| fi
-|1| x
-|2| y
-|3| z
-|4|  x*(x+y)
-|5| z
-|6| fs
-|7| a
-|8| b
-|9| с
-|10|  "21"
-|11| c
-|12| x
-|13| y
-|14| z
-|15| sa
-|16| sb
-|17| sc
-|18| strlen
-|19| p
-|20|  1
-|21|  5
-|22|  "1234567890" 
-|23|  "1234567890"
-|24|  fi(x,y)
-|25|  fs(sa,sb)
-|26| 0
+|0| func
+|1| a
+|2| b
+|3|  a + " fisting"
+|4| b
+|5| eblan
+|6|  "gay"

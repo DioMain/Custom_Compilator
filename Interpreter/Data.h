@@ -12,7 +12,7 @@
 namespace Parsing {
 	enum class LexemType {
 		Void, Var, VarType, Indefier, Literal, Equals, RuleEnd, Function,
-		FuncIn, FuncOut, SpaceIn, SpaceOut, Namespace, And, Main, Return, IgnoreMain
+		ParamsIn, ParamsOut, SpaceIn, SpaceOut, Namespace, And, Main, Return, IgnoreMain
 	};
 
 	enum class LinkType {
@@ -29,34 +29,6 @@ namespace Parsing {
 		std::string data;
 
 		Literal() : data("") { }
-	};
-
-	struct Var
-	{
-		VarType type;
-
-		std::string indefier;
-		std::string locationSpace;
-
-		int literalIndex;
-
-		Var() : type(VarType::Void), indefier(), literalIndex(PARSING_VAR_UNINIT) { }
-
-		Var(VarType type) : type(type), indefier(), literalIndex(PARSING_VAR_UNINIT) { }
-	};
-
-	struct Func
-	{
-		Var retVar;
-
-		std::vector<int> argsIndexes;
-
-		std::string indefier;
-		std::string locationSpace;
-
-		Func() : retVar(VarType::Void), indefier() { }
-
-		Func(VarType retType) : retVar(retType), indefier() { }
 	};
 
 	struct Lexem {
@@ -80,7 +52,7 @@ namespace Parsing {
 
 		std::vector<Lexem> BasicLexems;
 
-		std::vector<std::vector<Lexem*>> LexemsStable;
+		std::vector<std::vector<Lexem*>> LexemsTable;
 		std::vector<Literal*> RawLiterals;
 
 		Lexem GetBasicLexem(std::string name);

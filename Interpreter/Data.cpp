@@ -17,8 +17,8 @@ namespace Parsing {
 
 		BasicLexems.push_back(Lexem(LexemType::RuleEnd, ";"));
 
-		BasicLexems.push_back(Lexem(LexemType::FuncIn, "("));
-		BasicLexems.push_back(Lexem(LexemType::FuncOut, ")"));
+		BasicLexems.push_back(Lexem(LexemType::ParamsIn, "("));
+		BasicLexems.push_back(Lexem(LexemType::ParamsOut, ")"));
 
 		BasicLexems.push_back(Lexem(LexemType::SpaceIn, "{"));
 		BasicLexems.push_back(Lexem(LexemType::SpaceOut, "}"));

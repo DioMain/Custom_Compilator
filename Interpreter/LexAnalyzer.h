@@ -36,9 +36,9 @@ namespace Parsing {
 
 		std::vector<std::string> namespaces;
 
-		bool IsHaveEqualLiteral(std::string exp);
+		void ParamParsing(std::string param);
 
-		//std::string ExpressionParse(std::string exp);
+		bool IsHaveEqualLiteral(std::string exp);
 
 		void SetDefaultNamespaceBuffer(std::string spacename);
 

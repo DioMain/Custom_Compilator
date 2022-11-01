@@ -23,6 +23,7 @@ namespace Error {
 
 		ERROR_THROW_NODEF(105), ERROR_THROW_NODEF(106), ERROR_THROW_NODEF(107), ERROR_THROW_NODEF(108), ERROR_THROW_NODEF(109),
 
+		// Ошибки сканера кода
 		ERROR_THROW_C(110, "Ошибка при открытии файла [-IN]"),
 		ERROR_THROW_C(111, "Недопустимый символ в исходном файле [-IN]"),
 		ERROR_THROW_C(112, "Ошибка при создании файла протакола [-log]"),
@@ -31,7 +32,17 @@ namespace Error {
 		ERROR_THROW_NODEF(114), ERROR_THROW_NODEF(115),
 		ERROR_THROW_NODEF(116), ERROR_THROW_NODEF(117), ERROR_THROW_NODEF(118), ERROR_THROW_NODEF(119),
 
-		ERROR_THROW_NODEF10(120), ERROR_THROW_NODEF10(130), ERROR_THROW_NODEF10(140), ERROR_THROW_NODEF10(150),
+		// Ошибки лексического анализатора
+		ERROR_THROW_C(120, "Литерал идентификатора не может бать литералом вырожения!"),
+		ERROR_THROW_C(121, "Литерал вырожения должен быть закрыт!"),
+		ERROR_THROW_C(122, "Выход за глаболую облость видимости"),
+		ERROR_THROW_C(123, "Такого литерала не существует!"),
+		ERROR_THROW_C(124, "Неизвесное вырожение [Lex_Analyzer]!"),
+		ERROR_THROW_C(125, "Точка входа не обнаружена!"),
+
+		ERROR_THROW_NODEF(126), ERROR_THROW_NODEF(127), ERROR_THROW_NODEF(128), ERROR_THROW_NODEF(129),
+
+		ERROR_THROW_NODEF10(130), ERROR_THROW_NODEF10(140), ERROR_THROW_NODEF10(150),
 		ERROR_THROW_NODEF10(160), ERROR_THROW_NODEF10(170), ERROR_THROW_NODEF10(180), ERROR_THROW_NODEF10(190),
 
 		ERROR_THROW_NODEF100(200), ERROR_THROW_NODEF100(300), ERROR_THROW_NODEF100(400), ERROR_THROW_NODEF100(500),

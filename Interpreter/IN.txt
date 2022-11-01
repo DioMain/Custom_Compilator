@@ -1,35 +1,12 @@
-integer  fi(integer x, integer y)
-{
-integer z;
-z= x*(x+y);
-return z; 
 
-}; 
-string      fs (string a, string b)
-{
-string ñ = "21";
-
-return c; 
+void func(string a){
+	string b = a + " fisting";
+	
+	return b;
 }
 
-Main
-{
-       integer x;
-integer y;
-integer z;
-string sa;
-string sb;
-string sc;
+Main {
+	string eblan = "gay";
 
-integer   strlen(string p);
-
-x = 1;
-y = 5;
-
-sa = "1234567890"   ;
-sb = "1234567890"; 
-z = fi(x,y);
-sc = fs(sa,sb);
-
-return 0;
+	func(eblan);
 }

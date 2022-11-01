@@ -89,14 +89,14 @@ namespace Log {
 		*stream << "<------------[ÒÈÏ|ÖÅÏÎ×ÊÀ|ÏÐÎÑÒÐÀÍÑÒÂÎ ÈÌ¨Í]----------->" << endl;
 		*stream << "--------------------------------------------------------" << endl;
 
-		for (size_t i = 0; i < data.LexemsStable.size(); i++)
+		for (size_t i = 0; i < data.LexemsTable.size(); i++)
 		{
 			*stream << "|" << i << "|";
-			for (size_t j = 0; j < data.LexemsStable[i].size(); j++)
+			for (size_t j = 0; j < data.LexemsTable[i].size(); j++)
 			{
-				*stream << " [" << (int)data.LexemsStable[i][j]->type
-					<< "|" << data.LexemsStable[i][j]->name
-					<< "|" << data.LexemsStable[i][j]->locationSpace << "] ";
+				*stream << " [" << (int)data.LexemsTable[i][j]->type
+					<< "|" << data.LexemsTable[i][j]->name
+					<< "|" << data.LexemsTable[i][j]->locationSpace << "] ";
 			}
 			*stream << endl;
 		}
