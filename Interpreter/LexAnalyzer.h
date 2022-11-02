@@ -6,7 +6,7 @@
 #define PARSING_CODE_END '\0'
 #define PARSING_STRING '\"'
 
-#define PARSING_LITERA_LEXEM(id) Parsing::Lexem(Parsing::LexemType::Literal, PARSING_UNDEF_LEXEM_NAME, Parsing::LinkType::Literal, id)
+#define PARSING_LITERA_LEXEM(id) Parsing::Lexem(Parsing::LexemType::Expression, PARSING_UNDEF_LEXEM_NAME, Parsing::LinkType::Literal, id)
 
 namespace Parsing {
 	class LexAnalyzer
@@ -31,12 +31,13 @@ namespace Parsing {
 
 		std::string dataBuffer;
 		std::string indefierBuffer;
+		std::string FuncBuffer;
 		std::string namespaceBuffer;
 		VarType varTypeBuffer;
 
 		std::vector<std::string> namespaces;
 
-		void ParamParsing(std::string param);
+		ParamType ParamParsing(std::string param);
 
 		bool IsHaveEqualLiteral(std::string exp);
 

@@ -4,16 +4,16 @@ using namespace std;
 
 namespace Parsing {
 	void DataContainer::Init() {
-		BasicLexems.push_back(Lexem(LexemType::VarType, "integer"));
-		BasicLexems.push_back(Lexem(LexemType::VarType, "string"));
-		BasicLexems.push_back(Lexem(LexemType::VarType, "char"));
-		BasicLexems.push_back(Lexem(LexemType::VarType, "void"));
+		BasicLexems.push_back(Lexem(LexemType::VarType, "число"));
+		BasicLexems.push_back(Lexem(LexemType::VarType, "строка"));
+		BasicLexems.push_back(Lexem(LexemType::VarType, "символ"));
+		BasicLexems.push_back(Lexem(LexemType::VarType, "пусто"));
 
 		BasicLexems.push_back(Lexem(LexemType::Indefier, PARSING_UNDEF_LEXEM_NAME));
 
 		BasicLexems.push_back(Lexem(LexemType::Equals, "="));
 
-		BasicLexems.push_back(Lexem(LexemType::Literal, PARSING_UNDEF_LEXEM_NAME));
+		BasicLexems.push_back(Lexem(LexemType::Expression, PARSING_UNDEF_LEXEM_NAME));
 
 		BasicLexems.push_back(Lexem(LexemType::RuleEnd, ";"));
 
@@ -23,13 +23,24 @@ namespace Parsing {
 		BasicLexems.push_back(Lexem(LexemType::SpaceIn, "{"));
 		BasicLexems.push_back(Lexem(LexemType::SpaceOut, "}"));
 
-		BasicLexems.push_back(Lexem(LexemType::Namespace, "namespace"));
+		BasicLexems.push_back(Lexem(LexemType::Namespace, "пространство"));
 
 		BasicLexems.push_back(Lexem(LexemType::And, ","));
 
-		BasicLexems.push_back(Lexem(LexemType::Main, "Main"));
-		BasicLexems.push_back(Lexem(LexemType::Return, "return"));
-		BasicLexems.push_back(Lexem(LexemType::IgnoreMain, "IgnoreMain"));
+		BasicLexems.push_back(Lexem(LexemType::Main, "Вход"));
+		BasicLexems.push_back(Lexem(LexemType::Return, "вернуть"));
+		BasicLexems.push_back(Lexem(LexemType::IgnoreMain, "ИгнорироватьВход"));
+
+		BasicLexems.push_back(Lexem(LexemType::If, "Если"));
+		BasicLexems.push_back(Lexem(LexemType::Else, "Иначе"));
+
+		BasicLexems.push_back(Lexem(LexemType::LogicExpression, PARSING_UNDEF_LEXEM_NAME));
+
+		//BasicLexems.push_back(Lexem(LexemType::LogicAnd, "&&"));
+		//BasicLexems.push_back(Lexem(LexemType::LogicAnd, "И"));
+
+		//BasicLexems.push_back(Lexem(LexemType::LogicOr, "Если"));
+		//BasicLexems.push_back(Lexem(LexemType::LogicOr, "Если"));
 	}
 
 	Lexem DataContainer::GetBasicLexem(std::string name)

@@ -1,5 +1,5 @@
 <------------------ Протокол ------------------>
- Дата создания протокола: 01.11.2022 21:35:33
+ Дата создания протокола: 02.11.2022 18:48:37
 <------------- Входные параметры -------------->
  -in: IN.txt
  -out: OUT.txt
@@ -7,8 +7,8 @@
 
 <======= Проверка текста на доступность =======>
 <-------------- Исходные данные --------------->
- Кол-во символов: 106
- Кол-во строк: 10
+ Кол-во символов: 257
+ Кол-во строк: 22
  Проигнорировано: 0
 
 <========= Проверка текста завершена! =========>
@@ -19,23 +19,47 @@
 			Таблица лексем | Table of lexems
 <------------[ТИП|ЦЕПОЧКА|ПРОСТРАНСТВО ИМЁН]----------->
 --------------------------------------------------------
-|0| [2|void|GLOBAL]  [3|indefier|GLOBAL]  [8|(|GLOBAL]  [2|string|GLOBAL]  [3|indefier|GLOBAL]  [9|)|GLOBAL]  [10|{|UNDEFINE.1] 
-|1| [2|string|UNDEFINE.1]  [3|indefier|UNDEFINE.1]  [5|=|UNDEFINE.1]  [4|expression|UNDEFINE.1]  [6|;|UNDEFINE.1] 
-|2| [15|return|UNDEFINE.1]  [4|expression|UNDEFINE.1]  [6|;|UNDEFINE.1] 
-|3| [11|}|GLOBAL] 
-|4| [14|Main|GLOBAL]  [10|{|MAIN] 
-|5| [2|string|MAIN]  [3|indefier|MAIN]  [5|=|MAIN]  [4|expression|MAIN]  [6|;|MAIN] 
-|6| [3|indefier|MAIN]  [8|(|MAIN]  [3|indefier|MAIN]  [9|)|MAIN]  [6|;|MAIN] 
-|7| [11|}|GLOBAL] 
-|8|
+|0| [1|число|GLOBAL]  [2|indefier|GLOBAL]  [6|(|GLOBAL]  [1|число|GLOBAL]  [2|indefier|GLOBAL]  [11|,|GLOBAL]  [1|число|GLOBAL]  [2|indefier|GLOBAL]  [7|)|GLOBAL]  [8|{|Func.Произведение] 
+|1| [13|вернуть|Func.Произведение]  [3|expression|Func.Произведение]  [5|;|Func.Произведение] 
+|2| [9|}|GLOBAL] 
+|3| [1|пусто|GLOBAL]  [2|indefier|GLOBAL]  [6|(|GLOBAL]  [7|)|GLOBAL]  [8|{|Func.Тест] 
+|4| [9|}|GLOBAL] 
+|5| [12|Вход|GLOBAL]  [8|{|MAIN] 
+|6| [1|число|MAIN]  [2|indefier|MAIN]  [4|=|MAIN]  [3|expression|MAIN]  [5|;|MAIN] 
+|7| [1|число|MAIN]  [2|indefier|MAIN]  [4|=|MAIN]  [3|expression|MAIN]  [5|;|MAIN] 
+|8| [1|число|MAIN]  [2|indefier|MAIN]  [4|=|MAIN]  [3|expression|MAIN]  [5|;|MAIN] 
+|9| [15|Если|MAIN]  [6|(|MAIN]  [17|LogicExpression|MAIN]  [7|)|MAIN]  [8|{|IF.2] 
+|10| [2|indefier|IF.2]  [6|(|IF.2]  [7|)|IF.2]  [5|;|IF.2] 
+|11| [9|}|MAIN] 
+|12| [16|Иначе|MAIN]  [15|Если|MAIN]  [6|(|MAIN]  [17|LogicExpression|MAIN]  [7|)|MAIN]  [8|{|ELIF.2] 
+|13| [2|indefier|ELIF.2]  [6|(|ELIF.2]  [7|)|ELIF.2]  [5|;|ELIF.2] 
+|14| [9|}|MAIN] 
+|15| [16|Иначе|MAIN]  [8|{|ELSE.2] 
+|16| [2|indefier|ELSE.2]  [6|(|ELSE.2]  [7|)|ELSE.2]  [5|;|ELSE.2] 
+|17| [9|}|MAIN] 
+|18| [2|indefier|MAIN]  [6|(|MAIN]  [2|indefier|MAIN]  [11|,|MAIN]  [2|indefier|MAIN]  [7|)|MAIN]  [5|;|MAIN] 
+|19| [9|}|GLOBAL] 
+|20|
 --------------------------------------------------------
 		   Список литералов | Literals list
 #----Данные---------------------------------------------
 --------------------------------------------------------
-|0| func
-|1| a
-|2| b
-|3|  a + " fisting"
-|4| b
-|5| eblan
-|6|  "gay"
+|0| Произведение
+|1| а
+|2| б
+|3| а * б
+|4| Тест
+|5| а
+|6| 12
+|7| б
+|8| 20 + (2 * 2)
+|9| с
+|10| а + б
+|11| а == б && (б != а || 12 > 7)
+|12| Тест
+|13| а == б
+|14| Тест
+|15| Тест
+|16| Произведение
+|17| а
+|18| б

@@ -14,6 +14,8 @@ namespace Parsing {
 		Lexem curLex;
 
 		int tableStr = 0;
+		int paramdepth = 0;
+		int logicdepth = 0;
 
 		bool ENDL = false, 
 			REACT = false,
@@ -22,12 +24,15 @@ namespace Parsing {
 			LITERAL = false,
 			EXPRESSION = false,
 			EXPRESSION_STR = false,
+			EXPRESSION_LOGIC = false,
 			INDEFIER = false,
-			NSPACE = false,
+			NAMESPACE = false,
 			ENDRULE = false,
 			PARAMS = false,
 			MAIN = false,
-			MAIN_IGNORE = false;
+			MAIN_IGNORE = false,
+			IF = false,
+			ELSE = false;
 
 		SetDefaultNamespaceBuffer("UNDEFINE");
 
@@ -38,19 +43,27 @@ namespace Parsing {
 			// Если код закончился
 			if (code[index] == PARSING_CODE_END) CODEEND = true;
 
-			// Если мы встретили ; = ( ) { }
-			if ((IsReactiveSymbol(code[index]) && !EXPRESSION)
-				 || code[index] == ';') REACT = true;
+			// Если мы встретили ; = ( ) { }7
+			if (((IsReactiveSymbol(code[index]) && !EXPRESSION)
+				 || code[index] == ';' || code[index] == ',')
+				&& !EXPRESSION_STR && !EXPRESSION_LOGIC)
+				REACT = true;
+
+			if (EXPRESSION_LOGIC) {
+				if (code[index] == ')' && logicdepth == 0) REACT = true;
+
+				if (code[index] == '(') logicdepth++;
+				if (code[index] == ')') logicdepth--;
+			}
 
 			// Если мы встретили пробел и при этом мы это не строковый литерал
-			if (letter == PARSING_LEX_END && !EXPRESSION) SPACE = true;
-
-			//if (EXPRESSION && letter == '\"') 
-			//	EXPRESSION_STR = !EXPRESSION_STR;
+			if (letter == PARSING_LEX_END && !EXPRESSION && !PARAMS) SPACE = true;
 
 			// Если конец строки
 			if (code[index] == PARSING_LINE_END) ENDL = true;
 
+			if ((EXPRESSION || PARAMS) && letter == '\"')
+				EXPRESSION_STR = !EXPRESSION_STR;
 
 			// Если однавременно требуеться и вырожение и идентификатор
 			if (INDEFIER && EXPRESSION)
@@ -64,17 +77,74 @@ namespace Parsing {
 			if (namespaces.size() == 0)
 				throw ERROR_THROW_IN(122, lineI, letI);
 
+			if (EXPRESSION_STR && (ENDL || CODEEND))
+				throw ERROR_THROW_IN_C(126, "Строка должна быть закрыта", lineI, letI);
+
 			// Если конец кода, встречер реактивый символ, пробел, конец строки
 			if (CODEEND || REACT || SPACE || ENDL) {
 
 				// Если выражение не пустое
 				if (!expression.empty()) {
+					
+					// Если параметр и литерал
+					if (PARAMS && LITERAL) {
+						if (EXPRESSION_LOGIC) {
+							curLex = Lexem(LexemType::LogicExpression, "LogicExpression");
+							curLex.locationSpace = namespaces.back();
+
+							data->LexemsTable[tableStr].push_back(new Lexem(curLex));
+
+							data->RawLiterals.push_back(new Literal());
+							data->RawLiterals.back()->data = expression;
+						}
+						else {
+							switch (ParamParsing(expression))
+							{
+							case ParamType::VarCreation:
+								curLex = data->GetBasicLexem(dataBuffer);
+								curLex.locationSpace = namespaces.back();
+
+								data->LexemsTable[tableStr].push_back(new Lexem(curLex));
+
+								curLex = Lexem(LexemType::Indefier, "indefier");
+								curLex.locationSpace = namespaces.back();
+
+								data->LexemsTable[tableStr].push_back(new Lexem(curLex));
+
+								data->RawLiterals.push_back(new Literal());
+								data->RawLiterals.back()->data = indefierBuffer;
+
+								break;
+							case ParamType::Indefier:
+								curLex = Lexem(LexemType::Indefier, "indefier");
+								curLex.locationSpace = namespaces.back();
+
+								data->LexemsTable[tableStr].push_back(new Lexem(curLex));
+
+								data->RawLiterals.push_back(new Literal());
+								data->RawLiterals.back()->data = indefierBuffer;
+								break;
+							case ParamType::Expression:
+								curLex = Lexem(LexemType::Expression, "Expression");
+								curLex.locationSpace = namespaces.back();
+
+								data->LexemsTable[tableStr].push_back(new Lexem(curLex));
+
+								data->RawLiterals.push_back(new Literal());
+								data->RawLiterals.back()->data = expression;
+								break;
+							}
+						}
+
+						EXPRESSION_LOGIC = false;
+						LITERAL = false;
+					}
 					// Если литерал
-					if (LITERAL) {						
+					else if (LITERAL) {						
 						curLex = PARSING_VOID_LEXEM; // Устанавливает пустую лексему
 
 						// Если вырожение
-						if (EXPRESSION) curLex = Lexem(LexemType::Literal, "expression");
+						if (EXPRESSION) curLex = Lexem(LexemType::Expression, "expression");
 						// Если идентификатор
 						else if (INDEFIER) curLex = Lexem(LexemType::Indefier, "indefier");
 
@@ -83,10 +153,10 @@ namespace Parsing {
 							throw ERROR_THROW_IN(123, lineI, letI);
 
 						// Если переход на другое пространство имен
-						if (NSPACE) {
+						if (NAMESPACE) {
 							namespaceBuffer = expression;
 
-							NSPACE = false;
+							NAMESPACE = false;
 						}
 
 						curLex.locationSpace = namespaces.back();
@@ -116,7 +186,7 @@ namespace Parsing {
 							case LexemType::Namespace:
 								LITERAL = true;
 								INDEFIER = true;
-								NSPACE = true;
+								NAMESPACE = true;
 								break;
 							case LexemType::Return:
 								LITERAL = true;
@@ -130,11 +200,28 @@ namespace Parsing {
 							case LexemType::IgnoreMain:
 								MAIN_IGNORE = true;
 								break;
+							case LexemType::If:
+								IF = true;
+
+								SetDefaultNamespaceBuffer(ELSE ? "ELIF" : "IF");
+								break;
+							case LexemType::Else:
+								ELSE = true;
+
+								SetDefaultNamespaceBuffer("ELSE");
+								break;
 							}
+
 						}
 						// Если существует литерал равный данному вырожению
-						else if (IsHaveEqualLiteral(expression)) curLex = Lexem(LexemType::Indefier, "indefier");
-						else throw ERROR_THROW_IN(124, lineI, letI);
+						else if (IsHaveEqualLiteral(expression)) {
+							curLex = Lexem(LexemType::Indefier, "indefier");
+
+							data->RawLiterals.push_back(new Literal());
+							data->RawLiterals.back()->data = expression;
+						}
+						else 
+							throw ERROR_THROW_IN(124, lineI, letI);
 
 						curLex.locationSpace = namespaces.back();
 
@@ -162,8 +249,9 @@ namespace Parsing {
 				case LexemType::SpaceIn:
 					data->LexemsTable.push_back(vector<Lexem*>());
 
-					if (PARAMS) namespaces.push_back("Func." + dataBuffer);
-					else namespaces.push_back(namespaceBuffer);
+					namespaces.push_back(namespaceBuffer);
+
+					if (ELSE) ELSE = false;
 
 					SetDefaultNamespaceBuffer("UNDEFINE");
 					break;
@@ -174,6 +262,8 @@ namespace Parsing {
 						throw ERROR_THROW_IN_C(602, "Out global namespace!", lineI, letI);
 
 					namespaces.erase(namespaces.begin() + namespaces.size() - 1);
+
+					LITERAL = false;
 					break;
 				case LexemType::Equals:
 					LITERAL = true;
@@ -181,11 +271,30 @@ namespace Parsing {
 					break;
 				case LexemType::ParamsIn:
 					PARAMS = true;
+					LITERAL = true;
 
-					dataBuffer = data->RawLiterals.back()->data;
+					if (IF) { 
+						EXPRESSION_LOGIC = true;  
+						logicdepth = 0; 
+					}
+
+					paramdepth++;
+
+					if (!IF && !ELSE) namespaceBuffer = "Func." + data->RawLiterals.back()->data;
 					break;
 				case LexemType::ParamsOut:
-					PARAMS = false;
+					paramdepth--;
+
+					if (IF) IF = false;
+
+					if (paramdepth == 0) {
+						PARAMS = false;
+					}
+					break;
+				case LexemType::And:
+					LITERAL = true;
+
+					if (!PARAMS) INDEFIER = true;
 					break;
 				}
 
@@ -194,7 +303,7 @@ namespace Parsing {
 				data->LexemsTable[tableStr].push_back(new Lexem(curLex));
 			}
 
-			// Если данный символ закачивает строку лексем
+			// Cимволы закачивающие строку лексем
 			if (letter == ';' || letter == '{' || letter == '}') {
 				tableStr++;
 			}
@@ -208,6 +317,9 @@ namespace Parsing {
 
 			index++;
 
+			// Если единтсвенный сивлол это пробел
+			if (expression.size() == 1 && expression[0] == ' ') expression.clear();
+
 			SPACE = false;
 			REACT = false;
 			ENDL = false;
@@ -217,9 +329,33 @@ namespace Parsing {
 		if (!MAIN && !MAIN_IGNORE) throw ERROR_THROW(125);
 	}
 
-	void LexAnalyzer::ParamParsing(std::string param)
+	ParamType LexAnalyzer::ParamParsing(string param)
 	{
+		string word;
+		vector<string> words;
 
+		for (size_t i = 0; i < param.size() + 1; i++)
+		{
+			if ((param[i] == ' ' || param[i] == '\0') && !word.empty()) {
+				words.push_back(word);
+
+				word.clear();
+			}				
+			else if (param[i] != ' ' && param[i] != '\0') word += param[i];
+		}
+
+		if (GetVarTypeByName(words[0]) != VarType::Void && words.size() == 2) {
+			dataBuffer = words[0];
+			indefierBuffer = words[1];
+
+			return ParamType::VarCreation;
+		}
+		else if (IsHaveEqualLiteral(words[0])) {
+			indefierBuffer = words[0];
+
+			return ParamType::Indefier;
+		}
+		else return ParamType::Expression;
 	}
 
 	bool LexAnalyzer::IsHaveEqualLiteral(std::string exp)

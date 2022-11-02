@@ -2,17 +2,16 @@
 
 #define PARSING_UNDEF_LEXEM_NAME "$$$"
 #define PARSING_COMMAND_END_LEXEM Parsing::Lexem(Parsing::LexemType::RuleEnd, ";")
-#define PARSING_VOID_LEXEM Parsing::Lexem(Parsing::LexemType::Void, "void")
-#define PARSING_VAR_LEXEM Parsing::Lexem(Parsing::LexemType::Var, "Var")
-#define PARSING_FUNC_LEXEM Parsing::Lexem(Parsing::LexemType::Function, "function")
-#define PARSING_NAMESPACE_LEXEM Parsing::Lexem(Parsing::LexemType::Namespace, "namespace")
+#define PARSING_VOID_LEXEM Parsing::Lexem(Parsing::LexemType::Void, "пусто")
+#define PARSING_NAMESPACE_LEXEM Parsing::Lexem(Parsing::LexemType::Namespace, "пространство")
 
 #define PARSING_VAR_UNINIT -1
 
 namespace Parsing {
 	enum class LexemType {
-		Void, Var, VarType, Indefier, Literal, Equals, RuleEnd, Function,
-		ParamsIn, ParamsOut, SpaceIn, SpaceOut, Namespace, And, Main, Return, IgnoreMain
+		Void, VarType, Indefier, Expression, Equals, RuleEnd, ParamsIn, ParamsOut, 
+		SpaceIn, SpaceOut, Namespace, And, Main, Return, IgnoreMain, If, Else, 
+		LogicExpression 
 	};
 
 	enum class LinkType {
@@ -22,6 +21,10 @@ namespace Parsing {
 	enum class VarType
 	{
 		Void, String, Integer, Char
+	};
+
+	enum class ParamType {
+		Expression, Indefier, VarCreation
 	};
 
 	struct Literal
