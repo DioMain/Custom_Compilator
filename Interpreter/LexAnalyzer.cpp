@@ -2,7 +2,7 @@
 
 using namespace std;
 
-namespace Parsing {
+namespace LexemAnalyzer {
 	void LexAnalyzer::Invoke()
 	{
 		char letter;
@@ -20,6 +20,7 @@ namespace Parsing {
 		bool ENDL = false, 
 			REACT = false,
 			SPACE = false,
+			CHECK = false,
 			CODEEND = false,
 			LITERAL = false,
 			EXPRESSION = false,
@@ -30,8 +31,9 @@ namespace Parsing {
 			ENDRULE = false,
 			PARAMS = false,
 			MAIN = false,
-			MAIN_IGNORE = false,
-			IF = false,
+			COMMENT = false,
+			RETURN = false,
+			IF = false,		
 			ELSE = false;
 
 		SetDefaultNamespaceBuffer("UNDEFINE");
@@ -46,9 +48,10 @@ namespace Parsing {
 			// Если мы встретили ; = ( ) { }7
 			if (((IsReactiveSymbol(code[index]) && !EXPRESSION)
 				 || code[index] == ';' || code[index] == ',')
-				&& !EXPRESSION_STR && !EXPRESSION_LOGIC)
+				&& !EXPRESSION_STR && !EXPRESSION_LOGIC && !COMMENT)
 				REACT = true;
 
+			// Если логическое вырожение
 			if (EXPRESSION_LOGIC) {
 				if (code[index] == ')' && logicdepth == 0) REACT = true;
 
@@ -56,13 +59,15 @@ namespace Parsing {
 				if (code[index] == ')') logicdepth--;
 			}
 
+			if (expression.size() == 2 && expression[0] == '/' && expression[1] == '/') CHECK = true;
+
 			// Если мы встретили пробел и при этом мы это не строковый литерал
 			if (letter == PARSING_LEX_END && !EXPRESSION && !PARAMS) SPACE = true;
 
 			// Если конец строки
 			if (code[index] == PARSING_LINE_END) ENDL = true;
 
-			if ((EXPRESSION || PARAMS) && letter == '\"')
+			if ((EXPRESSION || PARAMS) && (letter == '\"' || letter == '\''))
 				EXPRESSION_STR = !EXPRESSION_STR;
 
 			// Если однавременно требуеться и вырожение и идентификатор
@@ -78,16 +83,17 @@ namespace Parsing {
 				throw ERROR_THROW_IN(122, lineI, letI);
 
 			if (EXPRESSION_STR && (ENDL || CODEEND))
-				throw ERROR_THROW_IN_C(126, "Строка должна быть закрыта", lineI, letI);
+				throw ERROR_THROW_IN(126, lineI, letI);
 
 			// Если конец кода, встречер реактивый символ, пробел, конец строки
-			if (CODEEND || REACT || SPACE || ENDL) {
+			if ((CODEEND || REACT || SPACE || ENDL || CHECK) && !COMMENT) {
 
 				// Если выражение не пустое
 				if (!expression.empty()) {
 					
 					// Если параметр и литерал
 					if (PARAMS && LITERAL) {
+						// Если логическое вырожение
 						if (EXPRESSION_LOGIC) {
 							curLex = Lexem(LexemType::LogicExpression, "LogicExpression");
 							curLex.locationSpace = namespaces.back();
@@ -165,6 +171,9 @@ namespace Parsing {
 
 						data->RawLiterals.back()->data = expression;
 
+						if (tableStr > data->LexemsTable.size() - 1)
+							throw ERROR_THROW_IN_C(127, "Превышено кол-во строк в таблице лексем!", lineI, letI);
+
 						data->LexemsTable[tableStr].push_back(new Lexem(curLex));
 
 						LITERAL = false;
@@ -191,14 +200,13 @@ namespace Parsing {
 							case LexemType::Return:
 								LITERAL = true;
 								EXPRESSION = true;
+
+								RETURN = true;
 								break;
 							case LexemType::Main:
 								namespaceBuffer = "MAIN";
 
 								MAIN = true;
-								break;
-							case LexemType::IgnoreMain:
-								MAIN_IGNORE = true;
 								break;
 							case LexemType::If:
 								IF = true;
@@ -209,6 +217,9 @@ namespace Parsing {
 								ELSE = true;
 
 								SetDefaultNamespaceBuffer("ELSE");
+								break;
+							case LexemType::Comment:
+								COMMENT = true;
 								break;
 							}
 
@@ -245,11 +256,20 @@ namespace Parsing {
 				{
 				case LexemType::RuleEnd:
 					data->LexemsTable.push_back(vector<Lexem*>());
+
+					if (RETURN) {
+						LITERAL = false;
+						EXPRESSION = false;
+
+						RETURN = false;
+					}
 					break;
 				case LexemType::SpaceIn:
 					data->LexemsTable.push_back(vector<Lexem*>());
 
 					namespaces.push_back(namespaceBuffer);
+
+					namespacesCounter++;
 
 					if (ELSE) ELSE = false;
 
@@ -289,6 +309,7 @@ namespace Parsing {
 
 					if (paramdepth == 0) {
 						PARAMS = false;
+						LITERAL = false;
 					}
 					break;
 				case LexemType::And:
@@ -304,7 +325,7 @@ namespace Parsing {
 			}
 
 			// Cимволы закачивающие строку лексем
-			if (letter == ';' || letter == '{' || letter == '}') {
+			if (!EXPRESSION_STR && !COMMENT && (letter == ';' || letter == '{' || letter == '}')) {
 				tableStr++;
 			}
 
@@ -320,13 +341,23 @@ namespace Parsing {
 			// Если единтсвенный сивлол это пробел
 			if (expression.size() == 1 && expression[0] == ' ') expression.clear();
 
+			// Если коментарий и конец строки
+			if (COMMENT && ENDL) {
+				data->LexemsTable.push_back(vector<Lexem*>());
+				tableStr++;
+
+				COMMENT = false;
+				expression.clear();
+			}
+
 			SPACE = false;
 			REACT = false;
 			ENDL = false;
+			CHECK = false;
 		}
 
 		// Если main не найден и при этом его не игнорируем
-		if (!MAIN && !MAIN_IGNORE) throw ERROR_THROW(125);
+		if (!MAIN) throw ERROR_THROW(125);
 	}
 
 	ParamType LexAnalyzer::ParamParsing(string param)
@@ -371,7 +402,7 @@ namespace Parsing {
 	void LexAnalyzer::SetDefaultNamespaceBuffer(string spacename)
 	{
 		strstream sst;
-		sst << spacename << '.' << namespaces.size() << '\0';
+		sst << spacename << '.' << namespacesCounter << '\0';
 
 		namespaceBuffer = sst.str();
 	}

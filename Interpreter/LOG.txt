@@ -1,5 +1,5 @@
 <------------------ Протокол ------------------>
- Дата создания протокола: 02.11.2022 18:48:37
+ Дата создания протокола: 03.11.2022 16:05:32
 <------------- Входные параметры -------------->
  -in: IN.txt
  -out: OUT.txt
@@ -7,8 +7,8 @@
 
 <======= Проверка текста на доступность =======>
 <-------------- Исходные данные --------------->
- Кол-во символов: 257
- Кол-во строк: 22
+ Кол-во символов: 458
+ Кол-во строк: 30
  Проигнорировано: 0
 
 <========= Проверка текста завершена! =========>
@@ -19,47 +19,56 @@
 			Таблица лексем | Table of lexems
 <------------[ТИП|ЦЕПОЧКА|ПРОСТРАНСТВО ИМЁН]----------->
 --------------------------------------------------------
-|0| [1|число|GLOBAL]  [2|indefier|GLOBAL]  [6|(|GLOBAL]  [1|число|GLOBAL]  [2|indefier|GLOBAL]  [11|,|GLOBAL]  [1|число|GLOBAL]  [2|indefier|GLOBAL]  [7|)|GLOBAL]  [8|{|Func.Произведение] 
-|1| [13|вернуть|Func.Произведение]  [3|expression|Func.Произведение]  [5|;|Func.Произведение] 
-|2| [9|}|GLOBAL] 
-|3| [1|пусто|GLOBAL]  [2|indefier|GLOBAL]  [6|(|GLOBAL]  [7|)|GLOBAL]  [8|{|Func.Тест] 
-|4| [9|}|GLOBAL] 
-|5| [12|Вход|GLOBAL]  [8|{|MAIN] 
-|6| [1|число|MAIN]  [2|indefier|MAIN]  [4|=|MAIN]  [3|expression|MAIN]  [5|;|MAIN] 
-|7| [1|число|MAIN]  [2|indefier|MAIN]  [4|=|MAIN]  [3|expression|MAIN]  [5|;|MAIN] 
-|8| [1|число|MAIN]  [2|indefier|MAIN]  [4|=|MAIN]  [3|expression|MAIN]  [5|;|MAIN] 
-|9| [15|Если|MAIN]  [6|(|MAIN]  [17|LogicExpression|MAIN]  [7|)|MAIN]  [8|{|IF.2] 
-|10| [2|indefier|IF.2]  [6|(|IF.2]  [7|)|IF.2]  [5|;|IF.2] 
-|11| [9|}|MAIN] 
-|12| [16|Иначе|MAIN]  [15|Если|MAIN]  [6|(|MAIN]  [17|LogicExpression|MAIN]  [7|)|MAIN]  [8|{|ELIF.2] 
-|13| [2|indefier|ELIF.2]  [6|(|ELIF.2]  [7|)|ELIF.2]  [5|;|ELIF.2] 
-|14| [9|}|MAIN] 
-|15| [16|Иначе|MAIN]  [8|{|ELSE.2] 
-|16| [2|indefier|ELSE.2]  [6|(|ELSE.2]  [7|)|ELSE.2]  [5|;|ELSE.2] 
-|17| [9|}|MAIN] 
-|18| [2|indefier|MAIN]  [6|(|MAIN]  [2|indefier|MAIN]  [11|,|MAIN]  [2|indefier|MAIN]  [7|)|MAIN]  [5|;|MAIN] 
-|19| [9|}|GLOBAL] 
-|20|
+|0| [13|//|GLOBAL] 
+|1| [10|namespace|GLOBAL]  [2|indefier|GLOBAL]  [8|{|program] 
+|2| [1|bool|program]  [2|indefier|program]  [4|=|program]  [3|expression|program]  [5|;|program] 
+|3| [1|int|program]  [2|indefier|program]  [4|=|program]  [3|expression|program]  [5|;|program] 
+|4| [1|int|program]  [2|indefier|program]  [4|=|program]  [3|expression|program]  [5|;|program] 
+|5| [1|char|program]  [2|indefier|program]  [4|=|program]  [3|expression|program]  [5|;|program] 
+|6| [1|string|program]  [2|indefier|program]  [4|=|program]  [3|expression|program]  [5|;|program] 
+|7| [1|void|program]  [2|indefier|program]  [6|(|program]  [7|)|program]  [5|;|program] 
+|8| [1|string|program]  [2|indefier|program]  [6|(|program]  [1|int|program]  [2|indefier|program]  [7|)|program]  [8|{|Func.OnNotExit] 
+|9| [14|return|Func.OnNotExit]  [3|expression|Func.OnNotExit]  [5|;|Func.OnNotExit] 
+|10| [9|}|program] 
+|11| [12|Main|program]  [8|{|MAIN] 
+|12| [1|string|MAIN]  [2|indefier|MAIN]  [5|;|MAIN] 
+|13| [15|if|MAIN]  [6|(|MAIN]  [17|LogicExpression|MAIN]  [7|)|MAIN]  [8|{|IF.3] 
+|14| [2|indefier|IF.3]  [6|(|IF.3]  [7|)|IF.3]  [5|;|IF.3] 
+|15| [9|}|MAIN] 
+|16| [16|else|MAIN]  [15|if|MAIN]  [6|(|MAIN]  [17|LogicExpression|MAIN]  [7|)|MAIN]  [10|namespace|MAIN]  [2|indefier|MAIN]  [8|{|CustomIfNamespace] 
+|17| [14|return|CustomIfNamespace]  [5|;|CustomIfNamespace] 
+|18| [9|}|MAIN] 
+|19| [16|else|MAIN]  [8|{|ELSE.5] 
+|20| [2|indefier|ELSE.5]  [4|=|ELSE.5]  [3|expression|ELSE.5]  [5|;|ELSE.5] 
+|21| [9|}|MAIN] 
+|22| [14|return|MAIN]  [3|expression|MAIN]  [5|;|MAIN] 
+|23| [9|}|program] 
+|24| [9|}|GLOBAL] 
+|25|
 --------------------------------------------------------
 		   Список литералов | Literals list
 #----Данные---------------------------------------------
 --------------------------------------------------------
-|0| Произведение
-|1| а
-|2| б
-|3| а * б
-|4| Тест
-|5| а
-|6| 12
-|7| б
-|8| 20 + (2 * 2)
-|9| с
-|10| а + б
-|11| а == б && (б != а || 12 > 7)
-|12| Тест
-|13| а == б
-|14| Тест
-|15| Тест
-|16| Произведение
-|17| а
-|18| б
+|0| program
+|1| exit
+|2| false
+|3| num
+|4| 1
+|5| damage
+|6| num * 3
+|7| symbol
+|8| ';'
+|9| name
+|10| "Dimasic"
+|11| OnExit
+|12| OnNotExit
+|13| damage
+|14| "You take " + damage + " dgm!"
+|15| Message
+|16| exit == true
+|17| OnExit
+|18| name == "Govno" || name == "Eblan"
+|19| CustomIfNamespace
+|20| Message
+|21| OnNotExit(damage)
+|22| Message

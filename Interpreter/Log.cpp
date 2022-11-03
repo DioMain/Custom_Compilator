@@ -79,7 +79,7 @@ namespace Log {
 		*stream << " -log: " << nowstr << endl;
 	}
 
-	void Logging::WriteData(Parsing::DataContainer data) {
+	void Logging::WriteData(LexemAnalyzer::DataContainer data) {
 		if (stream == nullptr || !stream->is_open()) return;
 
 		*stream << endl;

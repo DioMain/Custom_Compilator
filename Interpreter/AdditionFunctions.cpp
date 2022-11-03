@@ -2,14 +2,16 @@
 
 using namespace std;
 
-Parsing::VarType GetVarTypeByName(string typeName)
+LexemAnalyzer::VarType GetVarTypeByName(string typeName)
 {
-	if (typeName == "число")
-		return Parsing::VarType::Integer;
-	else if (typeName == "строка")
-		return Parsing::VarType::String;
-	else if (typeName == "символ")
-		return Parsing::VarType::Char;
+	if (typeName == "int")
+		return LexemAnalyzer::VarType::Integer;
+	else if (typeName == "string")
+		return LexemAnalyzer::VarType::String;
+	else if (typeName == "char")
+		return LexemAnalyzer::VarType::Char;
+	else if (typeName == "bool")
+		return LexemAnalyzer::VarType::Bool;
 	else
-		return Parsing::VarType::Void;
+		return LexemAnalyzer::VarType::Void;
 }

@@ -1,26 +1,20 @@
 #pragma once
 
 #define PARSING_UNDEF_LEXEM_NAME "$$$"
-#define PARSING_COMMAND_END_LEXEM Parsing::Lexem(Parsing::LexemType::RuleEnd, ";")
-#define PARSING_VOID_LEXEM Parsing::Lexem(Parsing::LexemType::Void, "пусто")
-#define PARSING_NAMESPACE_LEXEM Parsing::Lexem(Parsing::LexemType::Namespace, "пространство")
+#define PARSING_COMMAND_END_LEXEM LexemAnalyzer::Lexem(LexemAnalyzer::LexemType::RuleEnd, ";")
+#define PARSING_VOID_LEXEM LexemAnalyzer::Lexem(LexemAnalyzer::LexemType::Void, "void")
+#define PARSING_NAMESPACE_LEXEM LexemAnalyzer::Lexem(LexemAnalyzer::LexemType::Namespace, "namespace")
 
-#define PARSING_VAR_UNINIT -1
-
-namespace Parsing {
+namespace LexemAnalyzer {
 	enum class LexemType {
 		Void, VarType, Indefier, Expression, Equals, RuleEnd, ParamsIn, ParamsOut, 
-		SpaceIn, SpaceOut, Namespace, And, Main, Return, IgnoreMain, If, Else, 
+		SpaceIn, SpaceOut, Namespace, And, Main, Comment, Return, If, Else, 
 		LogicExpression 
-	};
-
-	enum class LinkType {
-		Void, Var, Literal
 	};
 
 	enum class VarType
 	{
-		Void, String, Integer, Char
+		Void, String, Integer, Char, Bool
 	};
 
 	enum class ParamType {
@@ -36,17 +30,13 @@ namespace Parsing {
 
 	struct Lexem {
 		LexemType type;
-		LinkType linkType;
 
 		std::string name;
 		std::string locationSpace;
 
-		int linkIndex;
+		Lexem() : type(LexemType::Void), name() { }
 
-		Lexem() : type(LexemType::Void), linkType(LinkType::Void), name(), linkIndex(-1) { }
-
-		Lexem(LexemType type, std::string name, LinkType linkType = LinkType::Void, int linkIndex = -1)
-			: type(type), linkType(linkType), name(name), linkIndex(linkIndex) { }
+		Lexem(LexemType type, std::string name) : type(type), name(name) { }
 	};
 
 	class DataContainer

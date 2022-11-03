@@ -6,7 +6,7 @@ using namespace Error;
 using namespace Parm;
 using namespace Log;
 using namespace In;
-using namespace Parsing;
+using namespace LexemAnalyzer;
 using namespace poland;
 
 int _tmain(int argc, TCHAR* argv[]) {

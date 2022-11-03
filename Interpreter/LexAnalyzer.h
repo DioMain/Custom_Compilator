@@ -6,9 +6,7 @@
 #define PARSING_CODE_END '\0'
 #define PARSING_STRING '\"'
 
-#define PARSING_LITERA_LEXEM(id) Parsing::Lexem(Parsing::LexemType::Expression, PARSING_UNDEF_LEXEM_NAME, Parsing::LinkType::Literal, id)
-
-namespace Parsing {
+namespace LexemAnalyzer {
 	class LexAnalyzer
 	{
 	public:
@@ -27,11 +25,13 @@ namespace Parsing {
 			letI = 0,
 			lineI = 0;
 
+		int namespacesCounter = 0;
+
 		char* code;
 
 		std::string dataBuffer;
 		std::string indefierBuffer;
-		std::string FuncBuffer;
+		std::string funcSpaceBuffer;
 		std::string namespaceBuffer;
 		VarType varTypeBuffer;
 
