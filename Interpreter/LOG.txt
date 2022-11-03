@@ -1,5 +1,5 @@
 <------------------ Протокол ------------------>
- Дата создания протокола: 03.11.2022 16:14:02
+ Дата создания протокола: 04.11.2022 2:01:06
 <------------- Входные параметры -------------->
  -in: IN.txt
  -out: OUT.txt
@@ -7,68 +7,6 @@
 
 <======= Проверка текста на доступность =======>
 <-------------- Исходные данные --------------->
- Кол-во символов: 458
- Кол-во строк: 30
+ Кол-во символов: 11
+ Кол-во строк: 0
  Проигнорировано: 0
-
-<========= Проверка текста завершена! =========>
-
-<===== Результат лексического анализатора =====>
-
---------------------------------------------------------
-			Таблица лексем | Table of lexems
-<------------[ТИП|ЦЕПОЧКА|ПРОСТРАНСТВО ИМЁН]----------->
---------------------------------------------------------
-|0| [13|//|GLOBAL] 
-|1| [10|namespace|GLOBAL]  [2|indefier|GLOBAL]  [8|{|program] 
-|2| [1|bool|program]  [2|indefier|program]  [4|=|program]  [3|expression|program]  [5|;|program] 
-|3| [1|int|program]  [2|indefier|program]  [4|=|program]  [3|expression|program]  [5|;|program] 
-|4| [1|int|program]  [2|indefier|program]  [4|=|program]  [3|expression|program]  [5|;|program] 
-|5| [1|char|program]  [2|indefier|program]  [4|=|program]  [3|expression|program]  [5|;|program] 
-|6| [1|string|program]  [2|indefier|program]  [4|=|program]  [3|expression|program]  [5|;|program] 
-|7| [1|void|program]  [2|indefier|program]  [6|(|program]  [7|)|program]  [5|;|program] 
-|8| [1|string|program]  [2|indefier|program]  [6|(|program]  [1|int|program]  [2|indefier|program]  [7|)|program]  [8|{|Func.OnNotExit] 
-|9| [14|return|Func.OnNotExit]  [3|expression|Func.OnNotExit]  [5|;|Func.OnNotExit] 
-|10| [9|}|program] 
-|11| [12|Main|program]  [8|{|MAIN] 
-|12| [1|string|MAIN]  [2|indefier|MAIN]  [5|;|MAIN] 
-|13| [15|if|MAIN]  [6|(|MAIN]  [17|LogicExpression|MAIN]  [7|)|MAIN]  [8|{|IF.3] 
-|14| [2|indefier|IF.3]  [6|(|IF.3]  [7|)|IF.3]  [5|;|IF.3] 
-|15| [9|}|MAIN] 
-|16| [16|else|MAIN]  [15|if|MAIN]  [6|(|MAIN]  [17|LogicExpression|MAIN]  [7|)|MAIN]  [10|namespace|MAIN]  [2|indefier|MAIN]  [8|{|CustomIfNamespace] 
-|17| [14|return|CustomIfNamespace]  [5|;|CustomIfNamespace] 
-|18| [9|}|MAIN] 
-|19| [16|else|MAIN]  [8|{|ELSE.5] 
-|20| [2|indefier|ELSE.5]  [4|=|ELSE.5]  [3|expression|ELSE.5]  [5|;|ELSE.5] 
-|21| [9|}|MAIN] 
-|22| [14|return|MAIN]  [3|expression|MAIN]  [5|;|MAIN] 
-|23| [9|}|program] 
-|24| [9|}|GLOBAL] 
-|25|
---------------------------------------------------------
-		   Список литералов | Literals list
-#----Данные---------------------------------------------
---------------------------------------------------------
-|0| program
-|1| exit
-|2| false
-|3| num
-|4| 1
-|5| damage
-|6| num * 3
-|7| symbol
-|8| ';'
-|9| name
-|10| "Dimasic"
-|11| OnExit
-|12| OnNotExit
-|13| damage
-|14| "You take " + damage + " dgm!"
-|15| Message
-|16| exit == true
-|17| OnExit
-|18| name == "Govno" || name == "Eblan"
-|19| CustomIfNamespace
-|20| Message
-|21| OnNotExit(damage)
-|22| Message

@@ -9,4 +9,4 @@ bool ExistElementInVector(std::vector<T> vec, T el) {
 	return false;
 }
 
-LexemAnalyzer::VarType GetVarTypeByName(std::string typeName);
+LegecyLexemAnalyzer::VarType GetVarTypeByName(std::string typeName);

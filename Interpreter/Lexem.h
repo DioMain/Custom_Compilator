@@ -1,6 +1,8 @@
 #pragma once
 
-namespace Lexem {
+#define LEXEM_CHAIN_UNDEFINE "$$$"
+
+namespace Data {
 	enum class LexemType {
 		Void, VarType, Indefier, Expression, LogicExpression, Equals, RuleEnd, ParamsIn, ParamsOut,
 		SpaceIn, SpaceOut, Namespace, And, Main, Comment, Return, If, Else
@@ -19,8 +21,10 @@ namespace Lexem {
 	public:
 		LexemData data;
 
-		BasicLexem(std::string chain, LexemType type) : data(LexemData(chain, type)) { }
+		AltLexemAnalyzer::LexemAnalyzer* lexemAnalyzer;
 
-		virtual void Action() = 0;
+		BasicLexem(std::string chain, LexemType type) : data(LexemData(chain, type)), lexemAnalyzer(nullptr) { }
+
+		virtual void Action()  { }
 	};
 }

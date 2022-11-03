@@ -19,7 +19,7 @@ namespace Log {
 		// Записывает в log фаил инфармацию о входных параметрах
 		void WriteParm(Parm::ParmAnalyzer parm);
 
-		void WriteData(LexemAnalyzer::DataContainer data);
+		void WriteData(LegecyLexemAnalyzer::DataContainer data);
 
 		// Записывает в log фаил инфармацию об входных данных
 		void WriteIn(In::InFile in);

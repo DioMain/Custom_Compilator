@@ -6,7 +6,7 @@
 #define PARSING_CODE_END '\0'
 #define PARSING_STRING '\"'
 
-namespace LexemAnalyzer {
+namespace LegecyLexemAnalyzer {
 	class LexAnalyzer
 	{
 	public:

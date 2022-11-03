@@ -2,7 +2,7 @@
 
 using namespace std;
 
-namespace LexemAnalyzer {
+namespace LegecyLexemAnalyzer {
 	void LexAnalyzer::Invoke()
 	{
 		char letter;

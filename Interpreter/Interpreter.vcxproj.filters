@@ -60,6 +60,12 @@
     <ClCompile Include="AllLexems.cpp">
       <Filter>Тестовые Файлы</Filter>
     </ClCompile>
+    <ClCompile Include="Collections.cpp">
+      <Filter>Тестовые Файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="AltLexemAnalyzer.cpp">
+      <Filter>Тестовые Файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -89,7 +95,7 @@
     <ClInclude Include="LexAnalyzer.h">
       <Filter>Файлы заголовков\LexemState_h</Filter>
     </ClInclude>
-    <ClInclude Include="Containers.h">
+    <ClInclude Include="Collections.h">
       <Filter>Тестовые Файлы</Filter>
     </ClInclude>
     <ClInclude Include="Lexem.h">
@@ -99,6 +105,12 @@
       <Filter>Тестовые Файлы</Filter>
     </ClInclude>
     <ClInclude Include="AltLexemAnalyzer.h">
+      <Filter>Тестовые Файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="Literal.h">
+      <Filter>Тестовые Файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="UpLoad.h">
       <Filter>Тестовые Файлы</Filter>
     </ClInclude>
   </ItemGroup>

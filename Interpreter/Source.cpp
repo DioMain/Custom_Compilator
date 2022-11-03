@@ -6,8 +6,10 @@ using namespace Error;
 using namespace Parm;
 using namespace Log;
 using namespace In;
-using namespace LexemAnalyzer;
-using namespace Containers;
+//using namespace LegecyLexemAnalyzer;
+using namespace AltLexemAnalyzer;
+using namespace Collections;
+using namespace Data;
 
 int _tmain(int argc, TCHAR* argv[]) {
 	setlocale(LC_ALL, "RUS");
@@ -17,9 +19,16 @@ int _tmain(int argc, TCHAR* argv[]) {
 	ParmAnalyzer parm(argv, argc);
 	Logging log;
 	InFile in;
-	LexAnalyzer lex;
 
-	DataContainer* container = nullptr;
+	DefaultLexems* defLex;
+
+	LexemsTable* lexTable;
+	LiteralsColletion* rawLit;
+
+	AltLexemAnalyzer::LexemAnalyzer lexAnalyzer;
+
+	//LexAnalyzer lex;
+	//DataContainer* container = nullptr;
 
 	try
 	{
@@ -43,16 +52,26 @@ int _tmain(int argc, TCHAR* argv[]) {
 		cout << "<========= Проверка текста завершена! =========>" << endl << endl;
 		log.WriteLine("\n<========= Проверка текста завершена! =========>", "");
 
-		container = new DataContainer();
+		defLex = new DefaultLexems();
+		lexTable = new LexemsTable();
+		rawLit = new LiteralsColletion();
 
-		container->Init();
+		lexAnalyzer = LexemAnalyzer(in.Code, defLex, lexTable, rawLit);
 
-		lex = LexAnalyzer(in.Code, container);
+		// LEGACY CODE
 
-		lex.Invoke();
+		//lexAnalyzer = AltLexemAnalyzer::LexemAnalyzer(in.Code, )
 
-		log.WriteLine("\n\n<===== Результат лексического анализатора =====>\n", "");
-		log.WriteData(*container);
+		//container = new DataContainer();
+
+		//container->Init();
+
+		//lex = LexAnalyzer(in.Code, container);
+
+		//lex.Invoke();
+
+		//log.WriteLine("\n\n<===== Результат лексического анализатора =====>\n", "");
+		//log.WriteData(*container);
 
 		cout << "Завершено без ошибок!" << endl;
 	}

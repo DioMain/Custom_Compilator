@@ -2,16 +2,16 @@
 
 using namespace std;
 
-LexemAnalyzer::VarType GetVarTypeByName(string typeName)
+LegecyLexemAnalyzer::VarType GetVarTypeByName(string typeName)
 {
 	if (typeName == "int")
-		return LexemAnalyzer::VarType::Integer;
+		return LegecyLexemAnalyzer::VarType::Integer;
 	else if (typeName == "string")
-		return LexemAnalyzer::VarType::String;
+		return LegecyLexemAnalyzer::VarType::String;
 	else if (typeName == "char")
-		return LexemAnalyzer::VarType::Char;
+		return LegecyLexemAnalyzer::VarType::Char;
 	else if (typeName == "bool")
-		return LexemAnalyzer::VarType::Bool;
+		return LegecyLexemAnalyzer::VarType::Bool;
 	else
-		return LexemAnalyzer::VarType::Void;
+		return LegecyLexemAnalyzer::VarType::Void;
 }

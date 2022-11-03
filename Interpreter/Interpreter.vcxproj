@@ -131,6 +131,8 @@
   <ItemGroup>
     <ClCompile Include="AdditionFunctions.cpp" />
     <ClCompile Include="AllLexems.cpp" />
+    <ClCompile Include="AltLexemAnalyzer.cpp" />
+    <ClCompile Include="Collections.cpp" />
     <ClCompile Include="LexAnalyzer.cpp" />
     <ClCompile Include="Error.cpp" />
     <ClCompile Include="InFile.cpp" />
@@ -146,16 +148,18 @@
     <ClInclude Include="AdditionFunctions.h" />
     <ClInclude Include="AllLexems.h" />
     <ClInclude Include="AltLexemAnalyzer.h" />
-    <ClInclude Include="Containers.h" />
+    <ClInclude Include="Collections.h" />
     <ClInclude Include="LexAnalyzer.h" />
     <ClInclude Include="Error.h" />
     <ClInclude Include="InFile.h" />
     <ClInclude Include="Data.h" />
     <ClInclude Include="Lexem.h" />
+    <ClInclude Include="Literal.h" />
     <ClInclude Include="Log.h" />
     <ClInclude Include="ParmAnalyzer.h" />
     <ClInclude Include="PolandNatation.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="UpLoad.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

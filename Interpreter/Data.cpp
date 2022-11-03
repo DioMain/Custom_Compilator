@@ -2,7 +2,7 @@
 
 using namespace std;
 
-namespace LexemAnalyzer {
+namespace LegecyLexemAnalyzer {
 	void DataContainer::Init() {
 		BasicLexems.push_back(Lexem(LexemType::VarType, "int"));
 		BasicLexems.push_back(Lexem(LexemType::VarType, "string"));

@@ -1,11 +1,11 @@
 #pragma once
 
 #define PARSING_UNDEF_LEXEM_NAME "$$$"
-#define PARSING_COMMAND_END_LEXEM LexemAnalyzer::Lexem(LexemAnalyzer::LexemType::RuleEnd, ";")
-#define PARSING_VOID_LEXEM LexemAnalyzer::Lexem(LexemAnalyzer::LexemType::Void, "void")
-#define PARSING_NAMESPACE_LEXEM LexemAnalyzer::Lexem(LexemAnalyzer::LexemType::Namespace, "namespace")
+#define PARSING_COMMAND_END_LEXEM LegecyLexemAnalyzer::Lexem(LegecyLexemAnalyzer::LexemType::RuleEnd, ";")
+#define PARSING_VOID_LEXEM LegecyLexemAnalyzer::Lexem(LegecyLexemAnalyzer::LexemType::Void, "void")
+#define PARSING_NAMESPACE_LEXEM LegecyLexemAnalyzer::Lexem(LegecyLexemAnalyzer::LexemType::Namespace, "namespace")
 
-namespace LexemAnalyzer {
+namespace LegecyLexemAnalyzer {
 	enum class LexemType {
 		Void, VarType, Indefier, Expression, Equals, RuleEnd, ParamsIn, ParamsOut, 
 		SpaceIn, SpaceOut, Namespace, And, Main, Comment, Return, If, Else, 
