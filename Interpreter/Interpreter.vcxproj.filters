@@ -25,6 +25,9 @@
     <Filter Include="Исходные файлы\LexemState">
       <UniqueIdentifier>{9f9b30aa-2373-484d-a09d-ca37284bb3f8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Тестовые Файлы">
+      <UniqueIdentifier>{df092d92-d4ba-42a1-a17d-bc59cbe7d391}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
@@ -54,6 +57,9 @@
     <ClCompile Include="LexAnalyzer.cpp">
       <Filter>Исходные файлы\LexemState</Filter>
     </ClCompile>
+    <ClCompile Include="AllLexems.cpp">
+      <Filter>Тестовые Файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -82,6 +88,18 @@
     </ClInclude>
     <ClInclude Include="LexAnalyzer.h">
       <Filter>Файлы заголовков\LexemState_h</Filter>
+    </ClInclude>
+    <ClInclude Include="Containers.h">
+      <Filter>Тестовые Файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="Lexem.h">
+      <Filter>Тестовые Файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="AllLexems.h">
+      <Filter>Тестовые Файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="AltLexemAnalyzer.h">
+      <Filter>Тестовые Файлы</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

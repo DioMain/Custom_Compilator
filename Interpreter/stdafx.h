@@ -17,4 +17,9 @@
 #include "LexAnalyzer.h"
 #include "Log.h"
 
+#include "Lexem.h"
+#include "AllLexems.h"
+#include "Containers.h"
+#include "AltLexemAnalyzer.h"
+
 #include "AdditionFunctions.h"

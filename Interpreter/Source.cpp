@@ -7,7 +7,7 @@ using namespace Parm;
 using namespace Log;
 using namespace In;
 using namespace LexemAnalyzer;
-using namespace poland;
+using namespace Containers;
 
 int _tmain(int argc, TCHAR* argv[]) {
 	setlocale(LC_ALL, "RUS");
