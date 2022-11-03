@@ -172,7 +172,7 @@ namespace LexemAnalyzer {
 						data->RawLiterals.back()->data = expression;
 
 						if (tableStr > data->LexemsTable.size() - 1)
-							throw ERROR_THROW_IN_C(127, "ѕревышено кол-во строк в таблице лексем!", lineI, letI);
+							throw ERROR_THROW_IN(127, lineI, letI);
 
 						data->LexemsTable[tableStr].push_back(new Lexem(curLex));
 

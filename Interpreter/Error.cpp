@@ -40,8 +40,9 @@ namespace Error {
 		ERROR_THROW_C(124, "Неизвесное вырожение! [Lexem-Analyzer]"),
 		ERROR_THROW_C(125, "Точка входа не обнаружена! [Main { }]"),
 		ERROR_THROW_C(126, "Строка должна быть закрыта! [\"TEXT\"]"),
+		ERROR_THROW_C(127, "Превышено кол-во строк в таблице лексем!"),
 
-		ERROR_THROW_NODEF(127), ERROR_THROW_NODEF(128), ERROR_THROW_NODEF(129),
+		ERROR_THROW_NODEF(128), ERROR_THROW_NODEF(129),
 
 		ERROR_THROW_NODEF10(130), ERROR_THROW_NODEF10(140), ERROR_THROW_NODEF10(150),
 		ERROR_THROW_NODEF10(160), ERROR_THROW_NODEF10(170), ERROR_THROW_NODEF10(180), ERROR_THROW_NODEF10(190),
