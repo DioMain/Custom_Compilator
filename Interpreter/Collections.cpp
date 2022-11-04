@@ -3,48 +3,48 @@
 namespace Collections {
 	DefaultLexems::DefaultLexems()
 	{
-		lexems.push_back(Data::Void());
-		lexems.push_back(Data::Integer());
-		lexems.push_back(Data::SString());
-		lexems.push_back(Data::Char());
-		lexems.push_back(Data::Boolean());
+		lexems.push_back(new Data::Void());
+		lexems.push_back(new Data::Integer());
+		lexems.push_back(new Data::SString());
+		lexems.push_back(new Data::Char());
+		lexems.push_back(new Data::Boolean());
 
-		lexems.push_back(Data::And());
-		lexems.push_back(Data::Equals());
+		lexems.push_back(new Data::And());
+		lexems.push_back(new Data::Equals());
 
-		lexems.push_back(Data::ParamsIn());
-		lexems.push_back(Data::ParamsOut());
-		lexems.push_back(Data::SpaceIn());
-		lexems.push_back(Data::SpaceOut());
+		lexems.push_back(new Data::ParamsIn());
+		lexems.push_back(new Data::ParamsOut());
+		lexems.push_back(new Data::SpaceIn());
+		lexems.push_back(new Data::SpaceOut());
 
-		lexems.push_back(Data::Main());
-		lexems.push_back(Data::Return());
-		lexems.push_back(Data::Namespace());
+		lexems.push_back(new Data::Main());
+		lexems.push_back(new Data::Return());
+		lexems.push_back(new Data::Namespace());
 
-		lexems.push_back(Data::RuleEnd());
+		lexems.push_back(new Data::RuleEnd());
 
-		lexems.push_back(Data::Comment());
+		lexems.push_back(new Data::Comment());
 
-		lexems.push_back(Data::If());
-		lexems.push_back(Data::Else());
+		lexems.push_back(new Data::If());
+		lexems.push_back(new Data::Else());
 	}
-	Data::BasicLexem DefaultLexems::ParsingChain(std::string chain)
+	Data::BasicLexem* DefaultLexems::ParsingChain(std::string chain)
 	{
-		std::vector<Data::BasicLexem> availableLexems = lexems;
+		std::vector<Data::BasicLexem*> availableLexems = lexems;
 
 		for (int i = 0; i < chain.size(); i++)
 		{
 			for (int j = 0; j < availableLexems.size(); j++)
 			{
-				if (chain[i] != availableLexems[j].data.chain[i]) {
+				if (chain[i] != availableLexems[j]->data.chain[i]) {
 					availableLexems.erase(availableLexems.begin() + j);
 					j--;
 				}
 			}
 		}
 
-		if (availableLexems.size() != 1 || availableLexems[0].data.chain.size() != chain.size())
-			return Data::Void(); // Здесь должна бать ошибка
+		if (availableLexems.size() != 1 || availableLexems[0]->data.chain.size() != chain.size())
+			return new Data::NoneLexem(); // Здесь должна бать ошибка
 
 		return availableLexems.front();
 	}

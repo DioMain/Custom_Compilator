@@ -1,5 +1,5 @@
 #pragma once
 
-namespace AltLexemAnalyzer {
-	class LexemAnalyzer;
+namespace LexemAnalysis {
+	class LexemAnalyser;
 }

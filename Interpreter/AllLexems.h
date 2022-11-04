@@ -2,6 +2,11 @@
 
 namespace Data {
 	
+	class NoneLexem : public BasicLexem {
+	public:
+		NoneLexem() : BasicLexem(LEXEM_CHAIN_UNDEFINE, LexemType::None) { }
+	};
+
 	// Наследуемые
 
 	class VarType : public BasicLexem {

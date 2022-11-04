@@ -79,7 +79,7 @@ namespace Log {
 		*stream << " -log: " << nowstr << endl;
 	}
 
-	void Logging::WriteData(LegecyLexemAnalyzer::DataContainer data) {
+	void Logging::WriteLexemAnalysisResult(Collections::LexemsTable table, Collections::LiteralsColletion lits) {
 		if (stream == nullptr || !stream->is_open()) return;
 
 		*stream << endl;
@@ -89,14 +89,14 @@ namespace Log {
 		*stream << "<------------[ÒÈÏ|ÖÅÏÎ×ÊÀ|ÏÐÎÑÒÐÀÍÑÒÂÎ ÈÌ¨Í]----------->" << endl;
 		*stream << "--------------------------------------------------------" << endl;
 
-		for (size_t i = 0; i < data.LexemsTable.size(); i++)
+		for (size_t i = 0; i < table.GetLinesCount(); i++)
 		{
 			*stream << "|" << i << "|";
-			for (size_t j = 0; j < data.LexemsTable[i].size(); j++)
+			for (size_t j = 0; j < table.GetLineSize(i); j++)
 			{
-				*stream << " [" << (int)data.LexemsTable[i][j]->type
-					<< "|" << data.LexemsTable[i][j]->name
-					<< "|" << data.LexemsTable[i][j]->locationSpace << "] ";
+				*stream << " [" << (int)table.Get(i, j).type
+					<< "|" << table.Get(i, j).chain
+					<< "|" << table.Get(i, j).space << "] ";
 			}
 			*stream << endl;
 		}
@@ -106,10 +106,9 @@ namespace Log {
 		*stream << "#----Äàííûå---------------------------------------------" << endl;
 		*stream << "--------------------------------------------------------" << endl;
 
-		for (int i = 0; i < data.RawLiterals.size(); i++)
+		for (int i = 0; i < lits.GetSize(); i++)
 		{
-			*stream << "|" << i << "| "
-				<< data.RawLiterals[i]->data << endl;
+			*stream << "|" << i << "| " << lits[i].data << endl;
 		}
 	}
 

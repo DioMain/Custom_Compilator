@@ -131,7 +131,7 @@
   <ItemGroup>
     <ClCompile Include="AdditionFunctions.cpp" />
     <ClCompile Include="AllLexems.cpp" />
-    <ClCompile Include="AltLexemAnalyzer.cpp" />
+    <ClCompile Include="AltLexemAnalyser.cpp" />
     <ClCompile Include="Collections.cpp" />
     <ClCompile Include="LexAnalyzer.cpp" />
     <ClCompile Include="Error.cpp" />
@@ -147,7 +147,7 @@
   <ItemGroup>
     <ClInclude Include="AdditionFunctions.h" />
     <ClInclude Include="AllLexems.h" />
-    <ClInclude Include="AltLexemAnalyzer.h" />
+    <ClInclude Include="AltLexemAnalyser.h" />
     <ClInclude Include="Collections.h" />
     <ClInclude Include="LexAnalyzer.h" />
     <ClInclude Include="Error.h" />

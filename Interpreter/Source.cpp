@@ -6,8 +6,7 @@ using namespace Error;
 using namespace Parm;
 using namespace Log;
 using namespace In;
-//using namespace LegecyLexemAnalyzer;
-using namespace AltLexemAnalyzer;
+using namespace LexemAnalysis;
 using namespace Collections;
 using namespace Data;
 
@@ -25,10 +24,7 @@ int _tmain(int argc, TCHAR* argv[]) {
 	LexemsTable* lexTable;
 	LiteralsColletion* rawLit;
 
-	AltLexemAnalyzer::LexemAnalyzer lexAnalyzer;
-
-	//LexAnalyzer lex;
-	//DataContainer* container = nullptr;
+	LexemAnalysis::LexemAnalyser lexAnalyzer;
 
 	try
 	{
@@ -56,22 +52,11 @@ int _tmain(int argc, TCHAR* argv[]) {
 		lexTable = new LexemsTable();
 		rawLit = new LiteralsColletion();
 
-		lexAnalyzer = LexemAnalyzer(in.Code, defLex, lexTable, rawLit);
+		lexAnalyzer = LexemAnalyser(in.Code, defLex, lexTable, rawLit);
 
-		// LEGACY CODE
+		lexAnalyzer.Invoke();
 
-		//lexAnalyzer = AltLexemAnalyzer::LexemAnalyzer(in.Code, )
-
-		//container = new DataContainer();
-
-		//container->Init();
-
-		//lex = LexAnalyzer(in.Code, container);
-
-		//lex.Invoke();
-
-		//log.WriteLine("\n\n<===== Результат лексического анализатора =====>\n", "");
-		//log.WriteData(*container);
+		log.WriteLexemAnalysisResult(*lexTable, *rawLit);
 
 		cout << "Завершено без ошибок!" << endl;
 	}

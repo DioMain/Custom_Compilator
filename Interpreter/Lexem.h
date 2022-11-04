@@ -4,8 +4,8 @@
 
 namespace Data {
 	enum class LexemType {
-		Void, VarType, Indefier, Expression, LogicExpression, Equals, RuleEnd, ParamsIn, ParamsOut,
-		SpaceIn, SpaceOut, Namespace, And, Main, Comment, Return, If, Else
+		None, Void, VarType, Indefier, Expression, LogicExpression, Equals, RuleEnd, ParamsIn, 
+		ParamsOut, SpaceIn, SpaceOut, Namespace, And, Main, Comment, Return, If, Else
 	};
 
 	struct LexemData {
@@ -21,10 +21,12 @@ namespace Data {
 	public:
 		LexemData data;
 
-		AltLexemAnalyzer::LexemAnalyzer* lexemAnalyzer;
+		LexemAnalysis::LexemAnalyser* lexemAnalyzer;
+
+		BasicLexem() : data(LexemData(LEXEM_CHAIN_UNDEFINE, LexemType::None)), lexemAnalyzer(nullptr) { }
 
 		BasicLexem(std::string chain, LexemType type) : data(LexemData(chain, type)), lexemAnalyzer(nullptr) { }
 
-		virtual void Action()  { }
+		virtual void Action() { }
 	};
 }

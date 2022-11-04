@@ -17,7 +17,6 @@
 #include "PolandNatation.h"
 #include "Data.h"				// legacy
 #include "LexAnalyzer.h"		// legacy
-#include "Log.h"
 
 // TESTING!
 
@@ -25,8 +24,10 @@
 #include "Literal.h"
 #include "AllLexems.h"
 #include "Collections.h"
-#include "AltLexemAnalyzer.h"
+#include "AltLexemAnalyser.h"
 
 //
+
+#include "Log.h"
 
 #include "AdditionFunctions.h"	// legacy

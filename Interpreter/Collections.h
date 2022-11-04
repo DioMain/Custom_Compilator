@@ -6,11 +6,11 @@ namespace Collections {
 
 		DefaultLexems();
 
-		Data::BasicLexem ParsingChain(std::string chain);
+		Data::BasicLexem* ParsingChain(std::string chain);
 
 	private:
 
-		std::vector<Data::BasicLexem> lexems;
+		std::vector<Data::BasicLexem*> lexems;
 	};
 
 	template <typename T>

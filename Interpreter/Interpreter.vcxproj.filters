@@ -63,7 +63,7 @@
     <ClCompile Include="Collections.cpp">
       <Filter>Тестовые Файлы</Filter>
     </ClCompile>
-    <ClCompile Include="AltLexemAnalyzer.cpp">
+    <ClCompile Include="AltLexemAnalyser.cpp">
       <Filter>Тестовые Файлы</Filter>
     </ClCompile>
   </ItemGroup>
@@ -104,7 +104,7 @@
     <ClInclude Include="AllLexems.h">
       <Filter>Тестовые Файлы</Filter>
     </ClInclude>
-    <ClInclude Include="AltLexemAnalyzer.h">
+    <ClInclude Include="AltLexemAnalyser.h">
       <Filter>Тестовые Файлы</Filter>
     </ClInclude>
     <ClInclude Include="Literal.h">
