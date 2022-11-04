@@ -9,25 +9,17 @@
 #include <vector>
 #include <stack>
 
-#include "UpLoad.h"				// TESTING!
+#include "UpLoad.h"
 
 #include "Error.h"
 #include "ParmAnalyzer.h"
 #include "InFile.h"
 #include "PolandNatation.h"
-#include "Data.h"				// legacy
-#include "LexAnalyzer.h"		// legacy
-
-// TESTING!
 
 #include "Lexem.h"
 #include "Literal.h"
 #include "AllLexems.h"
 #include "Collections.h"
-#include "AltLexemAnalyser.h"
-
-//
+#include "LexemAnalyser.h"
 
 #include "Log.h"
-
-#include "AdditionFunctions.h"	// legacy

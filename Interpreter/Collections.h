@@ -38,6 +38,9 @@ namespace Collections {
 		T& Get(int index) {
 			return container[index];
 		}
+		T& GetLast() {
+			return container[container.size() - 1];
+		}
 
 		int GetSize() {
 			return container.size();
@@ -71,7 +74,9 @@ namespace Collections {
 		int GetLineSize(int line);
 		int GetLinesCount();
 
-		Data::LexemData Get(int line, int col);
+		Data::LexemData& GetLast();
+
+		Data::LexemData& Get(int line, int col);
 	};
 
 	class LexemsColletion : public Collection<Data::LexemData> {

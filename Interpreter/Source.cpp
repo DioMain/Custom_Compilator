@@ -45,7 +45,7 @@ int _tmain(int argc, TCHAR* argv[]) {
 
 		log.WriteIn(in);
 
-		cout << "<========= Проверка текста завершена! =========>" << endl << endl;
+		cout << "<========= Проверка текста завершена! =========>" << endl;
 		log.WriteLine("\n<========= Проверка текста завершена! =========>", "");
 
 		defLex = new DefaultLexems();
@@ -55,6 +55,9 @@ int _tmain(int argc, TCHAR* argv[]) {
 		lexAnalyzer = LexemAnalyser(in.Code, defLex, lexTable, rawLit);
 
 		lexAnalyzer.Invoke();
+
+		cout << "<======== Лексический анализ завершен! ========>" << endl << endl;
+		log.WriteLine("\n<======== Лексический анализ завершен! ========>", "");
 
 		log.WriteLexemAnalysisResult(*lexTable, *rawLit);
 

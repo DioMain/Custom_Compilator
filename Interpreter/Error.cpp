@@ -4,7 +4,7 @@ using namespace std;
 
 namespace Error {
 
-	// Legacy
+	// Массив всех сущетсвующих ошибок / Array of all exist errors
 	static ErrorBase ErrorsPool[MAX_ERRORS_COUNT] = {
 		ERROR_THROW_C(0, "Недопустимый код ошибки"),
 		ERROR_THROW_C(1, "Системный збой"),
@@ -23,7 +23,7 @@ namespace Error {
 
 		ERROR_THROW_NODEF(105), ERROR_THROW_NODEF(106), ERROR_THROW_NODEF(107), ERROR_THROW_NODEF(108), ERROR_THROW_NODEF(109),
 
-		// Ошибки сканера кода
+		// Ошибки сканера кода / Errors of code scaner
 		ERROR_THROW_C(110, "Ошибка при открытии файла [-IN]"),
 		ERROR_THROW_C(111, "Недопустимый символ в исходном файле [-IN]"),
 		ERROR_THROW_C(112, "Ошибка при создании файла протакола [-log]"),
@@ -32,17 +32,16 @@ namespace Error {
 		ERROR_THROW_NODEF(114), ERROR_THROW_NODEF(115),
 		ERROR_THROW_NODEF(116), ERROR_THROW_NODEF(117), ERROR_THROW_NODEF(118), ERROR_THROW_NODEF(119),
 
-		// Ошибки лексического анализатора
-		ERROR_THROW_C(120, "Литерал идентификатора не может бать литералом вырожения!"),
+		// Ошибки лексического анализатора / Errors of lexem analysator
+		ERROR_THROW_C(120, "Треболволся литерал! [VAR IND = (EXPRESSION);] OR [NAMESPACE (INDEFIER) { }]"),
 		ERROR_THROW_C(121, "Литерал вырожения должен быть закрыт! [VAR IND = EXPRESSION;]"),
-		ERROR_THROW_C(122, "Выход за глаболую облость видимости"),
-		ERROR_THROW_C(123, "Такого литерала не существует!"),
-		ERROR_THROW_C(124, "Неизвесное вырожение! [Lexem-Analyzer]"),
-		ERROR_THROW_C(125, "Точка входа не обнаружена! [Main { }]"),
-		ERROR_THROW_C(126, "Строка должна быть закрыта! [\"TEXT\"]"),
-		ERROR_THROW_C(127, "Превышено кол-во строк в таблице лексем!"),
+		ERROR_THROW_C(122, "Выход за глобалую область видимости!"),
+		ERROR_THROW_C(123, "Такого литерала не существует! [LexemType == None]"),
+		ERROR_THROW_C(124, "Неизвесное лексема! [Lexem-Analysis]"),
+		ERROR_THROW_C(125, "Строчный или символьный литерал дожен быть закрыт! [\"TEXT\"] OR [\'C\']"),
+		ERROR_THROW_C(126, "Не все пространства имен закрыты!"),
 
-		ERROR_THROW_NODEF(128), ERROR_THROW_NODEF(129),
+		ERROR_THROW_NODEF(127), ERROR_THROW_NODEF(128), ERROR_THROW_NODEF(129),
 
 		ERROR_THROW_NODEF10(130), ERROR_THROW_NODEF10(140), ERROR_THROW_NODEF10(150),
 		ERROR_THROW_NODEF10(160), ERROR_THROW_NODEF10(170), ERROR_THROW_NODEF10(180), ERROR_THROW_NODEF10(190),

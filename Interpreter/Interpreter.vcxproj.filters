@@ -39,13 +39,7 @@
     <ClCompile Include="Log.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Data.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="PolandNatation.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="AdditionFunctions.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="InFile.cpp">
@@ -54,17 +48,14 @@
     <ClCompile Include="ParmAnalyzer.cpp">
       <Filter>Исходные файлы\FirstState</Filter>
     </ClCompile>
-    <ClCompile Include="LexAnalyzer.cpp">
+    <ClCompile Include="LexemAnalyser.cpp">
       <Filter>Исходные файлы\LexemState</Filter>
     </ClCompile>
     <ClCompile Include="AllLexems.cpp">
-      <Filter>Тестовые Файлы</Filter>
+      <Filter>Исходные файлы\LexemState</Filter>
     </ClCompile>
     <ClCompile Include="Collections.cpp">
-      <Filter>Тестовые Файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="AltLexemAnalyser.cpp">
-      <Filter>Тестовые Файлы</Filter>
+      <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -77,13 +68,7 @@
     <ClInclude Include="Log.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Data.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="PolandNatation.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="AdditionFunctions.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="InFile.h">
@@ -92,26 +77,23 @@
     <ClInclude Include="ParmAnalyzer.h">
       <Filter>Файлы заголовков\FirstState_h</Filter>
     </ClInclude>
-    <ClInclude Include="LexAnalyzer.h">
+    <ClInclude Include="LexemAnalyser.h">
+      <Filter>Файлы заголовков\LexemState_h</Filter>
+    </ClInclude>
+    <ClInclude Include="AllLexems.h">
       <Filter>Файлы заголовков\LexemState_h</Filter>
     </ClInclude>
     <ClInclude Include="Collections.h">
-      <Filter>Тестовые Файлы</Filter>
-    </ClInclude>
-    <ClInclude Include="Lexem.h">
-      <Filter>Тестовые Файлы</Filter>
-    </ClInclude>
-    <ClInclude Include="AllLexems.h">
-      <Filter>Тестовые Файлы</Filter>
-    </ClInclude>
-    <ClInclude Include="AltLexemAnalyser.h">
-      <Filter>Тестовые Файлы</Filter>
-    </ClInclude>
-    <ClInclude Include="Literal.h">
-      <Filter>Тестовые Файлы</Filter>
+      <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="UpLoad.h">
-      <Filter>Тестовые Файлы</Filter>
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Lexem.h">
+      <Filter>Файлы заголовков\LexemState_h</Filter>
+    </ClInclude>
+    <ClInclude Include="Literal.h">
+      <Filter>Файлы заголовков\LexemState_h</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

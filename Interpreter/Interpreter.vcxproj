@@ -129,14 +129,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AdditionFunctions.cpp" />
     <ClCompile Include="AllLexems.cpp" />
-    <ClCompile Include="AltLexemAnalyser.cpp" />
+    <ClCompile Include="LexemAnalyser.cpp" />
     <ClCompile Include="Collections.cpp" />
-    <ClCompile Include="LexAnalyzer.cpp" />
     <ClCompile Include="Error.cpp" />
     <ClCompile Include="InFile.cpp" />
-    <ClCompile Include="Data.cpp" />
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="ParmAnalyzer.cpp" />
     <ClCompile Include="PolandNatation.cpp" />
@@ -145,14 +142,11 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AdditionFunctions.h" />
     <ClInclude Include="AllLexems.h" />
-    <ClInclude Include="AltLexemAnalyser.h" />
+    <ClInclude Include="LexemAnalyser.h" />
     <ClInclude Include="Collections.h" />
-    <ClInclude Include="LexAnalyzer.h" />
     <ClInclude Include="Error.h" />
     <ClInclude Include="InFile.h" />
-    <ClInclude Include="Data.h" />
     <ClInclude Include="Lexem.h" />
     <ClInclude Include="Literal.h" />
     <ClInclude Include="Log.h" />

@@ -23,17 +23,26 @@ namespace Data {
 	void SpaceIn::Action()
 	{
 		if (lexemAnalyzer->NAMESPACE)
-			lexemAnalyzer->PrepareNamespace(lexemAnalyzer->literals->Get(lexemAnalyzer->literals->GetSize() - 1).data);
+			lexemAnalyzer->PrepareNamespace(lexemAnalyzer->literals->GetLast().data);
+		else if (lexemAnalyzer->IF && lexemAnalyzer->ELSE)
+			lexemAnalyzer->PrepareNamespace("ELIF");
+		else if (lexemAnalyzer->IF)
+			lexemAnalyzer->PrepareNamespace("IF");
+		else if (lexemAnalyzer->ELSE)
+			lexemAnalyzer->PrepareNamespace("ELSE");
 
 		lexemAnalyzer->OpenNamespace();
 
 		lexemAnalyzer->PrepareNamespace("UNDEFINE");
 
-		lexemAnalyzer->namespaceCount++;
+		lexemAnalyzer->namespaceCounter++;
 
 		lexemAnalyzer->NAMESPACE = false;
 
 		lexemAnalyzer->lexTable->NextLine();
+
+		lexemAnalyzer->IF = false;
+		lexemAnalyzer->ELSE = false;
 	}
 	void SpaceOut::Action()
 	{
@@ -44,31 +53,32 @@ namespace Data {
 
 	void ParamsIn::Action()
 	{
-		vector<char> end;
-		end.push_back(')');
-		end.push_back(',');
+		if (lexemAnalyzer->IF) {
+			lexemAnalyzer->ReadLiteral(LiteralType::LogicEpression, ')');
+		}
+		else {
+			vector<char> end;
+			end.push_back(')');
+			end.push_back(',');
 
-		lexemAnalyzer->ReadLiteral(LiteralType::Expression, end);
+			lexemAnalyzer->ReadLiteral(LiteralType::Expression, end);
 
-		lexemAnalyzer->PARAMS = true;
+			lexemAnalyzer->PARAMS = true;
+			lexemAnalyzer->PARAM_READ = true;
 
-		lexemAnalyzer->paramsDepth++;
-
-		if (lexemAnalyzer->paramsDepth == 1) {
-			lexemAnalyzer->PrepareNamespace("FUNC." + lexemAnalyzer->literals->Get(lexemAnalyzer->literals->GetSize() - 1).data);
+			lexemAnalyzer->PrepareNamespace("FUNC." + lexemAnalyzer->literals->GetLast().data);
 		}
 	}
 	void ParamsOut::Action()
 	{
-		lexemAnalyzer->paramsDepth--;
-
-		if (lexemAnalyzer->paramsDepth == 0) 
-			lexemAnalyzer->PARAMS = false;
+		lexemAnalyzer->PARAMS = false;
 	}
 
 	void Equals::Action()
 	{
 		lexemAnalyzer->ReadLiteral(LiteralType::Expression, ';');
+
+		lexemAnalyzer->NEED_LITERAL = true;
 	}
 	
 	void And::Action()
@@ -79,12 +89,17 @@ namespace Data {
 			end.push_back(',');
 
 			lexemAnalyzer->ReadLiteral(LiteralType::Indefier, end);
+
+			lexemAnalyzer->PARAM_READ = true;
 		}
 	}
 
 	void RuleEnd::Action()
 	{
 		lexemAnalyzer->lexTable->NextLine();
+
+		lexemAnalyzer->IF = false;
+		lexemAnalyzer->ELSE = false;
 	}
 
 	void Main::Action()
@@ -106,16 +121,24 @@ namespace Data {
 		lexemAnalyzer->ReadLiteral(LiteralType::Indefier, end);
 
 		lexemAnalyzer->NAMESPACE = true;
+		lexemAnalyzer->NEED_LITERAL = true;
+
+		lexemAnalyzer->PrepareNamespace("UNDEFINE");
 	}
 
 	void Comment::Action()
 	{
+		lexemAnalyzer->COMMENT = true;
+
+		lexemAnalyzer->lexTable->NextLine();
 	}
 
 	void If::Action()
 	{
+		lexemAnalyzer->IF = true;
 	}
 	void Else::Action()
 	{
+		lexemAnalyzer->ELSE = true;
 	}
 }

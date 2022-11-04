@@ -114,7 +114,11 @@ namespace Collections {
 	{
 		return table.size();
 	}
-	Data::LexemData LexemsTable::Get(int line, int col)
+	Data::LexemData& LexemsTable::GetLast()
+	{
+		return Get(GetLinesCount() - 1, GetLineSize(GetLinesCount() - 1) - 1);
+	}
+	Data::LexemData& LexemsTable::Get(int line, int col)
 	{
 		return table[line][col];
 	}
