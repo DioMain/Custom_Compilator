@@ -9,9 +9,9 @@ namespace Data {
 
 	// Наследуемые
 
-	class VarType : public BasicLexem {
+	class VarLexem : public BasicLexem {
 	public:
-		VarType(std::string chain) : BasicLexem(chain, LexemType::VarType) { }
+		VarLexem(std::string chain) : BasicLexem(chain, LexemType::VarType) { }
 
 		void Action() override;
 	};
@@ -26,25 +26,25 @@ namespace Data {
 
 	// Переменные
 
-	class Void : public VarType {
+	class Void : public VarLexem {
 	public:
-		Void() : VarType("void") { }
+		Void() : VarLexem("void") { }
 	};
-	class Integer : public VarType {
+	class Integer : public VarLexem {
 	public:
-		Integer() : VarType("int") { }
+		Integer() : VarLexem("int") { }
 	};
-	class SString : public VarType {
+	class SString : public VarLexem {
 	public:
-		SString() : VarType("string") { }
+		SString() : VarLexem("string") { }
 	};
-	class Char : public VarType {
+	class Char : public VarLexem {
 	public:
-		Char() : VarType("char") { }
+		Char() : VarLexem("char") { }
 	};
-	class Boolean : public VarType {
+	class Boolean : public VarLexem {
 	public:
-		Boolean() : VarType("bool") { }
+		Boolean() : VarLexem("bool") { }
 	};
 
 	// Литералы

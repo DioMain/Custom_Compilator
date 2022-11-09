@@ -130,6 +130,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AllLexems.cpp" />
+    <ClCompile Include="AllRules.cpp" />
     <ClCompile Include="LexemAnalyser.cpp" />
     <ClCompile Include="Collections.cpp" />
     <ClCompile Include="Error.cpp" />
@@ -140,9 +141,12 @@
     <ClCompile Include="Source.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="SyntaxAnalysator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AllLexems.h" />
+    <ClInclude Include="AllRules.h" />
+    <ClInclude Include="Func.h" />
     <ClInclude Include="LexemAnalyser.h" />
     <ClInclude Include="Collections.h" />
     <ClInclude Include="Error.h" />
@@ -152,8 +156,11 @@
     <ClInclude Include="Log.h" />
     <ClInclude Include="ParmAnalyzer.h" />
     <ClInclude Include="PolandNatation.h" />
+    <ClInclude Include="Rule.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="SyntaxAnalysator.h" />
     <ClInclude Include="UpLoad.h" />
+    <ClInclude Include="Var.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

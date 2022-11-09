@@ -5,7 +5,7 @@ using namespace Collections;
 using namespace LexemAnalysis;
 
 namespace Data {
-	void VarType::Action() 
+	void VarLexem::Action() 
 	{
 		vector<char> end;
 		end.push_back(' ');

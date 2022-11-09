@@ -49,6 +49,14 @@ namespace Collections {
 		return availableLexems.front();
 	}
 
+	DefaultRules::DefaultRules()
+	{
+	}
+	Data::Rule* DefaultRules::ParsingChain(std::vector<Data::LexemType> chain)
+	{
+		return nullptr;
+	}
+
 	bool LexemsColletion::IsExist(Data::LexemData element) {
 		for (size_t i = 0; i < container.size(); i++)
 		{
@@ -114,6 +122,7 @@ namespace Collections {
 	{
 		return table.size();
 	}
+
 	Data::LexemData& LexemsTable::GetLast()
 	{
 		return Get(GetLinesCount() - 1, GetLineSize(GetLinesCount() - 1) - 1);
@@ -121,5 +130,88 @@ namespace Collections {
 	Data::LexemData& LexemsTable::Get(int line, int col)
 	{
 		return table[line][col];
+	}
+
+	bool VarColletion::IsExist(Data::Var element)
+	{
+		for (size_t i = 0; i < container.size(); i++)
+		{
+			if (element.data == container[i].data
+				&& element.indefier == container[i].indefier
+				&& element.initspace == container[i].initspace
+				&& element.type == container[i].type)
+				return true;
+		}
+
+		return false;
+	}
+	int VarColletion::GetIndex(Data::Var element)
+	{
+		int index = -1;
+
+		for (size_t i = 0; i < container.size(); i++)
+		{
+			if (element.data == container[i].data
+				&& element.indefier == container[i].indefier
+				&& element.initspace == container[i].initspace
+				&& element.type == container[i].type)
+				index = i;
+		}
+
+		return index;
+	}
+
+	bool FuncColletion::IsExist(Data::Func element)
+	{
+		for (size_t i = 0; i < container.size(); i++)
+		{
+			if (element.initspace == container[i].initspace
+				&& element.params == container[i].params
+				&& element.retType == container[i].retType)
+				return true;
+		}
+
+		return false;
+	}
+	int FuncColletion::GetIndex(Data::Func element)
+	{
+		int index = -1;
+
+		for (size_t i = 0; i < container.size(); i++)
+		{
+			if (element.initspace == container[i].initspace
+				&& element.params == container[i].params
+				&& element.retType == container[i].retType)
+				index = i;
+		}
+
+		return index;
+	}
+
+	bool RuleColletion::IsExist(Data::Rule element)
+	{
+		for (size_t i = 0; i < container.size(); i++)
+		{
+			if (element.chain == container[i].chain
+				&& element.initspace == container[i].initspace
+				&& element.ruleName == container[i].ruleName)
+				return true;
+		}
+
+		return false;
+	}
+	int RuleColletion::GetIndex(Data::Rule element)
+	{
+		int index = -1;
+
+		for (size_t i = 0; i < container.size(); i++)
+		{
+			if (element.chain == container[i].chain
+				&& element.initspace == container[i].initspace
+				&& element.ruleName == container[i].ruleName)
+				index = i;
+		}
+
+		return index;
 	}
 }

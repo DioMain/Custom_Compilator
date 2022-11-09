@@ -9,6 +9,7 @@ using namespace In;
 using namespace LexemAnalysis;
 using namespace Collections;
 using namespace Data;
+using namespace SyntaxAnalysis;
 
 int _tmain(int argc, TCHAR* argv[]) {
 	setlocale(LC_ALL, "RUS");
@@ -20,11 +21,17 @@ int _tmain(int argc, TCHAR* argv[]) {
 	InFile in;
 
 	DefaultLexems* defLex;
+	DefaultRules* defRules;
 
 	LexemsTable* lexTable;
 	LiteralsColletion* rawLit;
 
-	LexemAnalysis::LexemAnalyser lexAnalyzer;
+	RuleColletion* resultRules;
+	FuncColletion* funcs;
+	VarColletion* vars;
+
+	LexemAnalyser lexAnalyser;
+	SyntaxAnalysator synAnalyser;
 
 	try
 	{
@@ -52,14 +59,23 @@ int _tmain(int argc, TCHAR* argv[]) {
 		lexTable = new LexemsTable();
 		rawLit = new LiteralsColletion();
 
-		lexAnalyzer = LexemAnalyser(in.Code, defLex, lexTable, rawLit);
+		lexAnalyser = LexemAnalyser(in.Code, defLex, lexTable, rawLit);
 
-		lexAnalyzer.Invoke();
+		lexAnalyser.Invoke();
 
 		cout << "<======== Лексический анализ завершен! ========>" << endl << endl;
 		log.WriteLine("\n<======== Лексический анализ завершен! ========>", "");
 
 		log.WriteLexemAnalysisResult(*lexTable, *rawLit);
+
+		defRules = new DefaultRules();
+		resultRules = new RuleColletion();
+		funcs = new FuncColletion();
+		vars = new VarColletion();
+
+		synAnalyser = SyntaxAnalysator(lexTable, defRules, resultRules, funcs, vars, rawLit);
+
+		synAnalyser.Invoke();
 
 		cout << "Завершено без ошибок!" << endl;
 	}

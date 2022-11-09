@@ -4,8 +4,12 @@
 
 namespace Data {
 	enum class LexemType {
+		// Обычные лексемы
 		None, Void, VarType, Indefier, Expression, LogicExpression, Equals, RuleEnd, ParamsIn, 
-		ParamsOut, SpaceIn, SpaceOut, Namespace, And, Main, Comment, Return, If, Else
+		ParamsOut, SpaceIn, SpaceOut, Namespace, And, Main, Comment, Return, If, Else,
+
+		// Лексемы для правил
+		AnyParams, VarInitParams, ExpressionParams,
 	};
 
 	struct LexemData {

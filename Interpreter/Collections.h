@@ -13,6 +13,19 @@ namespace Collections {
 		std::vector<Data::BasicLexem*> lexems;
 	};
 
+	class DefaultRules {
+	public:
+
+		DefaultRules();
+
+		Data::Rule* ParsingChain(std::vector<Data::LexemType> chain);
+
+	private:
+
+		std::vector<Data::Rule*> rules;
+
+	};
+
 	template <typename T>
 	class Collection {
 	public:
@@ -90,5 +103,24 @@ namespace Collections {
 		bool IsExist(Data::LiteralData element) override;
 
 		int GetIndex(Data::LiteralData element) override;
+	};
+
+	class VarColletion : public Collection<Data::Var> {
+	public:
+		bool IsExist(Data::Var element) override;
+
+		int GetIndex(Data::Var element) override;
+	};
+	class FuncColletion : public Collection<Data::Func> {
+	public:
+		bool IsExist(Data::Func element) override;
+
+		int GetIndex(Data::Func element) override;
+	};
+	class RuleColletion : public Collection<Data::Rule> {
+	public:
+		bool IsExist(Data::Rule element) override;
+
+		int GetIndex(Data::Rule element) override;
 	};
 }

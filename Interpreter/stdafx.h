@@ -19,7 +19,15 @@
 #include "Lexem.h"
 #include "Literal.h"
 #include "AllLexems.h"
+
+#include "Var.h"
+#include "Func.h"
+#include "Rule.h"
+#include "AllRules.h"
+
 #include "Collections.h"
+
 #include "LexemAnalyser.h"
+#include "SyntaxAnalysator.h"
 
 #include "Log.h"
