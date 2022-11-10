@@ -110,12 +110,16 @@ namespace Collections {
 		bool IsExist(Data::Var element) override;
 
 		int GetIndex(Data::Var element) override;
+
+		Data::Var& GetByIndefier(std::string ind);
 	};
 	class FuncColletion : public Collection<Data::Func> {
 	public:
 		bool IsExist(Data::Func element) override;
 
 		int GetIndex(Data::Func element) override;
+
+		Data::Func& GetByIndefier(std::string ind);
 	};
 	class RuleColletion : public Collection<Data::Rule> {
 	public:

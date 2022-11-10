@@ -5,6 +5,7 @@ namespace Data {
 	{
 		VarType retType;
 		
+		std::string indefier;
 		std::string initspace;
 
 		std::vector<Var*> params;

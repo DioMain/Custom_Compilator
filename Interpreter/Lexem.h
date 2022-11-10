@@ -9,7 +9,7 @@ namespace Data {
 		ParamsOut, SpaceIn, SpaceOut, Namespace, And, Main, Comment, Return, If, Else,
 
 		// Лексемы для правил
-		AnyParams, VarInitParams, ExpressionParams,
+		AnyParams, VarInitParams, ExpressionParams
 	};
 
 	struct LexemData {

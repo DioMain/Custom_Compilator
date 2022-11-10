@@ -51,6 +51,7 @@ namespace Collections {
 
 	DefaultRules::DefaultRules()
 	{
+		rules.push_back(new Data::VarCreate());
 	}
 	Data::Rule* DefaultRules::ParsingChain(std::vector<Data::LexemType> chain)
 	{
@@ -160,6 +161,15 @@ namespace Collections {
 
 		return index;
 	}
+	Data::Var& VarColletion::GetByIndefier(std::string ind)
+	{
+		Data::Var* item = nullptr;
+
+		for (size_t i = 0; i < container.size(); i++)
+			if (ind == container[i].indefier) item = &container[i];
+
+		return *item;
+	}
 
 	bool FuncColletion::IsExist(Data::Func element)
 	{
@@ -186,6 +196,15 @@ namespace Collections {
 		}
 
 		return index;
+	}
+	Data::Func& FuncColletion::GetByIndefier(std::string ind)
+	{
+		Data::Func* item = nullptr;
+
+		for (size_t i = 0; i < container.size(); i++)
+			if (ind == container[i].indefier) item = &container[i];
+
+		return *item;
 	}
 
 	bool RuleColletion::IsExist(Data::Rule element)
