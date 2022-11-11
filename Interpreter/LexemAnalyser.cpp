@@ -98,7 +98,7 @@ namespace LexemAnalysis {
 						currentLexem = new Expression(expression);
 						currentLexem->data.chain = "EXPRESSION";
 						break;
-					case LexemAnalysis::LiteralType::LogicEpression:
+					case LexemAnalysis::LiteralType::LogicExpression:
 						currentLexem = new LogicExpression(expression);
 						currentLexem->data.chain = "LOGIC_EXPRESSION";
 						break;
@@ -178,6 +178,10 @@ namespace LexemAnalysis {
 		// Если по мимо глобальной обл. вид. есть ещё что то
 		if (namespaces.size() != 1)
 			throw ERROR_THROW(126);
+
+		currentLexem = new Data::CodeEnd();
+
+		lexTable->Add(currentLexem->data);
 	}
 
 	// Подготавливет имя для нового пространства имён

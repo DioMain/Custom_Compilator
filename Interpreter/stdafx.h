@@ -20,8 +20,7 @@
 #include "Literal.h"
 #include "AllLexems.h"
 
-#include "Var.h"
-#include "Func.h"
+#include "Indefier.h"
 #include "Rule.h"
 #include "AllRules.h"
 

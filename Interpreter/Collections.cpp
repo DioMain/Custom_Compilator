@@ -133,76 +133,42 @@ namespace Collections {
 		return table[line][col];
 	}
 
-	bool VarColletion::IsExist(Data::Var element)
+	bool IndefierColletion::IsExist(Data::IndefierData element)
 	{
 		for (size_t i = 0; i < container.size(); i++)
 		{
 			if (element.data == container[i].data
-				&& element.indefier == container[i].indefier
+				&& element.name == container[i].name
 				&& element.initspace == container[i].initspace
-				&& element.type == container[i].type)
+				&& element.type == container[i].type
+				&& element.isFunc == container[i].isFunc)
 				return true;
 		}
 
 		return false;
 	}
-	int VarColletion::GetIndex(Data::Var element)
+	int IndefierColletion::GetIndex(Data::IndefierData element)
 	{
 		int index = -1;
 
 		for (size_t i = 0; i < container.size(); i++)
 		{
 			if (element.data == container[i].data
-				&& element.indefier == container[i].indefier
+				&& element.name == container[i].name
 				&& element.initspace == container[i].initspace
+				&& element.isFunc == container[i].isFunc
 				&& element.type == container[i].type)
 				index = i;
 		}
 
 		return index;
 	}
-	Data::Var& VarColletion::GetByIndefier(std::string ind)
+	Data::IndefierData& IndefierColletion::GetByName(std::string ind)
 	{
-		Data::Var* item = nullptr;
+		Data::IndefierData* item = nullptr;
 
 		for (size_t i = 0; i < container.size(); i++)
-			if (ind == container[i].indefier) item = &container[i];
-
-		return *item;
-	}
-
-	bool FuncColletion::IsExist(Data::Func element)
-	{
-		for (size_t i = 0; i < container.size(); i++)
-		{
-			if (element.initspace == container[i].initspace
-				&& element.params == container[i].params
-				&& element.retType == container[i].retType)
-				return true;
-		}
-
-		return false;
-	}
-	int FuncColletion::GetIndex(Data::Func element)
-	{
-		int index = -1;
-
-		for (size_t i = 0; i < container.size(); i++)
-		{
-			if (element.initspace == container[i].initspace
-				&& element.params == container[i].params
-				&& element.retType == container[i].retType)
-				index = i;
-		}
-
-		return index;
-	}
-	Data::Func& FuncColletion::GetByIndefier(std::string ind)
-	{
-		Data::Func* item = nullptr;
-
-		for (size_t i = 0; i < container.size(); i++)
-			if (ind == container[i].indefier) item = &container[i];
+			if (ind == container[i].name) item = &container[i];
 
 		return *item;
 	}

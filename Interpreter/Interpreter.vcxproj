@@ -146,7 +146,7 @@
   <ItemGroup>
     <ClInclude Include="AllLexems.h" />
     <ClInclude Include="AllRules.h" />
-    <ClInclude Include="Func.h" />
+    <ClInclude Include="Indefier.h" />
     <ClInclude Include="LexemAnalyser.h" />
     <ClInclude Include="Collections.h" />
     <ClInclude Include="Error.h" />
@@ -160,7 +160,6 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="SyntaxAnalysator.h" />
     <ClInclude Include="UpLoad.h" />
-    <ClInclude Include="Var.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
