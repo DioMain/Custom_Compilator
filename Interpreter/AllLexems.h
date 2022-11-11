@@ -166,4 +166,9 @@ namespace Data {
 
 		void Action() override;
 	};
+
+	class CodeEnd : public BasicLexem {
+	public:
+		CodeEnd() : BasicLexem("$", LexemType::CodeEnd) { }
+	};
 }

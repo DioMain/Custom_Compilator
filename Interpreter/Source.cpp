@@ -27,8 +27,7 @@ int _tmain(int argc, TCHAR* argv[]) {
 	LiteralsColletion* rawLit;
 
 	RuleColletion* resultRules;
-	FuncColletion* funcs;
-	VarColletion* vars;
+	IndefierColletion* idefiers;
 
 	LexemAnalyser lexAnalyser;
 	SyntaxAnalysator synAnalyser;
@@ -70,10 +69,9 @@ int _tmain(int argc, TCHAR* argv[]) {
 
 		defRules = new DefaultRules();
 		resultRules = new RuleColletion();
-		funcs = new FuncColletion();
-		vars = new VarColletion();
+		idefiers = new IndefierColletion();
 
-		synAnalyser = SyntaxAnalysator(lexTable, defRules, resultRules, funcs, vars, rawLit);
+		synAnalyser = SyntaxAnalysator(lexTable, defRules, resultRules, idefiers, rawLit);
 
 		synAnalyser.Invoke();
 

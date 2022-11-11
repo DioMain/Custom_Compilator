@@ -54,7 +54,7 @@ namespace Data {
 	void ParamsIn::Action()
 	{
 		if (lexemAnalyzer->IF) {
-			lexemAnalyzer->ReadLiteral(LiteralType::LogicEpression, ')');
+			lexemAnalyzer->ReadLiteral(LiteralType::LogicExpression, ')');
 		}
 		else {
 			vector<char> end;

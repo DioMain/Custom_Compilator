@@ -9,7 +9,7 @@
 namespace LexemAnalysis {
 	enum class LiteralType
 	{
-		None, Indefier, Expression, LogicEpression
+		None, Indefier, Expression, LogicExpression
 	};
 
 	class LexemAnalyser {

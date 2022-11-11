@@ -101,19 +101,16 @@
     <ClInclude Include="Literal.h">
       <Filter>Файлы заголовков\LexemState_h</Filter>
     </ClInclude>
-    <ClInclude Include="Func.h">
-      <Filter>Тестовые Файлы</Filter>
-    </ClInclude>
     <ClInclude Include="Rule.h">
       <Filter>Тестовые Файлы</Filter>
     </ClInclude>
     <ClInclude Include="SyntaxAnalysator.h">
       <Filter>Тестовые Файлы</Filter>
     </ClInclude>
-    <ClInclude Include="Var.h">
+    <ClInclude Include="AllRules.h">
       <Filter>Тестовые Файлы</Filter>
     </ClInclude>
-    <ClInclude Include="AllRules.h">
+    <ClInclude Include="Indefier.h">
       <Filter>Тестовые Файлы</Filter>
     </ClInclude>
   </ItemGroup>
