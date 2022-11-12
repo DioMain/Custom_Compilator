@@ -8,6 +8,9 @@ namespace Collections {
 
 		Data::BasicLexem* ParsingChain(std::string chain);
 
+		Data::LexemData GetDataByChain(std::string chain);
+		Data::LexemData GetDataByType(Data::LexemType type);
+
 	private:
 
 		std::vector<Data::BasicLexem*> lexems;
@@ -18,7 +21,9 @@ namespace Collections {
 
 		DefaultRules();
 
-		Data::Rule* ParsingChain(std::vector<Data::LexemType> chain);
+		Data::Rule* ParsingChain(std::vector<Data::LexemData> chain);
+
+		Data::Rule GetByName(std::string name);
 
 	private:
 
@@ -108,6 +113,7 @@ namespace Collections {
 	class IndefierColletion : public Collection<Data::IndefierData> {
 	public:
 		bool IsExist(Data::IndefierData element) override;
+		bool IsExist(std::string name);
 
 		int GetIndex(Data::IndefierData element) override;
 

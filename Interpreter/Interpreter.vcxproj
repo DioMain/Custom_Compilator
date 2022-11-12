@@ -138,6 +138,7 @@
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="ParmAnalyzer.cpp" />
     <ClCompile Include="PolandNatation.cpp" />
+    <ClCompile Include="Rule.cpp" />
     <ClCompile Include="Source.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>

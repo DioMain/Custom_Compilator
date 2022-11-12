@@ -79,7 +79,8 @@ namespace Log {
 		*stream << " -log: " << nowstr << endl;
 	}
 
-	void Logging::WriteLexemAnalysisResult(Collections::LexemsTable table, Collections::LiteralsColletion lits) {
+	void Logging::WriteLexemAnalysisResult(Collections::LexemsTable table, 
+										Collections::LiteralsColletion lits) {
 		if (stream == nullptr || !stream->is_open()) return;
 
 		*stream << endl;
@@ -91,15 +92,16 @@ namespace Log {
 
 		for (size_t i = 0; i < table.GetLinesCount(); i++)
 		{
-			*stream << "|" << i << "|";
+			*stream << "|" << i << "| ";
 			for (size_t j = 0; j < table.GetLineSize(i); j++)
 			{
-				*stream << " [" << (int)table.Get(i, j).type
+				*stream << "[" << (int)table.Get(i, j).type
 					<< "|" << table.Get(i, j).chain
-					<< "|" << table.Get(i, j).space << "] ";
+					<< "|" << table.Get(i, j).space << "] " ;
 			}
-			*stream << endl;
+			*stream << endl ;
 		}
+		
 
 		*stream << "--------------------------------------------------------" << endl;
 		*stream << "		   Ñïèñîê ëèòåğàëîâ | Literals list" << endl;
@@ -109,6 +111,77 @@ namespace Log {
 		for (int i = 0; i < lits.GetSize(); i++)
 		{
 			*stream << "|" << i << "| " << lits[i].data << endl;
+		}
+	}
+
+	void Logging::WriteSyntaxAnalysisResult(Collections::RuleColletion resultRules, 
+										Collections::IndefierColletion indefiers, 
+										Collections::DefaultLexems defLexems) {
+
+		if (stream == nullptr || !stream->is_open()) return;
+
+		*stream << endl;
+
+		*stream << "----------------------------------------------------------------" << endl;
+		*stream << "			       Ñïèñîê ïğàâèë | Rule list" << endl;
+		*stream << "<----------------[ÈÌß|ÏĞÎÑÒĞÀÍÑÒÂÎ ÈÌ¨Í|ÖÅÏÎ×ÊÀ]--------------->" << endl;
+		*stream << "----------------------------------------------------------------" << endl;
+
+		for (size_t i = 0; i < resultRules.GetSize(); i++)
+		{
+			*stream << "|" << i << "| " << left;
+			*stream << setw(16) << resultRules[i].ruleName << left << " | "
+				<< setw(16) << resultRules[i].initspace  << left << " | [";
+			
+			for (size_t j = 0; j < resultRules[i].fullChain.size(); j++)
+			{
+				switch (resultRules[i].fullChain[j])
+				{
+				case Data::LexemType::Expression:
+					*stream << setw(2) << "EX" << left;
+					break;
+				case Data::LexemType::Indefier:
+					*stream << setw(2) << "ID" << left;
+					break;
+				case Data::LexemType::LogicExpression:
+					*stream << setw(2) << "LG" << left;
+					break;
+				case Data::LexemType::VarType:
+					*stream << setw(2) << "VT" << left;
+					break;
+				default:
+					*stream << setw(1) << defLexems.GetDataByType(resultRules[i].fullChain[j]).chain[0] << left;
+					break;
+				}
+
+				if (j + 1 != resultRules[i].fullChain.size())
+					*stream << '|';
+			}
+
+			*stream << ']' << endl;
+		}
+
+		*stream << endl;
+
+		*stream << "-----------------------------------------------------------------" << endl;
+		*stream << "			Ñïèñîê èíäèôèêàòîğîâ | Indefiers list" << endl;
+		*stream << "<-[ÈÌß|ÒÈÏ|ÏĞÎÑÒĞÀÍÑTÂÎ ÈÌ¨Í|ÔÓÍÊÖÈß?|ÊÎË-ÂÎ ÏÀĞÀÌ.|ÈÍÔÎĞÌÀÖÈß]->" << endl;
+		*stream << "-----------------------------------------------------------------" << endl;
+
+		for (size_t i = 0; i < indefiers.GetSize(); i++)
+		{
+			*stream << "|" << i << "| ";
+			*stream << setw(12) << left << indefiers[i].name << " | "
+				<< setw(1) << left << (int)indefiers[i].type  << " | "
+				<< setw(12) << left << indefiers[i].initspace << " | "
+				<< setw(5) << left << (indefiers[i].isFunc ? "TRUE" : "FALSE")  << " | ";
+
+			if (indefiers[i].isFunc) *stream << setw(3) << left << indefiers[i].paramsCount << " | ";
+			else *stream << setw(3) << left << "$$$" << " | ";
+
+			*stream << setw(20) << left << (indefiers[i].data.size() != 0 ? indefiers[i].data : "$");
+
+			*stream << endl;
 		}
 	}
 

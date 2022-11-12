@@ -27,7 +27,7 @@ int _tmain(int argc, TCHAR* argv[]) {
 	LiteralsColletion* rawLit;
 
 	RuleColletion* resultRules;
-	IndefierColletion* idefiers;
+	IndefierColletion* indefiers;
 
 	LexemAnalyser lexAnalyser;
 	SyntaxAnalysator synAnalyser;
@@ -62,18 +62,23 @@ int _tmain(int argc, TCHAR* argv[]) {
 
 		lexAnalyser.Invoke();
 
-		cout << "<======== Лексический анализ завершен! ========>" << endl << endl;
+		cout << "<======== Лексический анализ завершен! ========>" << endl;
 		log.WriteLine("\n<======== Лексический анализ завершен! ========>", "");
 
 		log.WriteLexemAnalysisResult(*lexTable, *rawLit);
 
 		defRules = new DefaultRules();
 		resultRules = new RuleColletion();
-		idefiers = new IndefierColletion();
+		indefiers = new IndefierColletion();
 
-		synAnalyser = SyntaxAnalysator(lexTable, defRules, resultRules, idefiers, rawLit);
+		synAnalyser = SyntaxAnalysator(lexTable, defRules, resultRules, indefiers, rawLit);
 
 		synAnalyser.Invoke();
+
+		cout << "<======= Синтаксический анализ завершен! =======>" << endl << endl;
+		log.WriteLine("\n<======= Синтаксический анализ завершен! =======>", "");
+
+		log.WriteSyntaxAnalysisResult(*resultRules, *indefiers, *defLex);
 
 		cout << "Завершено без ошибок!" << endl;
 	}

@@ -19,7 +19,12 @@ namespace Log {
 		// Записывает в log фаил инфармацию о входных параметрах
 		void WriteParm(Parm::ParmAnalyzer parm);
 
-		void WriteLexemAnalysisResult(Collections::LexemsTable table, Collections::LiteralsColletion lits);
+		void WriteLexemAnalysisResult(Collections::LexemsTable table, 
+									Collections::LiteralsColletion lits);
+
+		void WriteSyntaxAnalysisResult(Collections::RuleColletion resultRules, 
+									Collections::IndefierColletion idefiers, 
+									Collections::DefaultLexems defLexems);
 
 		// Записывает в log фаил инфармацию об входных данных
 		void WriteIn(In::InFile in);

@@ -63,6 +63,9 @@
     <ClCompile Include="SyntaxAnalysator.cpp">
       <Filter>Тестовые Файлы</Filter>
     </ClCompile>
+    <ClCompile Include="Rule.cpp">
+      <Filter>Тестовые Файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">

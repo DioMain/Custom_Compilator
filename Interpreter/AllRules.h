@@ -1,6 +1,12 @@
 #pragma once
 
 namespace Data {
+	class NoneRule : public Rule {
+	public:
+		NoneRule() : Rule("None",
+			{ LexemType::None }) { }
+	};
+
 	class VarCreate : public Rule {
 	public:
 
@@ -14,7 +20,7 @@ namespace Data {
 	public:
 
 		VarCreateAndInit() : Rule("VarCreateAndInit", 
-			{ LexemType::VarType, LexemType::Indefier, LexemType::RuleEnd, LexemType::Equals, LexemType::Expression, LexemType::RuleEnd }) { }
+			{ LexemType::VarType, LexemType::Indefier, LexemType::Equals, LexemType::Expression, LexemType::RuleEnd }) { }
 
 		void Action() override;
 	};
@@ -58,7 +64,7 @@ namespace Data {
 	public:
 
 		FuncCreate() : Rule("FuncCreate",
-			{ LexemType::SpaceOut, LexemType::Indefier, LexemType::ParamsIn, LexemType::VarInitParams, LexemType::ParamsOut, LexemType::SpaceIn }) { }
+			{ LexemType::VarType, LexemType::Indefier, LexemType::ParamsIn, LexemType::VarInitParams, LexemType::ParamsOut, LexemType::SpaceIn }) { }
 
 		void Action() override;
 	};
@@ -76,6 +82,15 @@ namespace Data {
 
 		MainCreate() : Rule("MainCreate",
 			{ LexemType::Main, LexemType::SpaceIn }) { }
+
+		void Action() override;
+	};
+
+	class ReturnRule : public Rule {
+	public:
+
+		ReturnRule() : Rule("Return",
+			{ LexemType::Return, LexemType::Expression, LexemType::RuleEnd }) { }
 
 		void Action() override;
 	};
