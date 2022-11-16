@@ -27,6 +27,11 @@ namespace LexemAnalysis {
 			// Если пробел и сейчас не пост. считывание и не параметр и не коментарий
 			if (letter == LEXEM_ANALYSER_SPACE && !CONST_READ && !PARAMS && !COMMENT) SPACE = true;
 
+			if (PARAM_READ || (IF && CONST_READ)) {
+				if (letter == '(') 
+					bracketsCounter++;
+			}
+
 			// Если " или '
 			if (letter == LEXEM_ANALYSER_CHAR || letter == LEXEM_ANALYSER_STR)
 				STRING_EXP = !STRING_EXP;
@@ -49,8 +54,14 @@ namespace LexemAnalysis {
 			}	
 
 			// Если выражениея не строчное и мы закончили его считывать
-			if (!STRING_EXP && LiteralReadEnd()) {
-				CONST_READ = false;		
+			//if (!STRING_EXP && !PARAMS && LiteralReadEnd()) {
+			//	CONST_READ = false;		
+			//	READ_STOP = true;
+			//}
+
+			if (!STRING_EXP && LiteralReadEnd()
+				&& bracketsCounter == 0) {
+				CONST_READ = false;
 				READ_STOP = true;
 			}
 
@@ -91,15 +102,15 @@ namespace LexemAnalysis {
 						throw ERROR_THROW_IN(123, line, col);
 						break;
 					case LexemAnalysis::LiteralType::Indefier:
-						currentLexem = new Indefier(expression);
+						currentLexem = new IndefierLex(expression);
 						currentLexem->data.chain = "INDEFIER";
 						break;
 					case LexemAnalysis::LiteralType::Expression:
-						currentLexem = new Expression(expression);
+						currentLexem = new ExpressionLex(expression);
 						currentLexem->data.chain = "EXPRESSION";
 						break;
 					case LexemAnalysis::LiteralType::LogicExpression:
-						currentLexem = new LogicExpression(expression);
+						currentLexem = new LogicExpressionLex(expression);
 						currentLexem->data.chain = "LOGIC_EXPRESSION";
 						break;
 					}
@@ -118,7 +129,7 @@ namespace LexemAnalysis {
 				// Если не был найден такая лексема, однако уже есть литерал с такими данными
 				// Это нужно что бы реализовать идентификаторы 
 				if (currentLexem->data.type == LexemType::None && literals->IsExist(expression)) {
-					currentLexem = new Indefier(expression);
+					currentLexem = new IndefierLex(expression);
 					currentLexem->data.chain = "INDEFIER";
 				}
 				// Если по итогу нет такого литерала
@@ -128,6 +139,7 @@ namespace LexemAnalysis {
 				// Заполняем лексему данными
 				currentLexem->lexemAnalyzer = this;				// Устанавливаем указатель на лексический анализатор
 				currentLexem->data.space = GetFrontNamespace();	// Задаём лексеме её пространство имён
+				currentLexem->data.line = line;
 
 				lexTable->Add(currentLexem->data);				// Заносим лексему в таблицу
 
@@ -165,6 +177,11 @@ namespace LexemAnalysis {
 				expression.clear();
 			}
 
+			if (PARAM_READ || (IF && CONST_READ)) {
+				if (letter == ')' && bracketsCounter > 0)
+					bracketsCounter--;
+			}
+
 			// Убераем некоторые флажки
 			ENDL = false;
 			SPACE = false;
@@ -179,7 +196,7 @@ namespace LexemAnalysis {
 		if (namespaces.size() != 1)
 			throw ERROR_THROW(126);
 
-		currentLexem = new Data::CodeEnd();
+		currentLexem = new Data::CodeEndLex();
 
 		lexTable->Add(currentLexem->data);
 	}
@@ -269,7 +286,7 @@ namespace LexemAnalysis {
 			if (lex->data.type == LexemType::VarType) {
 				// Тогла это объявление агрумента
 				lexTable->Add(lex->data);
-				lexTable->Add(Indefier(words[1]).data);
+				lexTable->Add(IndefierLex(words[1]).data);
 
 				lexTable->GetLast().chain = "INDEFIER";
 				lexTable->GetLast().space = GetFrontNamespace();
@@ -280,25 +297,12 @@ namespace LexemAnalysis {
 			}
 		}
 
-		// Если слово одно и при этом есть такой же литерал
-		if (words.size() == 1 && literals->IsExist(words[0])) {
-			// Тогда это идентификатор
-			lexTable->Add(Indefier(words[0]).data);
+		lexTable->Add(ExpressionLex(param).data);
 
-			lexTable->GetLast().chain = "INDEFIER";
-			lexTable->GetLast().space = GetFrontNamespace();
+		lexTable->GetLast().chain = "EXPRESSION";
+		lexTable->GetLast().space = GetFrontNamespace();
 
-			literals->Add(words[0]);
-		}
-		else {
-			// Иначе это просто какое-то вырожение
-			lexTable->Add(Expression(param).data);
-
-			lexTable->GetLast().chain = "EXPRESSION";
-			lexTable->GetLast().space = GetFrontNamespace();
-
-			literals->Add(param);
-		}
+		literals->Add(param);
 	}
 
 	// Проверяет входной символ на то что специальный ли он

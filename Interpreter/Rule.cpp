@@ -1,11 +1,8 @@
 #include "stdafx.h"
 
 namespace Data {
-	Expression* Data::ExpressionData::ParsingExpression(std::string expression, Rule* rule)
-	{
 
-		return nullptr;
-	}
+	// Вспомогательные методы (Нужны для сокращения записи) / Auxiliary methods (Needed to shorten the entry)
 
 	int Rule::GetCurLitIndex()
 	{
@@ -20,17 +17,17 @@ namespace Data {
 		analysator->litIndex++;
 	}
 
-	IndefierData& Rule::GetLastIndefier()
+	IndefierData* Rule::GetLastIndefier()
 	{
-		return analysator->idefiers->GetLast();
+		return analysator->idefiers->GetLastPointer();
 	}
-	IndefierData& Rule::GetIndefier(int index)
+	IndefierData* Rule::GetIndefier(int index)
 	{
-		return analysator->idefiers->Get(index);
+		return analysator->idefiers->GetPointer(index);
 	}
-	IndefierData& Rule::GetIndefierByName(std::string name)
+	IndefierData* Rule::GetIndefierByName(std::string name)
 	{
-		return analysator->idefiers->GetByName(name);
+		return &analysator->idefiers->GetByName(name);
 	}
 	bool Rule::IndefierIsExist(std::string name)
 	{

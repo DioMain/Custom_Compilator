@@ -6,6 +6,25 @@ void foo (int a, char b, string c, bool d){
 	return d;
 }
 
+namespace JOJO {
+
+int gay(int j, int k) { return j + k; }
+
 Main {
+	string str = "some text + = - / * () || && ! < > {} []";
+
+	foo(gay(1, 2), '2', "asgs", true);
 	
+	int gg = 15;
+	
+	int Int = gay(gay(12,12) + 10, gg + 72 - (10000 * 63) / 5);
+	
+	bool test = true;
+	
+	if (true == false && 2 > 1 || (Int >= gay(1,1) && !test)) { }
+	else if (test == false || !test == true && true != true) { }
+	else { }
+	
+	if ('T' < 't' && (5<=5|| !test != test)) { }
+}
 }

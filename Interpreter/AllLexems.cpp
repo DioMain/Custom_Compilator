@@ -15,12 +15,12 @@ namespace Data {
 
 		lexemAnalyzer->ReadLiteral(LiteralType::Indefier, end);
 	}
-	void Literal::Action()
+	void LiteralLexem::Action()
 	{
 		lexemAnalyzer->literals->Add(litData);
 	}
 
-	void SpaceIn::Action()
+	void SpaceInLex::Action()
 	{
 		if (lexemAnalyzer->NAMESPACE)
 			lexemAnalyzer->PrepareNamespace(lexemAnalyzer->literals->GetLast().data);
@@ -44,14 +44,14 @@ namespace Data {
 		lexemAnalyzer->IF = false;
 		lexemAnalyzer->ELSE = false;
 	}
-	void SpaceOut::Action()
+	void SpaceOutLex::Action()
 	{
 		lexemAnalyzer->CloseNamespace();
 
 		lexemAnalyzer->lexTable->NextLine();
 	}
 
-	void ParamsIn::Action()
+	void ParamsInLex::Action()
 	{
 		if (lexemAnalyzer->IF) {
 			lexemAnalyzer->ReadLiteral(LiteralType::LogicExpression, ')');
@@ -66,22 +66,22 @@ namespace Data {
 			lexemAnalyzer->PARAMS = true;
 			lexemAnalyzer->PARAM_READ = true;
 
-			lexemAnalyzer->PrepareNamespace("FUNC." + lexemAnalyzer->literals->GetLast().data);
+			lexemAnalyzer->PrepareNamespace("FUNC." + lexemAnalyzer->literals->GetLastPointer()->data);
 		}
 	}
-	void ParamsOut::Action()
+	void ParamsOutLex::Action()
 	{
 		lexemAnalyzer->PARAMS = false;
 	}
 
-	void Equals::Action()
+	void EqualsLex::Action()
 	{
 		lexemAnalyzer->ReadLiteral(LiteralType::Expression, ';');
 
 		lexemAnalyzer->NEED_LITERAL = true;
 	}
 	
-	void And::Action()
+	void AndLex::Action()
 	{
 		if (lexemAnalyzer->PARAMS) {
 			vector<char> end;
@@ -94,7 +94,7 @@ namespace Data {
 		}
 	}
 
-	void RuleEnd::Action()
+	void RuleEndLex::Action()
 	{
 		lexemAnalyzer->lexTable->NextLine();
 
@@ -102,17 +102,17 @@ namespace Data {
 		lexemAnalyzer->ELSE = false;
 	}
 
-	void Main::Action()
+	void MainLex::Action()
 	{
 		lexemAnalyzer->PrepareNamespace("MAIN");
 	}
 
-	void Return::Action()
+	void ReturnLex::Action()
 	{
 		lexemAnalyzer->ReadLiteral(LiteralType::Expression, ';');
 	}
 
-	void Namespace::Action()
+	void NamespaceLex::Action()
 	{
 		vector<char> end;
 		end.push_back(' ');
@@ -126,18 +126,18 @@ namespace Data {
 		lexemAnalyzer->PrepareNamespace("UNDEFINE");
 	}
 
-	void Comment::Action()
+	void CommentLex::Action()
 	{
 		lexemAnalyzer->COMMENT = true;
 
 		lexemAnalyzer->lexTable->NextLine();
 	}
 
-	void If::Action()
+	void IfLex::Action()
 	{
 		lexemAnalyzer->IF = true;
 	}
-	void Else::Action()
+	void ElseLex::Action()
 	{
 		lexemAnalyzer->ELSE = true;
 	}

@@ -70,7 +70,7 @@ namespace Error {
 
 		strstream result;
 
-		result << endl << "Line index: " << lineIndex + 1 << ", Letter index: " << letterIndex + 1 << '\0';
+		result << endl << "Line index: " << lineIndex + 1 << '\0';
 
 		return base + result.str();
 	}

@@ -15,160 +15,160 @@ namespace Data {
 
 		void Action() override;
 	};
-	class Literal : public BasicLexem {
+	class LiteralLexem : public BasicLexem {
 	public:
 		LiteralData litData;
 
-		Literal(std::string data, LexemType type) : BasicLexem(LEXEM_CHAIN_UNDEFINE, type), litData(LiteralData(data)) { }
+		LiteralLexem(std::string data, LexemType type) : BasicLexem(LEXEM_CHAIN_UNDEFINE, type), litData(LiteralData(data)) { }
 
 		void Action() override;
 	};
 
 	// Переменные
 
-	class Void : public VarLexem {
+	class VoidLex : public VarLexem {
 	public:
-		Void() : VarLexem("void") { }
+		VoidLex() : VarLexem("void") { }
 	};
-	class Integer : public VarLexem {
+	class IntegerLex : public VarLexem {
 	public:
-		Integer() : VarLexem("int") { }
+		IntegerLex() : VarLexem("int") { }
 	};
-	class SString : public VarLexem {
+	class StringLex : public VarLexem {
 	public:
-		SString() : VarLexem("string") { }
+		StringLex() : VarLexem("string") { }
 	};
-	class Char : public VarLexem {
+	class CharLex : public VarLexem {
 	public:
-		Char() : VarLexem("char") { }
+		CharLex() : VarLexem("char") { }
 	};
-	class Boolean : public VarLexem {
+	class BooleanLex : public VarLexem {
 	public:
-		Boolean() : VarLexem("bool") { }
+		BooleanLex() : VarLexem("bool") { }
 	};
 
 	// Литералы
 
-	class Expression : public Literal {
+	class ExpressionLex : public LiteralLexem {
 	public:
-		Expression(std::string data) : Literal(data, LexemType::Expression) { }
+		ExpressionLex(std::string data) : LiteralLexem(data, LexemType::Expression) { }
 	};
-	class LogicExpression : public Literal {
+	class LogicExpressionLex : public LiteralLexem {
 	public:
-		LogicExpression(std::string data) : Literal(data, LexemType::LogicExpression) { }
+		LogicExpressionLex(std::string data) : LiteralLexem(data, LexemType::LogicExpression) { }
 	};
-	class Indefier : public Literal {
+	class IndefierLex : public LiteralLexem {
 	public:
-		Indefier(std::string data) : Literal(data, LexemType::Indefier) { }
+		IndefierLex(std::string data) : LiteralLexem(data, LexemType::Indefier) { }
 	};
 
 	// Скобки
 
-	class SpaceIn : public BasicLexem {
+	class SpaceInLex : public BasicLexem {
 	public:
 
-		SpaceIn() : BasicLexem("{", LexemType::SpaceIn) { }
+		SpaceInLex() : BasicLexem("{", LexemType::SpaceIn) { }
 
 		void Action() override;
 	};
-	class SpaceOut : public BasicLexem {
+	class SpaceOutLex : public BasicLexem {
 	public:
 
-		SpaceOut() : BasicLexem("}", LexemType::SpaceOut) { }
+		SpaceOutLex() : BasicLexem("}", LexemType::SpaceOut) { }
 
 		void Action() override;
 	};
 
-	class ParamsIn : public BasicLexem {
+	class ParamsInLex : public BasicLexem {
 	public:
 
-		ParamsIn() : BasicLexem("(", LexemType::ParamsIn) { }
+		ParamsInLex() : BasicLexem("(", LexemType::ParamsIn) { }
 
 		void Action() override;
 	};
-	class ParamsOut : public BasicLexem {
+	class ParamsOutLex : public BasicLexem {
 	public:
 
-		ParamsOut() : BasicLexem(")", LexemType::ParamsOut) { }
+		ParamsOutLex() : BasicLexem(")", LexemType::ParamsOut) { }
 
 		void Action() override;
 	};
 
 	// Другое
 
-	class Equals : public BasicLexem {
+	class EqualsLex : public BasicLexem {
 	public:
 
-		Equals() : BasicLexem("=", LexemType::Equals) { }
+		EqualsLex() : BasicLexem("=", LexemType::Equals) { }
 
 		void Action() override;
 	};
 
-	class And : public BasicLexem {
+	class AndLex : public BasicLexem {
 	public:
 
-		And() : BasicLexem(",", LexemType::And) { }
+		AndLex() : BasicLexem(",", LexemType::And) { }
 
 		void Action() override;
 	};
 
-	class RuleEnd : public BasicLexem {
+	class RuleEndLex : public BasicLexem {
 	public:
 
-		RuleEnd() : BasicLexem(";", LexemType::RuleEnd) { }
+		RuleEndLex() : BasicLexem(";", LexemType::RuleEnd) { }
 
 		void Action() override;
 	};
 
-	class Main : public BasicLexem {
+	class MainLex : public BasicLexem {
 	public:
 
-		Main() : BasicLexem("Main", LexemType::Main) { }
+		MainLex() : BasicLexem("Main", LexemType::Main) { }
 
 		void Action() override;
 	};
 
-	class Return : public BasicLexem {
+	class ReturnLex : public BasicLexem {
 	public:
 
-		Return() : BasicLexem("return", LexemType::Return) { }
+		ReturnLex() : BasicLexem("return", LexemType::Return) { }
 
 		void Action() override;
 	};
 
-	class Namespace : public BasicLexem {
+	class NamespaceLex : public BasicLexem {
 	public:
 
-		Namespace() : BasicLexem("namespace", LexemType::Namespace) { }
+		NamespaceLex() : BasicLexem("namespace", LexemType::Namespace) { }
 
 		void Action() override;
 	};
 
-	class Comment : public BasicLexem {
+	class CommentLex : public BasicLexem {
 	public:
 
-		Comment() : BasicLexem("//", LexemType::Comment) { }
+		CommentLex() : BasicLexem("//", LexemType::Comment) { }
 
 		void Action() override;
 	};
 
-	class If : public BasicLexem {
+	class IfLex : public BasicLexem {
 	public:
 
-		If() : BasicLexem("if", LexemType::If) { }
+		IfLex() : BasicLexem("if", LexemType::If) { }
 
 		void Action() override;
 	};
-	class Else : public BasicLexem {
+	class ElseLex : public BasicLexem {
 	public:
 
-		Else() : BasicLexem("else", LexemType::Else) { }
+		ElseLex() : BasicLexem("else", LexemType::Else) { }
 
 		void Action() override;
 	};
 
-	class CodeEnd : public BasicLexem {
+	class CodeEndLex : public BasicLexem {
 	public:
-		CodeEnd() : BasicLexem("$", LexemType::CodeEnd) { }
+		CodeEndLex() : BasicLexem("$", LexemType::CodeEnd) { }
 	};
 }

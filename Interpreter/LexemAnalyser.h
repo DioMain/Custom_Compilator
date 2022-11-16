@@ -37,6 +37,8 @@ namespace LexemAnalysis {
 			col = 0,				// Считываемый символ в строке	/ Current symbol index in string
 			index = 0;				// Индекс считываемого символа	/ Current symbol index
 
+		int bracketsCounter = 0;
+
 		char letter = ' ';				// Считываемый символ	/ Current symbol
 		std::string expression;			// Выражение	/ Expression
 		Data::BasicLexem* currentLexem;	// Лексема	/ Lexem

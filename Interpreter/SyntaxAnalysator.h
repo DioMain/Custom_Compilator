@@ -5,7 +5,7 @@ namespace SyntaxAnalysis {
 	{
 	public:
 
-		bool SOME_FLAG = false;
+		bool MAIN = false;
 
 		int line = 0, litIndex = 0;
 
@@ -32,6 +32,14 @@ namespace SyntaxAnalysis {
 		void Invoke();
 
 		Data::VarType GetVarTypeByChain(std::string chain);
+
+		Data::ExpressionNode* ParsingExpression(Data::Rule* rule, std::string chain, Data::ExpressionNode* lastNode);
+
+		bool IsOperator(char letter);
+		bool IsLetter(unsigned char symbol);
+		Data::ExpressionElementType GetExpressionElementType(std::string chain);
+
+		std::string GetStringNameOfVarType(Data::VarType type);
 
 	private:
 

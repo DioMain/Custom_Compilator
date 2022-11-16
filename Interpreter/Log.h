@@ -5,6 +5,8 @@ namespace Log {
 	{
 	public:
 
+		bool MOREINFO = true;
+
 		Logging() : stream(nullptr) { }
 		Logging(wchar_t* path);
 
@@ -36,6 +38,8 @@ namespace Log {
 		void Close();
 
 	private:
+
+		void RuleExpressionsOutPut(std::vector<Data::ExpressionNode*> exps, int deep);
 
 		std::ofstream* stream;
 	};

@@ -7,80 +7,80 @@ namespace Data {
 			{ LexemType::None }) { }
 	};
 
-	class VarCreate : public Rule {
+	class VarDeclareRule : public Rule {
 	public:
 
-		VarCreate() : Rule("VarCreate", 
+		VarDeclareRule() : Rule("VarDeclare", 
 			{ LexemType::VarType, LexemType::Indefier, LexemType::RuleEnd }) { }
 
 		void Action() override;
 	};
 
-	class VarCreateAndInit : public Rule {
+	class VarDeclareAndInitRule : public Rule {
 	public:
 
-		VarCreateAndInit() : Rule("VarCreateAndInit", 
+		VarDeclareAndInitRule() : Rule("VarDeclareAndInit", 
 			{ LexemType::VarType, LexemType::Indefier, LexemType::Equals, LexemType::Expression, LexemType::RuleEnd }) { }
 
 		void Action() override;
 	};
 
-	class VarAssign : public Rule {
+	class VarAssignRule : public Rule {
 	public:
 
-		VarAssign() : Rule("VarAssign", 
+		VarAssignRule() : Rule("VarAssign", 
 			{ LexemType::Indefier, LexemType::Equals, LexemType::Expression, LexemType::RuleEnd }) { }
 
 		void Action() override;
 	};
 
-	class CreateNamespace : public Rule {
+	class NamespaceDeclareRule : public Rule {
 	public:
 
-		CreateNamespace() : Rule("CreateNamespace",
+		NamespaceDeclareRule() : Rule("DeclareNamespace",
 			{ LexemType::Namespace, LexemType::Indefier, LexemType::SpaceIn }) { }
 
 		void Action() override;
 	};
 
-	class OpenSpace : public Rule {
+	class OpenSpaceRule : public Rule {
 	public:
 
-		OpenSpace() : Rule("OpenSpace",
+		OpenSpaceRule() : Rule("OpenSpace",
 			{ LexemType::SpaceIn }) { }
 
 		void Action() override;
 	};
-	class CloseSpace : public Rule {
+	class CloseSpaceRule : public Rule {
 	public:
 
-		CloseSpace() : Rule("CloseSpace",
+		CloseSpaceRule() : Rule("CloseSpace",
 			{ LexemType::SpaceOut }) { }
 
 		void Action() override;
 	};
 
-	class FuncCreate : public Rule {
+	class FuncDeclareRule : public Rule {
 	public:
 
-		FuncCreate() : Rule("FuncCreate",
+		FuncDeclareRule() : Rule("FuncDeclare",
 			{ LexemType::VarType, LexemType::Indefier, LexemType::ParamsIn, LexemType::VarInitParams, LexemType::ParamsOut, LexemType::SpaceIn }) { }
 
 		void Action() override;
 	};
-	class FuncUse : public Rule {
+	class FuncUseRule : public Rule {
 	public:
 
-		FuncUse() : Rule("FuncUse",
+		FuncUseRule() : Rule("FuncUse",
 			{ LexemType::Indefier, LexemType::ParamsIn, LexemType::ExpressionParams, LexemType::ParamsOut, LexemType::RuleEnd }) { }
 
 		void Action() override;
 	};
 
-	class MainCreate : public Rule {
+	class MainDeclareRule : public Rule {
 	public:
 
-		MainCreate() : Rule("MainCreate",
+		MainDeclareRule() : Rule("MainDeclare",
 			{ LexemType::Main, LexemType::SpaceIn }) { }
 
 		void Action() override;
@@ -91,6 +91,28 @@ namespace Data {
 
 		ReturnRule() : Rule("Return",
 			{ LexemType::Return, LexemType::Expression, LexemType::RuleEnd }) { }
+
+		void Action() override;
+	};
+
+	class IfRule : public Rule {
+	public:
+		IfRule() : Rule("If",
+			{ LexemType::If, LexemType::ParamsIn, LexemType::ExpressionParams, LexemType::ParamsOut, LexemType::SpaceIn }) { }
+
+		void Action() override;
+	};
+	class ElseIfRule : public Rule {
+	public:
+		ElseIfRule() : Rule("ElseIf",
+			{ LexemType::Else, LexemType::If, LexemType::ParamsIn, LexemType::ExpressionParams, LexemType::ParamsOut, LexemType::SpaceIn }) { }
+
+		void Action() override;
+	};
+	class ElseRule : public Rule {
+	public:
+		ElseRule() : Rule("Else",
+			{ LexemType::Else, LexemType::SpaceIn }) { }
 
 		void Action() override;
 	};

@@ -3,30 +3,30 @@
 namespace Collections {
 	DefaultLexems::DefaultLexems()
 	{
-		lexems.push_back(new Data::Void());
-		lexems.push_back(new Data::Integer());
-		lexems.push_back(new Data::SString());
-		lexems.push_back(new Data::Char());
-		lexems.push_back(new Data::Boolean());
+		lexems.push_back(new Data::VoidLex());
+		lexems.push_back(new Data::IntegerLex());
+		lexems.push_back(new Data::StringLex());
+		lexems.push_back(new Data::CharLex());
+		lexems.push_back(new Data::BooleanLex());
 
-		lexems.push_back(new Data::And());
-		lexems.push_back(new Data::Equals());
+		lexems.push_back(new Data::AndLex());
+		lexems.push_back(new Data::EqualsLex());
 
-		lexems.push_back(new Data::ParamsIn());
-		lexems.push_back(new Data::ParamsOut());
-		lexems.push_back(new Data::SpaceIn());
-		lexems.push_back(new Data::SpaceOut());
+		lexems.push_back(new Data::ParamsInLex());
+		lexems.push_back(new Data::ParamsOutLex());
+		lexems.push_back(new Data::SpaceInLex());
+		lexems.push_back(new Data::SpaceOutLex());
 
-		lexems.push_back(new Data::Main());
-		lexems.push_back(new Data::Return());
-		lexems.push_back(new Data::Namespace());
+		lexems.push_back(new Data::MainLex());
+		lexems.push_back(new Data::ReturnLex());
+		lexems.push_back(new Data::NamespaceLex());
 
-		lexems.push_back(new Data::RuleEnd());
+		lexems.push_back(new Data::RuleEndLex());
 
-		lexems.push_back(new Data::Comment());
+		lexems.push_back(new Data::CommentLex());
 
-		lexems.push_back(new Data::If());
-		lexems.push_back(new Data::Else());
+		lexems.push_back(new Data::IfLex());
+		lexems.push_back(new Data::ElseLex());
 	}
 	Data::BasicLexem* DefaultLexems::ParsingChain(std::string chain)
 	{
@@ -73,16 +73,19 @@ namespace Collections {
 
 	DefaultRules::DefaultRules()
 	{
-		rules.push_back(new Data::VarCreateAndInit());
-		rules.push_back(new Data::VarAssign());
-		rules.push_back(new Data::VarCreate());
-		rules.push_back(new Data::OpenSpace());
-		rules.push_back(new Data::CloseSpace());
-		rules.push_back(new Data::CreateNamespace());
-		rules.push_back(new Data::FuncCreate());
-		rules.push_back(new Data::FuncUse());
-		rules.push_back(new Data::MainCreate());
+		rules.push_back(new Data::VarDeclareAndInitRule());
+		rules.push_back(new Data::VarAssignRule());
+		rules.push_back(new Data::VarDeclareRule());
+		rules.push_back(new Data::OpenSpaceRule());
+		rules.push_back(new Data::CloseSpaceRule());
+		rules.push_back(new Data::NamespaceDeclareRule());
+		rules.push_back(new Data::FuncDeclareRule());
+		rules.push_back(new Data::FuncUseRule());
+		rules.push_back(new Data::MainDeclareRule());
 		rules.push_back(new Data::ReturnRule());
+		rules.push_back(new Data::IfRule());
+		rules.push_back(new Data::ElseIfRule());
+		rules.push_back(new Data::ElseRule());
 	}
 	Data::Rule* DefaultRules::ParsingChain(std::vector<Data::LexemData> chain)
 	{
@@ -104,16 +107,16 @@ namespace Collections {
 			if (chain[i].type == Data::LexemType::ParamsIn) { 
 				params = true; 
 				haveParams = true; 
-				intermediate->chain.push_back(chain[i].type);
+				intermediate->commonChain.push_back(chain[i].type);
 				continue; 
 			}
 			else if (chain[i].type == Data::LexemType::ParamsOut) {
 				if (HaveVarInit && OtherExpression)
-					intermediate->chain.push_back(Data::LexemType::AnyParams);
+					intermediate->commonChain.push_back(Data::LexemType::AnyParams);
 				else if (HaveVarInit)
-					intermediate->chain.push_back(Data::LexemType::VarInitParams);
+					intermediate->commonChain.push_back(Data::LexemType::VarInitParams);
 				else
-					intermediate->chain.push_back(Data::LexemType::ExpressionParams);
+					intermediate->commonChain.push_back(Data::LexemType::ExpressionParams);
 
 				params = false;
 			}				
@@ -131,14 +134,16 @@ namespace Collections {
 					OtherExpression = true;
 				}
 			}
-			else intermediate->chain.push_back(chain[i].type);
+			else intermediate->commonChain.push_back(chain[i].type);
 		}
 
-		for (size_t i = 0; i < intermediate->chain.size(); i++)
+		for (size_t i = 0; i < intermediate->commonChain.size(); i++)
 		{
 			for (size_t j = 0; j < availableRules.size(); j++)
 			{
-				if (intermediate->chain.size() != availableRules[j]->chain.size() || intermediate->chain[i] != availableRules[j]->chain[i]) {
+				if (intermediate->commonChain.size() != availableRules[j]->commonChain.size() || 
+					intermediate->commonChain[i] != availableRules[j]->commonChain[i]) {
+
 					availableRules.erase(availableRules.begin() + j);
 					j--;
 				}
@@ -162,7 +167,7 @@ namespace Collections {
 
 		for (size_t i = 0; i < rules.size(); i++)
 		{
-			if (rules[i]->ruleName == name) rule = *rules[i];
+			if (rules[i]->name == name) rule = *rules[i];
 		}
 		
 		return rule;
@@ -171,9 +176,9 @@ namespace Collections {
 	bool LexemsColletion::IsExist(Data::LexemData element) {
 		for (size_t i = 0; i < container.size(); i++)
 		{
-			if (element.chain == container[i].chain
-				&& element.space == container[i].space
-				&& element.type == container[i].type)
+			if (element.chain == container[i]->chain
+				&& element.space == container[i]->space
+				&& element.type == container[i]->type)
 				return true;
 		}
 
@@ -185,9 +190,9 @@ namespace Collections {
 
 		for (size_t i = 0; i < container.size(); i++)
 		{
-			if (element.chain == container[i].chain
-				&& element.space == container[i].space
-				&& element.type == container[i].type)
+			if (element.chain == container[i]->chain
+				&& element.space == container[i]->space
+				&& element.type == container[i]->type)
 				index = i;
 		}
 
@@ -198,7 +203,7 @@ namespace Collections {
 	{
 		for (size_t i = 0; i < container.size(); i++)
 		{
-			if (element.data == container[i].data)
+			if (element.data == container[i]->data)
 				return true;
 		}
 
@@ -210,7 +215,7 @@ namespace Collections {
 
 		for (size_t i = 0; i < container.size(); i++)
 		{
-			if (element.data == container[i].data)
+			if (element.data == container[i]->data)
 				index = i;
 		}
 
@@ -247,11 +252,11 @@ namespace Collections {
 	{
 		for (size_t i = 0; i < container.size(); i++)
 		{
-			if (element.data == container[i].data
-				&& element.name == container[i].name
-				&& element.initspace == container[i].initspace
-				&& element.type == container[i].type
-				&& element.isFunc == container[i].isFunc)
+			if (element.data == container[i]->data
+				&& element.name == container[i]->name
+				&& element.initspace == container[i]->initspace
+				&& element.dataType == container[i]->dataType
+				&& element.isFunc == container[i]->isFunc)
 				return true;
 		}
 
@@ -261,7 +266,7 @@ namespace Collections {
 	{
 		for (size_t i = 0; i < container.size(); i++)
 		{
-			if (name == container[i].name)
+			if (name == container[i]->name)
 				return true;
 		}
 
@@ -273,11 +278,11 @@ namespace Collections {
 
 		for (size_t i = 0; i < container.size(); i++)
 		{
-			if (element.data == container[i].data
-				&& element.name == container[i].name
-				&& element.initspace == container[i].initspace
-				&& element.isFunc == container[i].isFunc
-				&& element.type == container[i].type)
+			if (element.data == container[i]->data
+				&& element.name == container[i]->name
+				&& element.initspace == container[i]->initspace
+				&& element.isFunc == container[i]->isFunc
+				&& element.dataType == container[i]->dataType)
 				index = i;
 		}
 
@@ -288,7 +293,7 @@ namespace Collections {
 		Data::IndefierData* item = nullptr;
 
 		for (size_t i = 0; i < container.size(); i++)
-			if (ind == container[i].name) item = &container[i];
+			if (ind == container[i]->name) item = container[i];
 
 		return *item;
 	}
@@ -297,9 +302,9 @@ namespace Collections {
 	{
 		for (size_t i = 0; i < container.size(); i++)
 		{
-			if (element.chain == container[i].chain
-				&& element.initspace == container[i].initspace
-				&& element.ruleName == container[i].ruleName)
+			if (element.commonChain == container[i]->commonChain
+				&& element.initspace == container[i]->initspace
+				&& element.name == container[i]->name)
 				return true;
 		}
 
@@ -311,9 +316,9 @@ namespace Collections {
 
 		for (size_t i = 0; i < container.size(); i++)
 		{
-			if (element.chain == container[i].chain
-				&& element.initspace == container[i].initspace
-				&& element.ruleName == container[i].ruleName)
+			if (element.commonChain == container[i]->commonChain
+				&& element.initspace == container[i]->initspace
+				&& element.name == container[i]->name)
 				index = i;
 		}
 

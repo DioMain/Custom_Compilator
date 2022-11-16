@@ -35,13 +35,13 @@ namespace Collections {
 	class Collection {
 	public:
 
-		Collection() : container(std::vector<T>()) { }
+		Collection() : container(std::vector<T*>()) { }
 
 		virtual void Add(T element) {
-			container.push_back(element);
+			container.push_back(new T(element));
 		}
 		virtual void AddAt(T element, int index) {
-			container.insert(container.begin() + index, element);
+			container.insert(container.begin() + index, new T(element));
 		}
 		
 		virtual void Remove(T element) {
@@ -54,9 +54,15 @@ namespace Collections {
 		}
 
 		T& Get(int index) {
-			return container[index];
+			return *container[index];
 		}
 		T& GetLast() {
+			return *container[container.size() - 1];
+		}
+		T* GetPointer(int index) {
+			return container[index];
+		}
+		T* GetLastPointer() {
 			return container[container.size() - 1];
 		}
 
@@ -71,12 +77,12 @@ namespace Collections {
 		virtual int GetIndex(T element) = 0;
 
 		T& operator[](int index) {
-			return container[index];
+			return *container[index];
 		}
 
 	protected:
 
-		std::vector<T> container;
+		std::vector<T*> container;
 	};
 
 	class LexemsTable {

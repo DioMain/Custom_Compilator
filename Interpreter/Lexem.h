@@ -18,7 +18,9 @@ namespace Data {
 		std::string chain;
 		std::string space;
 
-		LexemData(std::string chain, LexemType type) : chain(chain), type(type) { }
+		int line;
+
+		LexemData(std::string chain, LexemType type) : chain(chain), type(type), line(0) { }
 	};
 
 	class BasicLexem {
