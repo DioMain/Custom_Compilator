@@ -7,9 +7,11 @@ using namespace Collections;
 namespace SyntaxAnalysis {
 	void SyntaxAnalysator::Invoke()
 	{
-		bool debag = false;	// d
+		bool debag = true;	// d
 
 		if (debag) cout << setw(25) << left << "Сообщение" << setw(30) << left << "Цепочка" << setw(20) << left << "Стек" << endl; // DEBAG
+
+		namespaces.push_back("GLOBAL.0");
 
 		while (true)
 		{
@@ -52,7 +54,7 @@ namespace SyntaxAnalysis {
 
 	ExpressionNode* SyntaxAnalysator::ParsingExpression(Rule* rule, string chain, VarType ret) {
 
-		bool debag = false;
+		bool debag = true;
 
 		if (debag)
 			cout << setw(25) << left << "SAVE STATE"		// DEBAG

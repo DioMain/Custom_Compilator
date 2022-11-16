@@ -107,7 +107,7 @@ namespace Collections {
 		bool OtherExpression = false;
 
 		// Debag
-		bool debag = false;		// d
+		bool debag = true;		// d
 
 		string deChain0 = "$";	// d
 		string deChain1 = "$";	// d

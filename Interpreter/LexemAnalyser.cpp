@@ -43,8 +43,8 @@ namespace LexemAnalysis {
 			// Если не пост. считывание и символ (или первый сивол выражения) является специальным
 			if (!CONST_READ && (IsSpecialSymbol(letter) || IsSpecialSymbol(expression[0]))) SPECIAL = true;
 
-			// Если пост. считывание м первый сивол выражения является специальным
-			if (CONST_READ && IsSpecialSymbol(expression[0])) {
+			// Если пост. считывания, литерал не обязателен, и первый сивол выражения является специальным
+			if (CONST_READ && !NEED_LITERAL && IsSpecialSymbol(expression[0])) {
 				SPECIAL = true;
 
 				LITERAL = false;
@@ -52,12 +52,6 @@ namespace LexemAnalysis {
 
 				if (PARAMS) PARAM_READ = false;
 			}	
-
-			// Если выражениея не строчное и мы закончили его считывать
-			//if (!STRING_EXP && !PARAMS && LiteralReadEnd()) {
-			//	CONST_READ = false;		
-			//	READ_STOP = true;
-			//}
 
 			if (!STRING_EXP && LiteralReadEnd()
 				&& bracketsCounter == 0) {

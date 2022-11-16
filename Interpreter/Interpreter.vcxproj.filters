@@ -28,6 +28,12 @@
     <Filter Include="Тестовые Файлы">
       <UniqueIdentifier>{df092d92-d4ba-42a1-a17d-bc59cbe7d391}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы заголовков\SyntaxState_h">
+      <UniqueIdentifier>{287a62c2-5df1-441d-817d-fb38640d0615}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\SyntaxState">
+      <UniqueIdentifier>{25a0fb44-1f46-405b-9e76-0ed9f039e097}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
@@ -58,13 +64,13 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="AllRules.cpp">
-      <Filter>Тестовые Файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="SyntaxAnalysator.cpp">
-      <Filter>Тестовые Файлы</Filter>
+      <Filter>Исходные файлы\SyntaxState</Filter>
     </ClCompile>
     <ClCompile Include="Rule.cpp">
-      <Filter>Тестовые Файлы</Filter>
+      <Filter>Исходные файлы\SyntaxState</Filter>
+    </ClCompile>
+    <ClCompile Include="SyntaxAnalysator.cpp">
+      <Filter>Исходные файлы\SyntaxState</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -104,17 +110,17 @@
     <ClInclude Include="Literal.h">
       <Filter>Файлы заголовков\LexemState_h</Filter>
     </ClInclude>
-    <ClInclude Include="Rule.h">
-      <Filter>Тестовые Файлы</Filter>
-    </ClInclude>
-    <ClInclude Include="SyntaxAnalysator.h">
-      <Filter>Тестовые Файлы</Filter>
-    </ClInclude>
     <ClInclude Include="AllRules.h">
-      <Filter>Тестовые Файлы</Filter>
+      <Filter>Файлы заголовков\SyntaxState_h</Filter>
     </ClInclude>
     <ClInclude Include="Indefier.h">
-      <Filter>Тестовые Файлы</Filter>
+      <Filter>Файлы заголовков\SyntaxState_h</Filter>
+    </ClInclude>
+    <ClInclude Include="Rule.h">
+      <Filter>Файлы заголовков\SyntaxState_h</Filter>
+    </ClInclude>
+    <ClInclude Include="SyntaxAnalysator.h">
+      <Filter>Файлы заголовков\SyntaxState_h</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
