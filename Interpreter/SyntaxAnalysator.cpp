@@ -7,7 +7,9 @@ using namespace Collections;
 namespace SyntaxAnalysis {
 	void SyntaxAnalysator::Invoke()
 	{
-		cout << setw(25) << left << "Сообщение" << setw(30) << left << "Цепочка" << setw(20) << left << "Стек" << endl; // DEBAG
+		bool debag = false;	// d
+
+		if (debag) cout << setw(25) << left << "Сообщение" << setw(30) << left << "Цепочка" << setw(20) << left << "Стек" << endl; // DEBAG
 
 		while (true)
 		{
@@ -24,7 +26,7 @@ namespace SyntaxAnalysis {
 			}
 
 			if (currentRule->name == "None")
-				throw ERROR_THROW_IN_C(0, "Неизвестное правило!", currentLexemChain[0].line, 0);
+				throw ERROR_THROW_IN(200, currentLexemChain[0].line, 0);
 
 			currentRule->analysator = this;
 
@@ -38,13 +40,310 @@ namespace SyntaxAnalysis {
 
 			line++;
 
-			cout << setw(25) << left << "RES STATE"		// DEBAG
-				<< setw(30) << left << "------------------------------" 
-				<< setw(20) << left << "--------------------" << endl; // DEBAG
+			if (debag)
+				cout << setw(25) << left << "RES STATE"		// DEBAG
+					<< setw(30) << left << "------------------------------" 
+					<< setw(20) << left << "--------------------" << endl; // DEBAG
 		}
 
 		if (!MAIN)
-			throw ERROR_THROW_C(0, "Точка входа не обнаружена!", currentLexemChain[0].line);
+			throw ERROR_THROW(201, currentLexemChain[0].line);
+	}
+
+	ExpressionNode* SyntaxAnalysator::ParsingExpression(Rule* rule, string chain, VarType ret) {
+
+		bool debag = false;
+
+		if (debag)
+			cout << setw(25) << left << "SAVE STATE"		// DEBAG
+			<< setw(30) << left << "-------"
+			<< setw(20) << left << "-------" << endl;	// DEBAG
+
+		string deChain0 = chain + "$";	// DEBAG
+		string deChain0_s = "";			// DEBAG
+		string deChain1 = "$";			// DEBAG
+
+		bool HaveLetters = false,			// Ключ наличия букв
+			IsString = false,				// Ключ строки
+			IsChar = false,					// Ключ символа
+			String = false,					// Ключ ввода строки
+			Char = false,					// Ключ ввода символа
+			SingleOperator = false,			// Ключ одиночного оператора
+			Func = false,					// Ключ функции
+			Space = false,					// Ключ пробела
+			Check = false,					// Ключ проверки
+			Operator = false;				// Ключ оператора
+
+		VarType needType = ret;				// Тип который должено вернуть вырожение
+
+		string word;						// выделенная цепочка символов
+			
+		int index = 0;						// индекс в вырожении
+
+		int symbolCounter = 0;				// Счетчик символов
+		int bracketsCounter = 0;			// Счетчик скобок
+
+		char letter = chain[index];			// текущий символ
+
+		ExpressionNode* current = new ExpressionNode();	// текущее вершина вырожения
+
+		current->returnType = needType;
+		current->selfRule = rule;
+
+		if (debag) {
+			deChain0_s.clear(); // DEBAG
+			for (size_t i = 0; i < (deChain0.size() < 29 ? deChain0.size() : 29); i++) // DEBAG
+				deChain0_s.push_back(deChain0[i]); // DEBAG
+
+			cout << setw(25) << left << ""
+				<< setw(30) << left << deChain0_s
+				<< setw(20) << left << deChain1 << endl; // DEBAG
+		}
+
+		while (letter != '\0')
+		{
+			letter = chain[index];
+
+			if (letter == '\0') Check = true;
+
+			if (letter == '\"' && !Operator) { String = !String; IsString = true; HaveLetters = true; }
+			if (letter == '\'' && !Operator) { Char = !Char; IsChar = true; HaveLetters = true; }
+
+			if (letter == ' ' && !Char && !String) {
+				\
+					Space = true;
+
+				if (debag) deChain0.erase(deChain0.begin()); // DEBAG
+			}
+
+			if (IsLetter(letter) && !Operator)
+				HaveLetters = true;
+
+			if (IsOperator(letter) && !Char && !String && !Operator)
+				Check = true;
+
+			if (!IsOperator(letter) && Operator)
+				Check = true;
+
+			if ((String && Char) || (IsString && IsChar))
+				throw ERROR_THROW_IN(211, currentLexemChain[0].line, 0);
+
+			if ((Space || Check || SingleOperator) && !word.empty()) {
+
+				VarType elementReturnType = VarType::Void;							// тип возрощаемый элементом
+				ExpressionElementType elementType = ExpressionElementType::None;	// тип элемента
+				IndefierData* ind;													// указатель на идентификатор
+
+				if (Operator) {
+					if (needType != VarType::Int && needType != VarType::Bool)
+						throw ERROR_THROW(208, currentLexemChain[0].line, 0);
+
+					elementType = GetExpressionElementType(word);
+
+					bool IsMathOperator = (elementType == ExpressionElementType::Plus || elementType == ExpressionElementType::Minus
+						|| elementType == ExpressionElementType::Multi || elementType == ExpressionElementType::Division);
+
+					if (elementType == ExpressionElementType::InBrack || elementType == ExpressionElementType::OutBrack) {
+						if (elementType == ExpressionElementType::InBrack) bracketsCounter++;
+						else bracketsCounter--;
+					}
+					else if (needType == VarType::Int && !IsMathOperator)
+						throw ERROR_THROW_IN(209, currentLexemChain[0].line, 0);
+					else if (needType == VarType::Bool && IsMathOperator)
+						throw ERROR_THROW_IN(210, currentLexemChain[0].line, 0);
+				}
+				else if (HaveLetters) {
+					if (rule->IndefierIsExist(word)) {
+						ind = rule->GetIndefierByName(word);
+
+						string subWord;			// под цепочка символов
+
+						int offset = 0,			// отступ от оригинальной цепочки
+							paramsCount = 0,	// кол-во параметров под функции
+							subBreackets = 0;	// кол-во под скобок
+
+						bool subExpression = false;	// Ключ под вырожения
+
+						char subLetter = chain[index + offset];	// текущий под символ
+
+						switch (ind->type)
+						{
+							// ОБРАБОТКА ПОД ФУНКЦИЙ
+						case IndefierType::Func:
+
+							elementReturnType = ind->dataType;
+							elementType = ExpressionElementType::Func;
+
+							while (subLetter != ')' || subExpression)
+							{
+								subLetter = chain[index + offset];
+
+								if (subLetter == '\0')
+									throw ERROR_THROW_IN(212, currentLexemChain[0].line, 0);
+
+								if (subLetter == ')') {
+									if (subBreackets <= 0) subExpression = false;
+									else subBreackets--;
+								}
+
+								if (subLetter == ',' && subExpression && subBreackets <= 0) {
+									if (debag)
+										for (size_t i = 0; i < subWord.size(); i++) // DEBAG
+											deChain0.erase(deChain0.begin()); // DEBAG
+
+									if (!subWord.empty()) {
+										current->subExpressions.push_back(ParsingExpression(rule, subWord, ind->params[paramsCount]->dataType));
+										paramsCount++;
+
+										if (debag)
+											cout << setw(25) << left << "RETURN STATE" // DEBAG
+											<< setw(30) << left << "-------"
+											<< setw(20) << left << "-------" << endl; // DEBAG
+									}
+									subWord.clear();
+								}
+								else if (subExpression)
+									subWord.push_back(subLetter);
+
+								if (subExpression && subLetter == '(') subBreackets++;
+
+								if (subLetter == '(') {
+									subExpression = true;
+									if (debag) deChain0.erase(deChain0.begin()); // DEBAG
+								}
+
+								offset++;
+							}
+
+							if (!subWord.empty()) {
+								current->subExpressions.push_back(ParsingExpression(rule, subWord, ind->params[paramsCount]->dataType));
+								paramsCount++;
+
+								if (debag)
+									cout << setw(25) << left << "RETURN STATE"	// DEBAG
+									<< setw(30) << left << "-------"
+									<< setw(20) << left << "-------" << endl; // DEBAG
+							}
+							if (debag)
+								for (size_t i = 0; i < subWord.size(); i++)	// DEBAG
+									deChain0.erase(deChain0.begin());	// DEBAG
+
+							if (paramsCount != ind->params.size())
+								throw ERROR_THROW_IN(123, currentLexemChain[0].line, 0);
+
+							index += offset - 1;
+
+							Func = true;
+
+							break;
+						case IndefierType::Var:
+							elementReturnType = ind->dataType;
+							elementType = ExpressionElementType::Var;
+							break;
+						case IndefierType::Param:
+							if (!rule->analysator->funcStack.empty() &&
+								ind->belong == rule->analysator->funcStack.top()) {
+								elementReturnType = ind->dataType;
+								elementType = ExpressionElementType::Var;
+							}
+							else
+								throw ERROR_THROW_IN(214, currentLexemChain[0].line, 0);
+							break;
+						default:
+							throw ERROR_THROW_IN(215, currentLexemChain[0].line, 0);
+						}
+					}
+					else if (IsString) {
+						if (word[0] == '\"' && word[word.size() - 1] == '\"') {
+							elementReturnType = VarType::String;
+							elementType = ExpressionElementType::Const;
+						}
+						else
+							throw ERROR_THROW_IN(216, currentLexemChain[0].line, 0);
+					}
+					else if (IsChar) {
+						if (symbolCounter == 1 && word[0] == '\'' && word[word.size() - 1] == '\'') {
+							elementReturnType = VarType::Char;
+							elementType = ExpressionElementType::Const;
+						}
+						else
+							throw ERROR_THROW_IN(217, currentLexemChain[0].line, 0);
+					}
+					else if (word == "true" || word == "false") {
+						elementReturnType = VarType::Bool;
+						elementType = ExpressionElementType::Const;
+					}
+				}
+				else {
+					elementReturnType = VarType::Int;
+					elementType = ExpressionElementType::Const;
+				}
+
+				if (needType != VarType::Void && needType != elementReturnType && !Operator
+					&& needType != VarType::Bool) {
+					strstream str;
+
+					str << "Не возможно присвоит " << GetStringNameOfVarType(elementReturnType)
+						<< " к " << GetStringNameOfVarType(needType) << "!";
+
+					str << '\0';
+
+					throw ERROR_THROW_IN_C(218, str.str(), currentLexemChain[0].line, 0);
+				}
+
+				current->elementChain.push_back(elementType);
+
+				if (!Operator) {
+					current->typeChain.push_back(elementReturnType);
+					current->elementsData.push_back(word);
+				}
+
+				Operator = false;
+				HaveLetters = false;
+				SingleOperator = false;
+				IsString = false;
+				IsChar = false;
+
+				symbolCounter = 0;
+
+				deChain1.insert(deChain1.end() - 1, Log::Logging::GetOpeartorSymbolsByType(elementType)[0]);
+
+				if (debag) {
+					for (size_t i = 0; i < word.size(); i++)	// DEBAG
+						deChain0.erase(deChain0.begin());		// DEBAG
+
+					deChain0_s.clear();
+					for (size_t i = 0; i < (deChain0.size() < 29 ? deChain0.size() : 29); i++)	// DEBAG
+						deChain0_s.push_back(deChain0[i]);										// DEBAG
+
+					cout << setw(25) << left << ""				// DEBAG
+						<< setw(30) << left << deChain0_s		// DEBAG
+						<< setw(20) << left << deChain1 << endl; // DEBAG
+				}
+
+				word.clear();
+			}
+
+			if (!Func && !Space)
+				word.push_back(letter);
+
+			if (IsOperator(letter) && !Char && !String && !Operator) Operator = true;
+
+			if ((letter == '+' || letter == '-' || letter == '*' || letter == '/' ||
+				letter == '(' || letter == ')') && !IsString && !IsChar && !Func)
+				SingleOperator = true;
+
+			Space = false;
+			Check = false;
+			Func = false;
+
+			if (Char && letter != '\'')
+				symbolCounter++;
+
+			index++;
+		}
+
+		return current;
 	}
 
 	VarType SyntaxAnalysator::GetVarTypeByChain(string chain)
@@ -71,287 +370,6 @@ namespace SyntaxAnalysis {
 		}
 
 		return var;
-	}
-
-	ExpressionNode* SyntaxAnalysator::ParsingExpression(Rule* rule, string chain, VarType ret) {
-
-		cout << setw(25) << left << "SAVE STATE"		// DEBAG
-			<< setw(30) << left << "-------"
-			<< setw(20) << left << "-------" << endl; // DEBAG
-		
-		string deChain0 = chain + "$";	// DEBAG
-		string deChain0_s = "";			// DEBAG
-		string deChain1 = "$";			// DEBAG
-
-		bool HaveLetters = false,
-			IsString = false,
-			IsChar = false,
-			String = false,
-			Char = false,
-			SingleOperator = false,
-			Func = false,
-			Space = false,
-			Check = false,
-			Operator = false;
-
-		VarType needType = ret;
-
-		string word;
-
-		int index = 0;
-
-		int sybolCounter = 0;
-		int bracketsCounter = 0;
-
-		char letter = chain[index];
-
-		ExpressionNode* current = new ExpressionNode();
-
-		current->returnType = needType;
-		current->selfRule = rule;
-
-		deChain0_s.clear(); // DEBAG
-		for (size_t i = 0; i < (deChain0.size() < 29 ? deChain0.size() : 29); i++) // DEBAG
-			deChain0_s.push_back(deChain0[i]); // DEBAG
-
-		cout << setw(25) << left << ""
-			<< setw(30) << left << deChain0_s
-			<< setw(20) << left << deChain1 << endl; // DEBAG
-
-		while (letter != '\0')
-		{
-			letter = chain[index];
-
-			if (letter == '\0') Check = true;
-
-			if (letter == '\"' && !Operator) { String = !String; IsString = true; HaveLetters = true; }
-			if (letter == '\'' && !Operator) { Char = !Char; IsChar = true; HaveLetters = true; }
-
-			if (letter == ' ' && !Char && !String) {\
-				Space = true;
-
-				deChain0.erase(deChain0.begin()); // DEBAG
-			}				
-
-			if (IsLetter(letter) && !Operator) 
-				HaveLetters = true;
-
-			if (IsOperator(letter) && !Char && !String && !Operator) 
-				Check = true;
-
-			if (!IsOperator(letter) && Operator)
-				Check = true;
-
-			if ((String && Char) || (IsString && IsChar))
-				throw ERROR_THROW_C(0, "String and Char???");
-
-			if ((Space || Check || SingleOperator) && !word.empty()) {
-
-				VarType elementReturnType = VarType::Void;
-				ExpressionElementType elementType = ExpressionElementType::None;
-				IndefierData* ind;
-
-				if (Operator) {
-					if (needType != VarType::Int && needType != VarType::Bool)
-						throw ERROR_THROW_C(0, "В вырожении заперщены все операторы! [Void, String, Char]");
-
-					elementType = GetExpressionElementType(word);
-
-					bool IsMathOperator = (elementType == ExpressionElementType::Plus || elementType == ExpressionElementType::Minus
-										|| elementType == ExpressionElementType::Multi || elementType == ExpressionElementType::Division);
-
-					if (elementType == ExpressionElementType::InBrack || elementType == ExpressionElementType::OutBrack) {
-						if (elementType == ExpressionElementType::InBrack) bracketsCounter++;
-						else bracketsCounter--;
-					}
-					else if (needType == VarType::Int && !IsMathOperator) 
-						throw ERROR_THROW_C(0, "В вырожении заперщены логические операторы! [Int]");
-					else if (needType == VarType::Bool && IsMathOperator) 		
-						throw ERROR_THROW_C(0, "В вырожении заперщены арифметические операторы! [Bool]");					
-				}
-				else if (HaveLetters) {
-					if (rule->IndefierIsExist(word)) {
-						ind = rule->GetIndefierByName(word);
-
-						string subWord;
-						int offset = 0, paramsCount = 0, subBreackets = 0;
-						bool funcInner = false;
-						char subLetter = chain[index + offset];
-
-						switch (ind->type)
-						{
-						case IndefierType::Func:
-
-							elementReturnType = ind->dataType;
-							elementType = ExpressionElementType::Func;
-
-							while (subLetter != ')' || funcInner)
-							{
-								subLetter = chain[index + offset];
-
-								if (subLetter == '\0')
-									throw ERROR_THROW_C(0, "Функция использована не правильно!");
-
-								if (subLetter == ')') {
-									if (subBreackets <= 0) funcInner = false;
-									else subBreackets--;
-								}
-
-								if (subLetter == ',' && funcInner && subBreackets <= 0) {
-									for (size_t i = 0; i < subWord.size(); i++) // DEBAG
-										deChain0.erase(deChain0.begin()); // DEBAG
-
-									if (!subWord.empty()) {
-										current->subExpressions.push_back(ParsingExpression(rule, subWord, ind->params[paramsCount]->dataType));
-										paramsCount++;
-
-										cout << setw(25) << left << "RETURN STATE" // DEBAG
-											<< setw(30) << left << "-------"
-											<< setw(20) << left << "-------" << endl; // DEBAG
-									}
-									subWord.clear();
-								}
-								else if (funcInner)
-									subWord.push_back(subLetter);
-
-								if (funcInner && subLetter == '(') subBreackets++;
-
-								if (subLetter == '(') {
-									funcInner = true;
-									deChain0.erase(deChain0.begin()); // DEBAG
-								}
-
-								offset++;
-							}
-
-							if (!subWord.empty()) {
-								current->subExpressions.push_back(ParsingExpression(rule, subWord, ind->params[paramsCount]->dataType));
-								paramsCount++;			
-
-								cout << setw(25) << left << "RETURN STATE"	// DEBAG
-									<< setw(30) << left << "-------"
-									<< setw(20) << left << "-------" << endl; // DEBAG
-							}
-
-							for (size_t i = 0; i < subWord.size(); i++)	// DEBAG
-								deChain0.erase(deChain0.begin());	// DEBAG
-
-							if (paramsCount != ind->params.size())
-								throw ERROR_THROW_C(0, "Функция не принемает столько аргументов!");
-
-							
-
-							index += offset - 1;
-
-							Func = true;
-
-							break;
-						case IndefierType::Var:
-							elementReturnType = ind->dataType;
-							elementType = ExpressionElementType::Var;
-							break;
-						case IndefierType::Param:
-							if (!rule->analysator->funcStack.empty() && 
-								ind->belong == rule->analysator->funcStack.top()) {
-								elementReturnType = ind->dataType;
-								elementType = ExpressionElementType::Var;
-							}
-							else
-								throw ERROR_THROW_C(0, "Параметр функции использован за самой функцией!");
-							break;
-						default:
-							throw ERROR_THROW_C(0, "Unknown indefier type!");
-						}
-					}
-					else if (IsString) {
-						if (word[0] == '\"' && word[word.size() - 1] == '\"') {
-							elementReturnType = VarType::String;
-							elementType = ExpressionElementType::Const;
-						}	
-						else
-							throw ERROR_THROW_C(0, "String not right!");
-					}
-					else if (IsChar) {
-						if (sybolCounter == 1 && word[0] == '\'' && word[word.size() - 1] == '\'') {
-							elementReturnType = VarType::Char;
-							elementType = ExpressionElementType::Const;
-						}
-						else
-							throw ERROR_THROW_C(0, "Char not right!");
-					}
-					else if (word == "true" || word == "false") {
-						elementReturnType = VarType::Bool;
-						elementType = ExpressionElementType::Const;
-					}
-				}
-				else {
-					elementReturnType = VarType::Int;
-					elementType = ExpressionElementType::Const;
-				}				
-
-				if (needType != VarType::Void && needType != elementReturnType && !Operator
-					&& needType != VarType::Bool) {
-					strstream str;
-
-					str << "Не возможно присвоит " << GetStringNameOfVarType(elementReturnType)
-						<< " к " << GetStringNameOfVarType(needType) << "!";
-
-					str << '\0';
-
-					throw ERROR_THROW_IN_C(0, str.str(), currentLexemChain[0].line, 0);
-				}
-
-				current->elementChain.push_back(elementType);
-
-				if (!Operator) {
-					current->typeChain.push_back(elementReturnType);
-					current->elementsData.push_back(word);
-				}					
-
-				Operator = false;
-				HaveLetters = false;
-				SingleOperator = false;
-				IsString = false;
-				IsChar = false;
-
-				sybolCounter = 0;
-
-				deChain1.insert(deChain1.end() - 1, Log::Logging::GetOpeartorSymbolsByType(elementType)[0]);
-
-				for (size_t i = 0; i < word.size(); i++)	// DEBAG
-					deChain0.erase(deChain0.begin());		// DEBAG
-
-				deChain0_s.clear();
-				for (size_t i = 0; i < (deChain0.size() < 29 ? deChain0.size() : 29); i++)	// DEBAG
-					deChain0_s.push_back(deChain0[i]);										// DEBAG
-					
-				cout << setw(25) << left << ""				// DEBAG
-					<< setw(30) << left << deChain0_s		// DEBAG
-					<< setw(20) << left << deChain1 << endl; // DEBAG
-
-				word.clear();
-			}
-
-			if (!Func && !Space) 
-				word.push_back(letter);
-
-			if (IsOperator(letter) && !Char && !String && !Operator) Operator = true;
-
-			if ((letter == '+' || letter == '-' || letter == '*' || letter == '/' ||
-				letter == '(' || letter == ')') && !IsString && !IsChar && !Func)
-				SingleOperator = true;
-
-			Space = false;
-			Check = false;
-			Func = false;
-
-			if (Char && letter != '\'')
-				sybolCounter++;
-
-			index++;
-		}
-
-		return current;
 	}
 
 	bool SyntaxAnalysator::IsOperator(char letter) {

@@ -107,13 +107,17 @@ namespace Collections {
 		bool OtherExpression = false;
 
 		// Debag
-		string deChain0 = "$";
-		string deChain1 = "$";
+		bool debag = false;		// d
 
-		for (size_t i = 0; i < chain.size(); i++)
-			deChain0.insert(deChain0.end() - 1, chain[i].chain[0]); // d
+		string deChain0 = "$";	// d
+		string deChain1 = "$";	// d
 
-		cout << setw(25) << left << "RYLE FIND" << setw(30) << left << deChain0 << setw(20) << left << deChain1 << endl; // d
+		if (debag)
+			for (size_t i = 0; i < chain.size(); i++)
+				deChain0.insert(deChain0.end() - 1, chain[i].chain[0]); // d
+
+		if (debag)
+			cout << setw(25) << left << "RYLE FIND" << setw(30) << left << deChain0 << setw(20) << left << deChain1 << endl; // d
 
 		for (size_t i = 0; i < chain.size(); i++)
 		{
@@ -121,40 +125,54 @@ namespace Collections {
 				params = true; 
 				haveParams = true; 
 				intermediate->commonChain.push_back(chain[i].type);
-				deChain1.insert(deChain1.end() - 1,chain[i].chain[0]); // d
-				deChain0.erase(deChain0.begin()); // d
+				if (debag) {
+					deChain1.insert(deChain1.end() - 1, chain[i].chain[0]); // d
+					deChain0.erase(deChain0.begin()); // d
+				}
+				
 				continue; 
 			}
 			else if (chain[i].type == Data::LexemType::ParamsOut) {
 				if (HaveVarInit && OtherExpression) {
 					intermediate->commonChain.push_back(Data::LexemType::AnyParams);
-					deChain1.insert(deChain1.end() - 1, 'A'); // d
-					deChain1.insert(deChain1.end() - 1, 'P'); // d
+					if (debag) {
+						deChain1.insert(deChain1.end() - 1, 'A'); // d
+						deChain1.insert(deChain1.end() - 1, 'P'); // d
 
-					deChain0.erase(deChain0.begin());	// d
+						deChain0.erase(deChain0.begin());	// d
+					}
 				}
 				else if (HaveVarInit) {
 					intermediate->commonChain.push_back(Data::LexemType::VarInitParams);
-					deChain1.insert(deChain1.end() - 1, 'V'); // d
-					deChain1.insert(deChain1.end() - 1, 'I'); // d
-					deChain1.insert(deChain1.end() - 1, 'P'); // d
 
-					deChain0.erase(deChain0.begin()); // d
-					deChain0.erase(deChain0.begin()); // d
+					if (debag) {
+						deChain1.insert(deChain1.end() - 1, 'V'); // d
+						deChain1.insert(deChain1.end() - 1, 'I'); // d
+						deChain1.insert(deChain1.end() - 1, 'P'); // d
+
+						deChain0.erase(deChain0.begin()); // d
+						deChain0.erase(deChain0.begin()); // d
+					}
 				}
 				else if (OtherExpression) {
 					intermediate->commonChain.push_back(Data::LexemType::ExpressionParams);
-					deChain1.insert(deChain1.end() - 1, 'E'); // d
-					deChain1.insert(deChain1.end() - 1, 'P'); // d
-					
-					deChain0.erase(deChain0.begin()); // d
+
+					if (debag) {
+						deChain1.insert(deChain1.end() - 1, 'E'); // d
+						deChain1.insert(deChain1.end() - 1, 'P'); // d
+
+						deChain0.erase(deChain0.begin()); // d
+					}
 				}					
 				else {
 					intermediate->commonChain.push_back(Data::LexemType::NoneParams);
-					deChain1.insert(deChain1.end() - 1, 'N'); // d
-					deChain1.insert(deChain1.end() - 1, 'P'); // d
 
-					deChain0.erase(deChain0.begin());	// d
+					if (debag) {
+						deChain1.insert(deChain1.end() - 1, 'N'); // d
+						deChain1.insert(deChain1.end() - 1, 'P'); // d
+
+						deChain0.erase(deChain0.begin());	// d
+					}
 				}
 
 
@@ -176,15 +194,18 @@ namespace Collections {
 					OtherExpression = true;
 				}
 
-				deChain0.erase(deChain0.begin());	// d
+				if (debag) deChain0.erase(deChain0.begin());	// d
 			}
 			else { 
 				intermediate->commonChain.push_back(chain[i].type); 
-				deChain1.insert(deChain1.end() - 1, chain[i].chain[0]); // d
-				deChain0.erase(deChain0.begin());		// d
+
+				if (debag) {
+					deChain1.insert(deChain1.end() - 1, chain[i].chain[0]); // d
+					deChain0.erase(deChain0.begin());		// d
+				}
 			}
 
-			cout << setw(25) << left << "" << setw(30) << left << deChain0 << setw(20) << left << deChain1 << endl; // d
+			if (debag) cout << setw(25) << left << "" << setw(30) << left << deChain0 << setw(20) << left << deChain1 << endl; // d
 		}
 
 		for (size_t i = 0; i < intermediate->commonChain.size(); i++)
@@ -205,9 +226,9 @@ namespace Collections {
 
 		result = availableRules.front();
 
-		cout << setw(25) << left << "RULE IS FIND" << setw(30) << left << "-------" << setw(20) << left << "-------" << endl; // ds
+		if (debag) cout << setw(25) << left << "RULE IS FIND" << setw(30) << left << "-------" << setw(20) << left << "-------" << endl; // ds
 
-		cout << setw(25) << left << result->name << setw(30) << left << deChain1 << setw(20) << left << "$" << endl; // d	
+		if (debag) cout << setw(25) << left << result->name << setw(30) << left << deChain1 << setw(20) << left << "$" << endl; // d	
 
 		result->initspace = chain[0].space;
 		result->fullChain = intermediate->fullChain;

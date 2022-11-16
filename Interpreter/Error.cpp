@@ -43,16 +43,36 @@ namespace Error {
 
 		ERROR_THROW_NODEF(127), ERROR_THROW_NODEF(128), ERROR_THROW_NODEF(129),
 		
-		ERROR_THROW_C(130, "Some syntax analysis error!"),
-
-		ERROR_THROW_NODEF(131), 
-		ERROR_THROW_NODEF(132), ERROR_THROW_NODEF(133), ERROR_THROW_NODEF(134), ERROR_THROW_NODEF(135),
-		ERROR_THROW_NODEF(136), ERROR_THROW_NODEF(137), ERROR_THROW_NODEF(138), ERROR_THROW_NODEF(139),
-		
-		ERROR_THROW_NODEF10(140), ERROR_THROW_NODEF10(150),
+		ERROR_THROW_NODEF10(130), ERROR_THROW_NODEF10(140), ERROR_THROW_NODEF10(150),
 		ERROR_THROW_NODEF10(160), ERROR_THROW_NODEF10(170), ERROR_THROW_NODEF10(180), ERROR_THROW_NODEF10(190),
 
-		ERROR_THROW_NODEF100(200), ERROR_THROW_NODEF100(300), ERROR_THROW_NODEF100(400), ERROR_THROW_NODEF100(500),
+		// Ошибки синтаксического анализатора / Errors of syntax analysator
+		ERROR_THROW_C(200, "Неизвестное правило!"),
+		ERROR_THROW_C(201, "Точка входа не обнаружена! [Main { }]"),
+		ERROR_THROW_C(202, "Идентификатор уже сущетвует!"),
+		ERROR_THROW_C(203, "Идентификатор не найден!"),
+		ERROR_THROW_C(204, "Идентификатор указывает на фунцию!"),
+		ERROR_THROW_C(205, "Идентификатор указывает на переменную!"),
+		ERROR_THROW_C(206, "Параметр использован за функцией!"),
+		ERROR_THROW_C(207, "Идентификатор объявлен в другом пространстве имён!"),
+		ERROR_THROW_C(208, "В вырожении заперщены все операторы! [Void, String, Char]"),
+		ERROR_THROW_C(209, "В вырожении заперщены логические операторы! [Int]"),
+
+		ERROR_THROW_C(210, "В вырожении заперщены арифметические операторы! [Bool]"),
+		ERROR_THROW_C(211, "String не может быть однавременно и Char! [\'text\"]"),
+		ERROR_THROW_C(212, "Функция использована не правильно!"),
+		ERROR_THROW_C(213, "Функция не принемает столько аргументов!"),
+		ERROR_THROW_C(214, "Параметр функции использован за самой функцией!"),
+		ERROR_THROW_C(215, "Неизвестный тип идентификатора!"),
+		ERROR_THROW_C(216, "Не правильный формат строки!"),
+		ERROR_THROW_C(217, "Не правильный формат символа!"),
+		ERROR_THROW_C(218, "Не возможно присвоит {TYPE} к {TYPE}"),
+		ERROR_THROW_NODEF(219),
+
+		ERROR_THROW_NODEF10(220), ERROR_THROW_NODEF10(130), ERROR_THROW_NODEF10(240), ERROR_THROW_NODEF10(250),
+		ERROR_THROW_NODEF10(260), ERROR_THROW_NODEF10(270), ERROR_THROW_NODEF10(280), ERROR_THROW_NODEF10(290),
+
+		ERROR_THROW_NODEF100(300), ERROR_THROW_NODEF100(400), ERROR_THROW_NODEF100(500),
 		ERROR_THROW_NODEF100(600), ERROR_THROW_NODEF100(700), ERROR_THROW_NODEF100(800), ERROR_THROW_NODEF100(900)
 	};
 

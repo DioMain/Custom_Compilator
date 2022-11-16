@@ -18,7 +18,7 @@ namespace Data {
 	void VarDeclareAndInitRule::Action()
 	{
 		if (IndefierIsExist(GetLit(GetCurLitIndex()).data))
-			throw ERROR_THROW_IN_C(0, "Такой идентификатор уже сущетвует!", GetLexemFromChain(0).line, 0);
+			throw ERROR_THROW_IN(202, GetLexemFromChain(0).line, 0);
 
 		VarType var = analysator->GetVarTypeByChain(GetLexemFromChain(0).chain);
 
@@ -42,18 +42,18 @@ namespace Data {
 	void VarAssignRule::Action()
 	{
 		if (!IndefierIsExist(GetLit(GetCurLitIndex()).data))
-			throw ERROR_THROW_IN_C(0, "Такой идентификатор не сущетвует!", GetLexemFromChain(0).line, 0);
+			throw ERROR_THROW_IN(203, GetLexemFromChain(0).line, 0);
 
 		IndefierData* curInd = GetIndefierByName(GetLit(GetCurLitIndex()).data);
 
 		if (curInd->isFunc)
-			throw ERROR_THROW_IN_C(0, "Этот идентификатор указывает на фунцию!", GetLexemFromChain(0).line, 0);
+			throw ERROR_THROW_IN(204, GetLexemFromChain(0).line, 0);
 
 		if ((analysator->funcStack.empty() || curInd->belong != analysator->funcStack.top()) && curInd->type == IndefierType::Param)
-			throw ERROR_THROW_C(0, "Параметр функции использован за самой функцией!");
+			throw ERROR_THROW_IN(206, GetLexemFromChain(0).line, 0);
 
 		if (!analysator->IsHaveThisNamespace(curInd->initspace))
-			throw ERROR_THROW_C(0, "Переменная объявленая в другом пространстве имён!");
+			throw ERROR_THROW_IN(207, GetLexemFromChain(0).line, 0);
 
 		AddLitIndex();
 
@@ -88,7 +88,7 @@ namespace Data {
 	void FuncDeclareRule::Action()
 	{
 		if (IndefierIsExist(GetLit(GetCurLitIndex()).data))
-			throw ERROR_THROW_IN_C(0, "Такая идентификатор уже сущетвует!", GetLexemFromChain(0).line, 0);
+			throw ERROR_THROW_IN(202, GetLexemFromChain(0).line, 0);
 
 		VarType var = analysator->GetVarTypeByChain(GetLexemFromChain(0).chain);
 
@@ -121,7 +121,7 @@ namespace Data {
 	void FuncDecNonParamsRule::Action()
 	{
 		if (IndefierIsExist(GetLit(GetCurLitIndex()).data))
-			throw ERROR_THROW_IN_C(0, "Такая идентификатор уже сущетвует!", GetLexemFromChain(0).line, 0);
+			throw ERROR_THROW_IN(202, GetLexemFromChain(0).line, 0);
 
 		VarType var = analysator->GetVarTypeByChain(GetLexemFromChain(0).chain);
 
@@ -138,18 +138,18 @@ namespace Data {
 	void FuncUseRule::Action()
 	{
 		if (!IndefierIsExist(GetLit(GetCurLitIndex()).data)) 
-			throw ERROR_THROW_IN_C(0, "Такой идентификатор не сущетвует!", GetLexemFromChain(0).line, 0);
+			throw ERROR_THROW_IN(203, GetLexemFromChain(0).line, 0);
 
 		IndefierData* curInd = GetIndefierByName(GetLit(GetCurLitIndex()).data);
 
 		if (!curInd->isFunc)
-			throw ERROR_THROW_IN_C(0, "Этот идентификатор не указывает на фунцию!", GetLexemFromChain(0).line, 0);
+			throw ERROR_THROW_IN(205, GetLexemFromChain(0).line, 0);
 
 		if (curInd->params.size() != paramsChain.size())
-			throw ERROR_THROW_IN_C(0, "Функция не принемает столько аргументов!", GetLexemFromChain(0).line, 0);
+			throw ERROR_THROW_IN(213, GetLexemFromChain(0).line, 0);
 
 		if (!analysator->IsHaveThisNamespace(curInd->initspace))
-			throw ERROR_THROW_C(0, "Функция объявленая в другом пространстве имён!");
+			throw ERROR_THROW_IN(207, GetLexemFromChain(0).line, 0);
 
 		AddLitIndex();
 
