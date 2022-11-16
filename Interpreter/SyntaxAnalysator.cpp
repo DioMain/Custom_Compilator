@@ -7,6 +7,8 @@ using namespace Collections;
 namespace SyntaxAnalysis {
 	void SyntaxAnalysator::Invoke()
 	{
+		cout << setw(25) << left << "Сообщение" << setw(30) << left << "Цепочка" << setw(20) << left << "Стек" << endl; // DEBAG
+
 		while (true)
 		{
 			currentLexemChain = table->table[line];
@@ -15,17 +17,34 @@ namespace SyntaxAnalysis {
 
 			currentRule = defRules->ParsingChain(currentLexemChain);
 
+			if (SAVE_NAMESPACE) {
+				namespaces.push_back(currentLexemChain[0].space);
+
+				SAVE_NAMESPACE = false;
+			}
+
 			if (currentRule->name == "None")
-				throw ERROR_THROW_IN_C(0, "Не известное правило!", currentLexemChain[0].line, 0);
+				throw ERROR_THROW_IN_C(0, "Неизвестное правило!", currentLexemChain[0].line, 0);
 
 			currentRule->analysator = this;
 
 			currentRule->Action();
 
-			rules->Add(*currentRule);
+			rules->Add(Rule(*currentRule));
+
+			currentRule->expressionsRoot.clear();
+			currentRule->fullChain.clear();
+			currentRule->paramsChain.clear();
 
 			line++;
+
+			cout << setw(25) << left << "RES STATE"		// DEBAG
+				<< setw(30) << left << "------------------------------" 
+				<< setw(20) << left << "--------------------" << endl; // DEBAG
 		}
+
+		if (!MAIN)
+			throw ERROR_THROW_C(0, "Точка входа не обнаружена!", currentLexemChain[0].line);
 	}
 
 	VarType SyntaxAnalysator::GetVarTypeByChain(string chain)
@@ -54,7 +73,15 @@ namespace SyntaxAnalysis {
 		return var;
 	}
 
-	ExpressionNode* SyntaxAnalysator::ParsingExpression(Rule* rule, string chain, ExpressionNode* lastNode = nullptr) {
+	ExpressionNode* SyntaxAnalysator::ParsingExpression(Rule* rule, string chain, VarType ret) {
+
+		cout << setw(25) << left << "SAVE STATE"		// DEBAG
+			<< setw(30) << left << "-------"
+			<< setw(20) << left << "-------" << endl; // DEBAG
+		
+		string deChain0 = chain + "$";	// DEBAG
+		string deChain0_s = "";			// DEBAG
+		string deChain1 = "$";			// DEBAG
 
 		bool HaveLetters = false,
 			IsString = false,
@@ -67,7 +94,7 @@ namespace SyntaxAnalysis {
 			Check = false,
 			Operator = false;
 
-		VarType needType = lastNode == nullptr ? rule->retTypeBuffer : lastNode->returnType;
+		VarType needType = ret;
 
 		string word;
 
@@ -83,6 +110,14 @@ namespace SyntaxAnalysis {
 		current->returnType = needType;
 		current->selfRule = rule;
 
+		deChain0_s.clear(); // DEBAG
+		for (size_t i = 0; i < (deChain0.size() < 29 ? deChain0.size() : 29); i++) // DEBAG
+			deChain0_s.push_back(deChain0[i]); // DEBAG
+
+		cout << setw(25) << left << ""
+			<< setw(30) << left << deChain0_s
+			<< setw(20) << left << deChain1 << endl; // DEBAG
+
 		while (letter != '\0')
 		{
 			letter = chain[index];
@@ -92,8 +127,11 @@ namespace SyntaxAnalysis {
 			if (letter == '\"' && !Operator) { String = !String; IsString = true; HaveLetters = true; }
 			if (letter == '\'' && !Operator) { Char = !Char; IsChar = true; HaveLetters = true; }
 
-			if (letter == ' ' && !Char && !String)
+			if (letter == ' ' && !Char && !String) {\
 				Space = true;
+
+				deChain0.erase(deChain0.begin()); // DEBAG
+			}				
 
 			if (IsLetter(letter) && !Operator) 
 				HaveLetters = true;
@@ -160,9 +198,16 @@ namespace SyntaxAnalysis {
 								}
 
 								if (subLetter == ',' && funcInner && subBreackets <= 0) {
+									for (size_t i = 0; i < subWord.size(); i++) // DEBAG
+										deChain0.erase(deChain0.begin()); // DEBAG
+
 									if (!subWord.empty()) {
-										current->subExpressions.push_back(ParsingExpression(rule, subWord, current));
+										current->subExpressions.push_back(ParsingExpression(rule, subWord, ind->params[paramsCount]->dataType));
 										paramsCount++;
+
+										cout << setw(25) << left << "RETURN STATE" // DEBAG
+											<< setw(30) << left << "-------"
+											<< setw(20) << left << "-------" << endl; // DEBAG
 									}
 									subWord.clear();
 								}
@@ -171,18 +216,30 @@ namespace SyntaxAnalysis {
 
 								if (funcInner && subLetter == '(') subBreackets++;
 
-								if (subLetter == '(') funcInner = true;
+								if (subLetter == '(') {
+									funcInner = true;
+									deChain0.erase(deChain0.begin()); // DEBAG
+								}
 
 								offset++;
 							}
 
 							if (!subWord.empty()) {
-								paramsCount++;
-								current->subExpressions.push_back(ParsingExpression(rule, subWord, current));
+								current->subExpressions.push_back(ParsingExpression(rule, subWord, ind->params[paramsCount]->dataType));
+								paramsCount++;			
+
+								cout << setw(25) << left << "RETURN STATE"	// DEBAG
+									<< setw(30) << left << "-------"
+									<< setw(20) << left << "-------" << endl; // DEBAG
 							}
+
+							for (size_t i = 0; i < subWord.size(); i++)	// DEBAG
+								deChain0.erase(deChain0.begin());	// DEBAG
 
 							if (paramsCount != ind->params.size())
 								throw ERROR_THROW_C(0, "Функция не принемает столько аргументов!");
+
+							
 
 							index += offset - 1;
 
@@ -194,12 +251,13 @@ namespace SyntaxAnalysis {
 							elementType = ExpressionElementType::Var;
 							break;
 						case IndefierType::Param:
-							if (ind->belong == rule->analysator->funcStack.top()) {
+							if (!rule->analysator->funcStack.empty() && 
+								ind->belong == rule->analysator->funcStack.top()) {
 								elementReturnType = ind->dataType;
 								elementType = ExpressionElementType::Var;
 							}
 							else
-								throw ERROR_THROW_C(0, "Var not found!");
+								throw ERROR_THROW_C(0, "Параметр функции использован за самой функцией!");
 							break;
 						default:
 							throw ERROR_THROW_C(0, "Unknown indefier type!");
@@ -235,12 +293,12 @@ namespace SyntaxAnalysis {
 					&& needType != VarType::Bool) {
 					strstream str;
 
-					str << "Не возможно присвоит " << GetStringNameOfVarType(needType) 
-						<< " к " << GetStringNameOfVarType(elementReturnType) << "!";
+					str << "Не возможно присвоит " << GetStringNameOfVarType(elementReturnType)
+						<< " к " << GetStringNameOfVarType(needType) << "!";
 
 					str << '\0';
 
-					throw ERROR_THROW_C(0, str.str());
+					throw ERROR_THROW_IN_C(0, str.str(), currentLexemChain[0].line, 0);
 				}
 
 				current->elementChain.push_back(elementType);
@@ -257,6 +315,19 @@ namespace SyntaxAnalysis {
 				IsChar = false;
 
 				sybolCounter = 0;
+
+				deChain1.insert(deChain1.end() - 1, Log::Logging::GetOpeartorSymbolsByType(elementType)[0]);
+
+				for (size_t i = 0; i < word.size(); i++)	// DEBAG
+					deChain0.erase(deChain0.begin());		// DEBAG
+
+				deChain0_s.clear();
+				for (size_t i = 0; i < (deChain0.size() < 29 ? deChain0.size() : 29); i++)	// DEBAG
+					deChain0_s.push_back(deChain0[i]);										// DEBAG
+					
+				cout << setw(25) << left << ""				// DEBAG
+					<< setw(30) << left << deChain0_s		// DEBAG
+					<< setw(20) << left << deChain1 << endl; // DEBAG
 
 				word.clear();
 			}
@@ -290,6 +361,14 @@ namespace SyntaxAnalysis {
 	}
 	bool SyntaxAnalysator::IsLetter(unsigned char symbol) {
 		return (symbol >= 0x41 && symbol <= 0x7a) || (symbol >= 0xc0 && symbol <= 0xff);
+	}
+	bool SyntaxAnalysator::IsHaveThisNamespace(std::string name) {
+		for (string item : namespaces) {
+			if (item == name)
+				return true;
+		}
+
+		return false;
 	}
 
 	ExpressionElementType SyntaxAnalysator::GetExpressionElementType(string chain) {

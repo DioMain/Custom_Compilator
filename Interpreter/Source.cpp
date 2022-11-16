@@ -84,6 +84,8 @@ int _tmain(int argc, TCHAR* argv[]) {
 	}
 	catch (LineError err)
 	{
+		cout << endl;
+
 		log.WriteError(&err);
 
 		cout << "Работа завершина с ошибками!" << endl;
@@ -91,6 +93,8 @@ int _tmain(int argc, TCHAR* argv[]) {
 	}
 	catch (ErrorBase err)
 	{
+		cout << endl;
+
 		log.WriteError(&err);
 
 		cout << "Работа завершина с ошибками!" << endl;

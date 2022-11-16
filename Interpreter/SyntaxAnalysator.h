@@ -5,7 +5,8 @@ namespace SyntaxAnalysis {
 	{
 	public:
 
-		bool MAIN = false;
+		bool MAIN = false,
+			SAVE_NAMESPACE = false;
 
 		int line = 0, litIndex = 0;
 
@@ -33,10 +34,12 @@ namespace SyntaxAnalysis {
 
 		Data::VarType GetVarTypeByChain(std::string chain);
 
-		Data::ExpressionNode* ParsingExpression(Data::Rule* rule, std::string chain, Data::ExpressionNode* lastNode);
+		Data::ExpressionNode* ParsingExpression(Data::Rule* rule, std::string chain, Data::VarType ret);
 
 		bool IsOperator(char letter);
 		bool IsLetter(unsigned char symbol);
+		bool IsHaveThisNamespace(std::string name);
+
 		Data::ExpressionElementType GetExpressionElementType(std::string chain);
 
 		std::string GetStringNameOfVarType(Data::VarType type);

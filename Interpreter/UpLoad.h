@@ -7,3 +7,7 @@ namespace LexemAnalysis {
 namespace SyntaxAnalysis {
 	class SyntaxAnalysator;
 }
+
+namespace Log {
+	class Logging;
+}

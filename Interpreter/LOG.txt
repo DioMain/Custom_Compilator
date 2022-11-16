@@ -1,5 +1,5 @@
 <------------------ Протокол ------------------>
- Дата создания протокола: 16.11.2022 6:44:39
+ Дата создания протокола: 16.11.2022 17:19:53
 <------------- Входные параметры -------------->
  -in: IN.txt
  -out: OUT.txt
@@ -7,8 +7,8 @@
 
 <======= Проверка текста на доступность =======>
 <-------------- Исходные данные --------------->
- Кол-во символов: 545
- Кол-во строк: 33
+ Кол-во символов: 393
+ Кол-во строк: 36
  Проигнорировано: 0
 
 <========= Проверка текста завершена! =========>
@@ -17,73 +17,60 @@
 			Таблица лексем | Table of lexems
 <------------[ТИП|ЦЕПОЧКА|ПРОСТРАНСТВО ИМЁН]----------->
 --------------------------------------------------------
-|0| [2|void|GLOBAL.0] [3|INDEFIER|GLOBAL.0] [8|(|GLOBAL.0] [2|int|] [3|INDEFIER|GLOBAL.0] [14|,|GLOBAL.0] [2|char|] [3|INDEFIER|GLOBAL.0] [14|,|GLOBAL.0] [2|string|] [3|INDEFIER|GLOBAL.0] [14|,|GLOBAL.0] [2|bool|] [3|INDEFIER|GLOBAL.0] [10|)|GLOBAL.0] [11|{|GLOBAL.0] 
-|1| [3|INDEFIER|FUNC.foo.1] [6|=|FUNC.foo.1] [4|EXPRESSION|FUNC.foo.1] [7|;|FUNC.foo.1] 
-|2| [3|INDEFIER|FUNC.foo.1] [6|=|FUNC.foo.1] [4|EXPRESSION|FUNC.foo.1] [7|;|FUNC.foo.1] 
-|3| [17|return|FUNC.foo.1] [4|EXPRESSION|FUNC.foo.1] [7|;|FUNC.foo.1] 
-|4| [12|}|FUNC.foo.1] 
-|5| [2|int|GLOBAL.0] [3|INDEFIER|GLOBAL.0] [8|(|GLOBAL.0] [10|)|GLOBAL.0] [11|{|GLOBAL.0] 
-|6| [12|}|FUNC.One.2] 
-|7| [13|namespace|GLOBAL.0] [3|INDEFIER|GLOBAL.0] [11|{|GLOBAL.0] 
-|8| [2|int|JOJO.3] [3|INDEFIER|JOJO.3] [8|(|JOJO.3] [2|int|JOJO.3] [3|INDEFIER|JOJO.3] [14|,|JOJO.3] [2|int|JOJO.3] [3|INDEFIER|JOJO.3] [10|)|JOJO.3] [11|{|JOJO.3] 
-|9| [17|return|FUNC.gay.4] [4|EXPRESSION|FUNC.gay.4] [7|;|FUNC.gay.4] 
-|10| [12|}|FUNC.gay.4] 
-|11| [15|Main|JOJO.3] [11|{|JOJO.3] 
-|12| [2|string|MAIN.5] [3|INDEFIER|MAIN.5] [6|=|MAIN.5] [4|EXPRESSION|MAIN.5] [7|;|MAIN.5] 
-|13| [3|INDEFIER|MAIN.5] [8|(|MAIN.5] [4|EXPRESSION|MAIN.5] [14|,|MAIN.5] [4|EXPRESSION|MAIN.5] [14|,|MAIN.5] [4|EXPRESSION|MAIN.5] [14|,|MAIN.5] [4|EXPRESSION|MAIN.5] [10|)|MAIN.5] [7|;|MAIN.5] 
-|14| [2|int|MAIN.5] [3|INDEFIER|MAIN.5] [6|=|MAIN.5] [4|EXPRESSION|MAIN.5] [7|;|MAIN.5] 
-|15| [2|int|MAIN.5] [3|INDEFIER|MAIN.5] [6|=|MAIN.5] [4|EXPRESSION|MAIN.5] [7|;|MAIN.5] 
-|16| [2|int|MAIN.5] [3|INDEFIER|MAIN.5] [6|=|MAIN.5] [4|EXPRESSION|MAIN.5] [7|;|MAIN.5] 
-|17| [2|bool|MAIN.5] [3|INDEFIER|MAIN.5] [6|=|MAIN.5] [4|EXPRESSION|MAIN.5] [7|;|MAIN.5] 
-|18| [18|if|MAIN.5] [8|(|MAIN.5] [5|LOGIC_EXPRESSION|MAIN.5] [10|)|MAIN.5] [11|{|MAIN.5] 
-|19| [12|}|IF.6] 
-|20| [19|else|MAIN.5] [18|if|MAIN.5] [8|(|MAIN.5] [5|LOGIC_EXPRESSION|MAIN.5] [10|)|MAIN.5] [11|{|MAIN.5] 
-|21| [12|}|ELIF.7] 
-|22| [19|else|MAIN.5] [11|{|MAIN.5] 
-|23| [12|}|ELSE.8] 
-|24| [18|if|MAIN.5] [8|(|MAIN.5] [5|LOGIC_EXPRESSION|MAIN.5] [10|)|MAIN.5] [11|{|MAIN.5] 
-|25| [12|}|IF.9] 
-|26| [12|}|MAIN.5] 
-|27| [12|}|JOJO.3] 
-|28| [20|$|] 
+|0| [16|//|GLOBAL.0] 
+|1| [13|namespace|GLOBAL.0] [3|INDEFIER|GLOBAL.0] [11|{|GLOBAL.0] 
+|2| [2|int|space.1] [3|INDEFIER|space.1] [8|(|space.1] [2|int|space.1] [3|INDEFIER|space.1] [10|)|space.1] [11|{|space.1] 
+|3| [2|int|FUNC.func.2] [3|INDEFIER|FUNC.func.2] [6|=|FUNC.func.2] [4|EXPRESSION|FUNC.func.2] [7|;|FUNC.func.2] 
+|4| [17|return|FUNC.func.2] [4|EXPRESSION|FUNC.func.2] [7|;|FUNC.func.2] 
+|5| [12|}|FUNC.func.2] 
+|6| [2|string|space.1] [3|INDEFIER|space.1] [8|(|space.1] [2|char|] [3|INDEFIER|space.1] [14|,|space.1] [2|int|FUNC.func.2] [3|INDEFIER|space.1] [10|)|space.1] [11|{|space.1] 
+|7| [18|if|FUNC.dup.3] [8|(|FUNC.dup.3] [5|LOGIC_EXPRESSION|FUNC.dup.3] [10|)|FUNC.dup.3] [11|{|FUNC.dup.3] 
+|8| [17|return|IF.4] [4|EXPRESSION|IF.4] [7|;|IF.4] 
+|9| [12|}|IF.4] 
+|10| [19|else|FUNC.dup.3] [18|if|FUNC.dup.3] [8|(|FUNC.dup.3] [5|LOGIC_EXPRESSION|FUNC.dup.3] [10|)|FUNC.dup.3] [11|{|FUNC.dup.3] 
+|11| [17|return|ELIF.5] [4|EXPRESSION|ELIF.5] [7|;|ELIF.5] 
+|12| [12|}|ELIF.5] 
+|13| [19|else|FUNC.dup.3] [11|{|FUNC.dup.3] 
+|14| [17|return|ELSE.6] [4|EXPRESSION|ELSE.6] [7|;|ELSE.6] 
+|15| [12|}|ELSE.6] 
+|16| [12|}|FUNC.dup.3] 
+|17| [15|Main|space.1] [11|{|space.1] 
+|18| [2|string|MAIN.7] [3|INDEFIER|MAIN.7] [6|=|MAIN.7] [4|EXPRESSION|MAIN.7] [7|;|MAIN.7] 
+|19| [11|{|MAIN.7] 
+|20| [2|int|UNDEFINE.7] [3|INDEFIER|UNDEFINE.7] [6|=|UNDEFINE.7] [4|EXPRESSION|UNDEFINE.7] [7|;|UNDEFINE.7] 
+|21| [3|INDEFIER|UNDEFINE.7] [6|=|UNDEFINE.7] [4|EXPRESSION|UNDEFINE.7] [7|;|UNDEFINE.7] 
+|22| [12|}|UNDEFINE.7] 
+|23| [16|//|MAIN.7] 
+|24| [3|INDEFIER|MAIN.7] [8|(|MAIN.7] [4|EXPRESSION|MAIN.7] [10|)|MAIN.7] [7|;|MAIN.7] 
+|25| [12|}|MAIN.7] 
+|26| [12|}|space.1] 
+|27| [20|$|] 
 --------------------------------------------------------
 		   Список литералов | Literals list
 #----Данные---------------------------------------------
 --------------------------------------------------------
-|0| foo
-|1| a
-|2| b
-|3| c
-|4| d
-|5| a
-|6| 12
-|7| c
-|8| "word"
-|9| d
-|10| One
-|11| JOJO
-|12| gay
-|13| j
-|14| k
-|15| j + k
-|16| str
-|17| "some text + = - / * () || && ! < > {} []"
-|18| foo
-|19| gay(1, 2)
-|20| '2'
-|21| "asgs"
-|22| true
-|23| gg
-|24| 15
-|25| i
-|26| One()
-|27| Int
-|28| gay(gay(12,12) + 10, gg + 72 - (10000 * 63) / 5)
-|29| test
-|30| true
-|31| true == false && 2 > 1 || (Int >= gay(1,1) && !test)
-|32| test == false || !test == true && true != true
-|33| 'T' < 't' && (5<=5|| !test != test)
+|0| space
+|1| func
+|2| a
+|3| result
+|4| func(func(func(func(0)) + func(100))) * func(a)
+|5| result + ((1 * 3) / 3)
+|6| dup
+|7| symbol
+|8| count
+|9| count >= 10
+|10| "----------"
+|11| count < 10 && count >= 5
+|12| "-----"
+|13| "f"
+|14| p_p
+|15| dup('-', 7)
+|16| jon
+|17| 12
+|18| p_p
+|19| "12f"
+|20| func
+|21| 30
 
 <======= Синтаксический анализ завершен! =======>
 ---------------------------------------------------------------------------
@@ -91,80 +78,61 @@
 <--------------------[ИМЯ|ПРОСТРАНСТВО ИМЁН|ЦЕПОЧКА]---------------------->
 <-----------------------[ДЕРЕВО ОБХОДА ВЫРОЖЕНИЙ]------------------------->
 ---------------------------------------------------------------------------
-|0|   FuncDeclare          | GLOBAL.0         | [VT|ID|(|VT|ID|,|VT|ID|,|VT|ID|,|VT|ID|)|{]
-|1|   VarAssign            | FUNC.foo.1       | [ID|=|EX|;]
-|       [CHAIN:{C}][TYPE:{Int}][DATA:{12}]
-|2|   VarAssign            | FUNC.foo.1       | [ID|=|EX|;]
-|       [CHAIN:{C}][TYPE:{Int}][DATA:{12}]
-|       [CHAIN:{C}][TYPE:{String}][DATA:{"word"}]
-|3|   Return               | FUNC.foo.1       | [re|EX|;]
-|       [CHAIN:{V}][TYPE:{Bool}][DATA:{d}]
-|4|   CloseSpace           | FUNC.foo.1       | [}]
-|5|   FuncDecNonParams     | GLOBAL.0         | [VT|ID|(|)|{]
-|6|   CloseSpace           | FUNC.One.2       | [}]
-|7|   DeclareNamespace     | GLOBAL.0         | [na|ID|{]
-|8|   FuncDeclare          | JOJO.3           | [VT|ID|(|VT|ID|,|VT|ID|)|{]
-|9|   Return               | FUNC.gay.4       | [re|EX|;]
-|       [CHAIN:{V}][TYPE:{Bool}][DATA:{d}]
-|       [CHAIN:{V|+|V}][TYPE:{Int|Int}][DATA:{j|k}]
-|10|  CloseSpace           | FUNC.gay.4       | [}]
-|11|  MainDeclare          | JOJO.3           | [Ma|{]
-|12|  VarDeclareAndInit    | MAIN.5           | [VT|ID|=|EX|;]
-|13|  FuncUse              | MAIN.5           | [ID|(|EX|,|EX|,|EX|,|EX|)|;]
-|       [CHAIN:{F}][TYPE:{Int}][DATA:{gay}]
-|              [CHAIN:{C}][TYPE:{Int}][DATA:{1}]
-|              [CHAIN:{C}][TYPE:{Int}][DATA:{2}]
-|       [CHAIN:{C}][TYPE:{Char}][DATA:{'2'}]
-|       [CHAIN:{C}][TYPE:{String}][DATA:{"asgs"}]
-|       [CHAIN:{C}][TYPE:{Bool}][DATA:{true}]
-|14|  VarDeclareAndInit    | MAIN.5           | [VT|ID|=|EX|;]
-|15|  VarDeclareAndInit    | MAIN.5           | [VT|ID|=|EX|;]
-|16|  VarDeclareAndInit    | MAIN.5           | [VT|ID|=|EX|;]
-|       [CHAIN:{F}][TYPE:{Int}][DATA:{gay}]
-|              [CHAIN:{F|+|C}][TYPE:{Int|Int}][DATA:{gay|10}]
-|                     [CHAIN:{C}][TYPE:{Int}][DATA:{12}]
-|                     [CHAIN:{C}][TYPE:{Int}][DATA:{12}]
-|              [CHAIN:{V|+|C|-|(|C|*|C|)|/|C}][TYPE:{Int|Int|Int|Int|Int}][DATA:{gg|72|10000|63|5}]
-|17|  VarDeclareAndInit    | MAIN.5           | [VT|ID|=|EX|;]
-|       [CHAIN:{F}][TYPE:{Int}][DATA:{gay}]
-|              [CHAIN:{F|+|C}][TYPE:{Int|Int}][DATA:{gay|10}]
-|                     [CHAIN:{C}][TYPE:{Int}][DATA:{12}]
-|                     [CHAIN:{C}][TYPE:{Int}][DATA:{12}]
-|              [CHAIN:{V|+|C|-|(|C|*|C|)|/|C}][TYPE:{Int|Int|Int|Int|Int}][DATA:{gg|72|10000|63|5}]
-|18|  If                   | MAIN.5           | [if|(|LG|)|{]
-|       [CHAIN:{C|==|C|&&|C|>|C| || |(|V|>=|F|&&|!|V|)}][TYPE:{Bool|Bool|Int|Int|Int|Int|Bool}][DATA:{true|false|2|1|Int|gay|test}]
-|              [CHAIN:{C}][TYPE:{Int}][DATA:{1}]
-|              [CHAIN:{C}][TYPE:{Int}][DATA:{1}]
-|19|  CloseSpace           | IF.6             | [}]
-|20|  ElseIf               | MAIN.5           | [el|if|(|LG|)|{]
-|       [CHAIN:{V|==|C| || |!|V|==|C|&&|C|!=|C}][TYPE:{Bool|Bool|Bool|Bool|Bool|Bool}][DATA:{test|false|test|true|true|true}]
-|21|  CloseSpace           | ELIF.7           | [}]
-|22|  Else                 | MAIN.5           | [el|{]
-|23|  CloseSpace           | ELSE.8           | [}]
-|24|  If                   | MAIN.5           | [if|(|LG|)|{]
-|       [CHAIN:{C|==|C|&&|C|>|C| || |(|V|>=|F|&&|!|V|)}][TYPE:{Bool|Bool|Int|Int|Int|Int|Bool}][DATA:{true|false|2|1|Int|gay|test}]
-|              [CHAIN:{C}][TYPE:{Int}][DATA:{1}]
-|              [CHAIN:{C}][TYPE:{Int}][DATA:{1}]
-|       [CHAIN:{C|<|C|&&|(|C|<=|C| || |!|V|!=|V|)}][TYPE:{Char|Char|Int|Int|Bool|Bool}][DATA:{'T'|'t'|5|5|test|test}]
-|25|  CloseSpace           | IF.9             | [}]
-|26|  CloseSpace           | MAIN.5           | [}]
-|27|  CloseSpace           | JOJO.3           | [}]
+|0|   Comment              | GLOBAL.0         | [//]
+|1|   DeclareNamespace     | GLOBAL.0         | [na|ID|{]
+|2|   FuncDeclare          | space.1          | [VT|ID|(|VT|ID|)|{]
+|3|   VarDeclareAndInit    | FUNC.func.2      | [VT|ID|=|EX|;]
+|       [CHAIN:{F|*|F}][TYPE:{Int|Int}][DATA:{func|func}]
+|              [CHAIN:{F}][TYPE:{Int}][DATA:{func}]
+|                     [CHAIN:{F|+|F}][TYPE:{Int|Int}][DATA:{func|func}]
+|                            [CHAIN:{F}][TYPE:{Int}][DATA:{func}]
+|                                   [CHAIN:{C}][TYPE:{Int}][DATA:{0}]
+|                            [CHAIN:{C}][TYPE:{Int}][DATA:{100}]
+|              [CHAIN:{V}][TYPE:{Int}][DATA:{a}]
+|4|   Return               | FUNC.func.2      | [re|EX|;]
+|       [CHAIN:{V|+|(|(|C|*|C|)|/|C|)}][TYPE:{Int|Int|Int|Int}][DATA:{result|1|3|3}]
+|5|   CloseSpace           | FUNC.func.2      | [}]
+|6|   FuncDeclare          | space.1          | [VT|ID|(|VT|ID|,|VT|ID|)|{]
+|7|   If                   | FUNC.dup.3       | [if|(|LG|)|{]
+|       [CHAIN:{V|>=|C}][TYPE:{Int|Int}][DATA:{count|10}]
+|8|   Return               | IF.4             | [re|EX|;]
+|       [CHAIN:{C}][TYPE:{String}][DATA:{"----------"}]
+|9|   CloseSpace           | IF.4             | [}]
+|10|  ElseIf               | FUNC.dup.3       | [el|if|(|LG|)|{]
+|       [CHAIN:{V|<|C|&&|V|>=|C}][TYPE:{Int|Int|Int|Int}][DATA:{count|10|count|5}]
+|11|  Return               | ELIF.5           | [re|EX|;]
+|       [CHAIN:{C}][TYPE:{String}][DATA:{"-----"}]
+|12|  CloseSpace           | ELIF.5           | [}]
+|13|  Else                 | FUNC.dup.3       | [el|{]
+|14|  Return               | ELSE.6           | [re|EX|;]
+|       [CHAIN:{C}][TYPE:{String}][DATA:{"f"}]
+|15|  CloseSpace           | ELSE.6           | [}]
+|16|  CloseSpace           | FUNC.dup.3       | [}]
+|17|  MainDeclare          | space.1          | [Ma|{]
+|18|  VarDeclareAndInit    | MAIN.7           | [VT|ID|=|EX|;]
+|       [CHAIN:{F}][TYPE:{String}][DATA:{dup}]
+|              [CHAIN:{C}][TYPE:{Char}][DATA:{'-'}]
+|              [CHAIN:{C}][TYPE:{Int}][DATA:{7}]
+|19|  OpenSpace            | MAIN.7           | [{]
+|20|  VarDeclareAndInit    | UNDEFINE.7       | [VT|ID|=|EX|;]
+|21|  VarAssign            | UNDEFINE.7       | [ID|=|EX|;]
+|       [CHAIN:{C}][TYPE:{String}][DATA:{"12f"}]
+|22|  CloseSpace           | UNDEFINE.7       | [}]
+|23|  Comment              | MAIN.7           | [//]
+|24|  FuncUse              | MAIN.7           | [ID|(|EX|)|;]
+|       [CHAIN:{C}][TYPE:{Int}][DATA:{30}]
+|25|  CloseSpace           | MAIN.7           | [}]
+|26|  CloseSpace           | space.1          | [}]
 
 ---------------------------------------------------------------------------
 				Список индификаторов | Indefiers list
 <--[ИМЯ|ТИП|ВОЗ.ТИП|ПРОСТРАНСTВО ИМЁН|ФУНКЦИЯ?|КОЛ-ВО ПАРАМ.|ИНФОРМАЦИЯ]-->
 ---------------------------------------------------------------------------
-|0|   foo          | 1 | 0 | GLOBAL.0     | TRUE  | 4   | $                   
-|1|   a            | 2 | 1 | GLOBAL.0     | FALSE | $$$ | $                   
-|2|   b            | 2 | 2 | GLOBAL.0     | FALSE | $$$ | $                   
-|3|   c            | 2 | 3 | GLOBAL.0     | FALSE | $$$ | $                   
-|4|   d            | 2 | 4 | GLOBAL.0     | FALSE | $$$ | $                   
-|5|   One          | 1 | 1 | GLOBAL.0     | TRUE  | 0   | $                   
-|6|   gay          | 1 | 1 | JOJO.3       | TRUE  | 2   | $                   
-|7|   j            | 2 | 1 | JOJO.3       | FALSE | $$$ | $                   
-|8|   k            | 2 | 1 | JOJO.3       | FALSE | $$$ | $                   
-|9|   str          | 0 | 3 | MAIN.5       | FALSE | $$$ | "some text + = - / * () || && ! < > {} []"
-|10|  gg           | 0 | 1 | MAIN.5       | FALSE | $$$ | 15                  
-|11|  i            | 0 | 1 | MAIN.5       | FALSE | $$$ | One                 
-|12|  Int          | 0 | 1 | MAIN.5       | FALSE | $$$ | $                   
-|13|  test         | 0 | 4 | MAIN.5       | FALSE | $$$ | true                
+|0|   func         | 1 | 1 | space.1      | TRUE  | 1   | $                   
+|1|   a            | 2 | 1 | space.1      | FALSE | $$$ | $                   
+|2|   result       | 0 | 1 | FUNC.func.2  | FALSE | $$$ | $                   
+|3|   dup          | 1 | 3 | space.1      | TRUE  | 2   | $                   
+|4|   symbol       | 2 | 2 | space.1      | FALSE | $$$ | $                   
+|5|   count        | 2 | 1 | space.1      | FALSE | $$$ | $                   
+|6|   p_p          | 0 | 3 | MAIN.7       | FALSE | $$$ | $                   
+|7|   jon          | 0 | 1 | UNDEFINE.7   | FALSE | $$$ | 12                  

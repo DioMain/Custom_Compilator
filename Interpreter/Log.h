@@ -37,6 +37,8 @@ namespace Log {
 		// Закрывает поток log файла
 		void Close();
 
+		static std::string GetOpeartorSymbolsByType(Data::ExpressionElementType type);
+
 	private:
 
 		void RuleExpressionsOutPut(std::vector<Data::ExpressionNode*> exps, int deep);

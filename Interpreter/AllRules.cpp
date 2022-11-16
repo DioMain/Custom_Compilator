@@ -30,7 +30,7 @@ namespace Data {
 
 		retTypeBuffer = curInd->dataType;
 
-		ExpressionNode* exp = analysator->ParsingExpression(this, GetLit(GetCurLitIndex()).data, nullptr);
+		ExpressionNode* exp = analysator->ParsingExpression(this, GetLit(GetCurLitIndex()).data, curInd->dataType);
 
 		if (exp->subExpressions.empty() && exp->elementChain.size() == 1)
 			curInd->data = exp->elementsData[0];
@@ -49,11 +49,17 @@ namespace Data {
 		if (curInd->isFunc)
 			throw ERROR_THROW_IN_C(0, "Этот идентификатор указывает на фунцию!", GetLexemFromChain(0).line, 0);
 
+		if ((analysator->funcStack.empty() || curInd->belong != analysator->funcStack.top()) && curInd->type == IndefierType::Param)
+			throw ERROR_THROW_C(0, "Параметр функции использован за самой функцией!");
+
+		if (!analysator->IsHaveThisNamespace(curInd->initspace))
+			throw ERROR_THROW_C(0, "Переменная объявленая в другом пространстве имён!");
+
 		AddLitIndex();
 
 		retTypeBuffer = curInd->dataType;
 
-		ExpressionNode* exp = analysator->ParsingExpression(this, GetLit(GetCurLitIndex()).data, nullptr);
+		ExpressionNode* exp = analysator->ParsingExpression(this, GetLit(GetCurLitIndex()).data, curInd->dataType);
 
 		expressionsRoot.push_back(exp);
 
@@ -63,15 +69,20 @@ namespace Data {
 	void NamespaceDeclareRule::Action()
 	{
 		AddLitIndex();
+
+		analysator->SAVE_NAMESPACE = true;
 	}
 
 	void OpenSpaceRule::Action()
 	{
+		analysator->SAVE_NAMESPACE = true;
 	}
 	void CloseSpaceRule::Action()
 	{
 		if (GetLexemFromChain(0).space.substr(0, 4) == "FUNC")
 			analysator->funcStack.pop();
+
+		analysator->namespaces.pop_back();
 	}
 
 	void FuncDeclareRule::Action()
@@ -84,8 +95,6 @@ namespace Data {
 		AddNewIndefier(IndefierData(GetLit(GetCurLitIndex()).data, IndefierType::Func, var, initspace, true));
 
 		IndefierData* funcInd = GetLastIndefier();
-
-		analysator->funcStack.push(funcInd);
 
 		AddLitIndex();
 
@@ -104,6 +113,10 @@ namespace Data {
 
 			AddLitIndex();
 		}
+
+		analysator->funcStack.push(funcInd);
+
+		analysator->SAVE_NAMESPACE = true;
 	}
 	void FuncDecNonParamsRule::Action()
 	{
@@ -116,9 +129,11 @@ namespace Data {
 
 		IndefierData* funcInd = GetLastIndefier();
 
+		AddLitIndex();
+
 		analysator->funcStack.push(funcInd);
 
-		AddLitIndex();
+		analysator->SAVE_NAMESPACE = true;
 	}
 	void FuncUseRule::Action()
 	{
@@ -133,13 +148,16 @@ namespace Data {
 		if (curInd->params.size() != paramsChain.size())
 			throw ERROR_THROW_IN_C(0, "Функция не принемает столько аргументов!", GetLexemFromChain(0).line, 0);
 
+		if (!analysator->IsHaveThisNamespace(curInd->initspace))
+			throw ERROR_THROW_C(0, "Функция объявленая в другом пространстве имён!");
+
 		AddLitIndex();
 
 		for (size_t i = 0; i < paramsChain.size(); i++)
 		{
 			retTypeBuffer = curInd->params[i]->dataType;
 
-			expressionsRoot.push_back(analysator->ParsingExpression(this, GetLit(GetCurLitIndex()).data, nullptr));
+			expressionsRoot.push_back(analysator->ParsingExpression(this, GetLit(GetCurLitIndex()).data, curInd->dataType));
 
 			AddLitIndex();
 		}
@@ -148,6 +166,8 @@ namespace Data {
 	void MainDeclareRule::Action()
 	{
 		analysator->MAIN = true;
+
+		analysator->SAVE_NAMESPACE = true;
 	}
 
 	void ReturnRule::Action()
@@ -156,7 +176,7 @@ namespace Data {
 
 		retTypeBuffer = curInd->dataType;
 
-		ExpressionNode* exp = analysator->ParsingExpression(this, GetLit(GetCurLitIndex()).data, nullptr);
+		ExpressionNode* exp = analysator->ParsingExpression(this, GetLit(GetCurLitIndex()).data, curInd->dataType);
 
 		expressionsRoot.push_back(exp);
 
@@ -166,22 +186,26 @@ namespace Data {
 	void IfRule::Action() {
 		retTypeBuffer = VarType::Bool;
 
-		ExpressionNode* exp = analysator->ParsingExpression(this, GetLit(GetCurLitIndex()).data, nullptr);
+		ExpressionNode* exp = analysator->ParsingExpression(this, GetLit(GetCurLitIndex()).data, VarType::Bool);
 
 		expressionsRoot.push_back(exp);
 
 		AddLitIndex();
+
+		analysator->SAVE_NAMESPACE = true;
 	}
 	void ElseIfRule::Action() {
 		retTypeBuffer = VarType::Bool;
 
-		ExpressionNode* exp = analysator->ParsingExpression(this, GetLit(GetCurLitIndex()).data, nullptr);
+		ExpressionNode* exp = analysator->ParsingExpression(this, GetLit(GetCurLitIndex()).data, VarType::Bool);
 
 		expressionsRoot.push_back(exp);
 
 		AddLitIndex();
+
+		analysator->SAVE_NAMESPACE = true;
 	}
 	void ElseRule::Action() {
-
+		analysator->SAVE_NAMESPACE = true;
 	}
 }

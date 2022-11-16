@@ -1,5 +1,7 @@
 #include "stdafx.h"
 
+using namespace std;
+
 namespace Collections {
 	DefaultLexems::DefaultLexems()
 	{
@@ -87,6 +89,7 @@ namespace Collections {
 		rules.push_back(new Data::IfRule());
 		rules.push_back(new Data::ElseIfRule());
 		rules.push_back(new Data::ElseRule());
+		rules.push_back(new Data::CommentRule());
 	}
 	Data::Rule* DefaultRules::ParsingChain(std::vector<Data::LexemData> chain)
 	{
@@ -103,29 +106,65 @@ namespace Collections {
 		bool HaveVarInit = false;
 		bool OtherExpression = false;
 
+		// Debag
+		string deChain0 = "$";
+		string deChain1 = "$";
+
+		for (size_t i = 0; i < chain.size(); i++)
+			deChain0.insert(deChain0.end() - 1, chain[i].chain[0]); // d
+
+		cout << setw(25) << left << "RYLE FIND" << setw(30) << left << deChain0 << setw(20) << left << deChain1 << endl; // d
+
 		for (size_t i = 0; i < chain.size(); i++)
 		{
 			if (chain[i].type == Data::LexemType::ParamsIn) { 
 				params = true; 
 				haveParams = true; 
 				intermediate->commonChain.push_back(chain[i].type);
+				deChain1.insert(deChain1.end() - 1,chain[i].chain[0]); // d
+				deChain0.erase(deChain0.begin()); // d
 				continue; 
 			}
 			else if (chain[i].type == Data::LexemType::ParamsOut) {
-				if (HaveVarInit && OtherExpression)
+				if (HaveVarInit && OtherExpression) {
 					intermediate->commonChain.push_back(Data::LexemType::AnyParams);
-				else if (HaveVarInit)
+					deChain1.insert(deChain1.end() - 1, 'A'); // d
+					deChain1.insert(deChain1.end() - 1, 'P'); // d
+
+					deChain0.erase(deChain0.begin());	// d
+				}
+				else if (HaveVarInit) {
 					intermediate->commonChain.push_back(Data::LexemType::VarInitParams);
-				else if (OtherExpression)
+					deChain1.insert(deChain1.end() - 1, 'V'); // d
+					deChain1.insert(deChain1.end() - 1, 'I'); // d
+					deChain1.insert(deChain1.end() - 1, 'P'); // d
+
+					deChain0.erase(deChain0.begin()); // d
+					deChain0.erase(deChain0.begin()); // d
+				}
+				else if (OtherExpression) {
 					intermediate->commonChain.push_back(Data::LexemType::ExpressionParams);
-				else 
+					deChain1.insert(deChain1.end() - 1, 'E'); // d
+					deChain1.insert(deChain1.end() - 1, 'P'); // d
+					
+					deChain0.erase(deChain0.begin()); // d
+				}					
+				else {
 					intermediate->commonChain.push_back(Data::LexemType::NoneParams);
+					deChain1.insert(deChain1.end() - 1, 'N'); // d
+					deChain1.insert(deChain1.end() - 1, 'P'); // d
+
+					deChain0.erase(deChain0.begin());	// d
+				}
+
 
 				params = false;
 			}				
 
 			if (params) {
-				if (chain[i].type == Data::LexemType::And) continue;
+				if (chain[i].type == Data::LexemType::And) { 					
+					continue; 
+				}
 
 				if (chain[i].type == Data::LexemType::VarType && chain[i + 1].type == Data::LexemType::Indefier) {
 					intermediate->paramsChain.push_back(Data::LexemType::VarInitParams);
@@ -136,8 +175,16 @@ namespace Collections {
 					intermediate->paramsChain.push_back(Data::LexemType::VarInitParams);
 					OtherExpression = true;
 				}
+
+				deChain0.erase(deChain0.begin());	// d
 			}
-			else intermediate->commonChain.push_back(chain[i].type);
+			else { 
+				intermediate->commonChain.push_back(chain[i].type); 
+				deChain1.insert(deChain1.end() - 1, chain[i].chain[0]); // d
+				deChain0.erase(deChain0.begin());		// d
+			}
+
+			cout << setw(25) << left << "" << setw(30) << left << deChain0 << setw(20) << left << deChain1 << endl; // d
 		}
 
 		for (size_t i = 0; i < intermediate->commonChain.size(); i++)
@@ -154,9 +201,13 @@ namespace Collections {
 		}
 
 		if (availableRules.size() < 1)
-			return new Data::NoneRule();
+			return new Data::NoneRule();	
 
 		result = availableRules.front();
+
+		cout << setw(25) << left << "RULE IS FIND" << setw(30) << left << "-------" << setw(20) << left << "-------" << endl; // ds
+
+		cout << setw(25) << left << result->name << setw(30) << left << deChain1 << setw(20) << left << "$" << endl; // d	
 
 		result->initspace = chain[0].space;
 		result->fullChain = intermediate->fullChain;

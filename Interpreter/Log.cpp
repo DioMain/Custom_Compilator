@@ -124,66 +124,7 @@ namespace Log {
 			*stream << "[CHAIN:{";
 
 			for (Data::ExpressionElementType item : exps[i]->elementChain) {			
-				switch (item)
-				{
-				case Data::ExpressionElementType::Const:
-					ch = 'C';
-					break;
-				case Data::ExpressionElementType::Func:
-					ch = 'F';
-					break;
-				case Data::ExpressionElementType::Var:
-					ch = 'V';
-					break;
-				case Data::ExpressionElementType::Plus:
-					ch = '+';
-					break;
-				case Data::ExpressionElementType::Minus:
-					ch = '-';
-					break;
-				case Data::ExpressionElementType::Division:
-					ch = '/';
-					break;
-				case Data::ExpressionElementType::Multi:
-					ch = '*';
-					break;
-				case Data::ExpressionElementType::InBrack:
-					ch = '(';
-					break;
-				case Data::ExpressionElementType::OutBrack:
-					ch = ')';
-					break;
-				case Data::ExpressionElementType::LAnd:
-					ch = "&&";
-					break;
-				case Data::ExpressionElementType::LOr:
-					ch = " || ";
-					break;
-				case Data::ExpressionElementType::LNot:
-					ch = '!';
-					break;
-				case Data::ExpressionElementType::LEqual:
-					ch = "==";
-					break;
-				case Data::ExpressionElementType::LNotEqual:
-					ch = "!=";
-					break;
-				case Data::ExpressionElementType::LMore:
-					ch = '>';
-					break;
-				case Data::ExpressionElementType::LLess:
-					ch = '<';
-					break;
-				case Data::ExpressionElementType::LEqMore:
-					ch = ">=";
-					break;
-				case Data::ExpressionElementType::LEqLess:
-					ch = "<=";
-					break;
-				default:
-					ch = '$';
-					break;
-				}
+				ch = GetOpeartorSymbolsByType(item);
 
 				*stream << ch << '|';
 			}
@@ -233,6 +174,73 @@ namespace Log {
 			if (!exps[i]->subExpressions.empty())
 				RuleExpressionsOutPut(exps[i]->subExpressions, deep + 1);
 		}
+	}
+
+	std::string Logging::GetOpeartorSymbolsByType(Data::ExpressionElementType type) {
+		string ch;
+
+		switch (type)
+		{
+		case Data::ExpressionElementType::Const:
+			ch = 'C';
+			break;
+		case Data::ExpressionElementType::Func:
+			ch = 'F';
+			break;
+		case Data::ExpressionElementType::Var:
+			ch = 'V';
+			break;
+		case Data::ExpressionElementType::Plus:
+			ch = '+';
+			break;
+		case Data::ExpressionElementType::Minus:
+			ch = '-';
+			break;
+		case Data::ExpressionElementType::Division:
+			ch = '/';
+			break;
+		case Data::ExpressionElementType::Multi:
+			ch = '*';
+			break;
+		case Data::ExpressionElementType::InBrack:
+			ch = '(';
+			break;
+		case Data::ExpressionElementType::OutBrack:
+			ch = ')';
+			break;
+		case Data::ExpressionElementType::LAnd:
+			ch = "&&";
+			break;
+		case Data::ExpressionElementType::LOr:
+			ch = " || ";
+			break;
+		case Data::ExpressionElementType::LNot:
+			ch = '!';
+			break;
+		case Data::ExpressionElementType::LEqual:
+			ch = "==";
+			break;
+		case Data::ExpressionElementType::LNotEqual:
+			ch = "!=";
+			break;
+		case Data::ExpressionElementType::LMore:
+			ch = '>';
+			break;
+		case Data::ExpressionElementType::LLess:
+			ch = '<';
+			break;
+		case Data::ExpressionElementType::LEqMore:
+			ch = ">=";
+			break;
+		case Data::ExpressionElementType::LEqLess:
+			ch = "<=";
+			break;
+		default:
+			ch = '$';
+			break;
+		}
+
+		return ch;
 	}
 
 	void Logging::WriteSyntaxAnalysisResult(Collections::RuleColletion resultRules, 

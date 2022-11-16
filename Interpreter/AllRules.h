@@ -124,4 +124,12 @@ namespace Data {
 
 		void Action() override;
 	};
+
+	class CommentRule : public Rule {
+	public:
+		CommentRule() : Rule("Comment",
+			{ LexemType::Comment }) { }
+
+		void Action() override { }
+	};
 }
