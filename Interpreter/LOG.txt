@@ -1,5 +1,5 @@
 <------------------ Протокол ------------------>
- Дата создания протокола: 16.11.2022 6:25:23
+ Дата создания протокола: 16.11.2022 6:44:39
 <------------- Входные параметры -------------->
  -in: IN.txt
  -out: OUT.txt
@@ -7,8 +7,8 @@
 
 <======= Проверка текста на доступность =======>
 <-------------- Исходные данные --------------->
- Кол-во символов: 529
- Кол-во строк: 29
+ Кол-во символов: 545
+ Кол-во строк: 33
  Проигнорировано: 0
 
 <========= Проверка текста завершена! =========>
@@ -22,27 +22,30 @@
 |2| [3|INDEFIER|FUNC.foo.1] [6|=|FUNC.foo.1] [4|EXPRESSION|FUNC.foo.1] [7|;|FUNC.foo.1] 
 |3| [17|return|FUNC.foo.1] [4|EXPRESSION|FUNC.foo.1] [7|;|FUNC.foo.1] 
 |4| [12|}|FUNC.foo.1] 
-|5| [13|namespace|GLOBAL.0] [3|INDEFIER|GLOBAL.0] [11|{|GLOBAL.0] 
-|6| [2|int|JOJO.2] [3|INDEFIER|JOJO.2] [8|(|JOJO.2] [2|int|JOJO.2] [3|INDEFIER|JOJO.2] [14|,|JOJO.2] [2|int|JOJO.2] [3|INDEFIER|JOJO.2] [10|)|JOJO.2] [11|{|JOJO.2] 
-|7| [17|return|FUNC.gay.3] [4|EXPRESSION|FUNC.gay.3] [7|;|FUNC.gay.3] 
-|8| [12|}|FUNC.gay.3] 
-|9| [15|Main|JOJO.2] [11|{|JOJO.2] 
-|10| [2|string|MAIN.4] [3|INDEFIER|MAIN.4] [6|=|MAIN.4] [4|EXPRESSION|MAIN.4] [7|;|MAIN.4] 
-|11| [3|INDEFIER|MAIN.4] [8|(|MAIN.4] [4|EXPRESSION|MAIN.4] [14|,|MAIN.4] [4|EXPRESSION|MAIN.4] [14|,|MAIN.4] [4|EXPRESSION|MAIN.4] [14|,|MAIN.4] [4|EXPRESSION|MAIN.4] [10|)|MAIN.4] [7|;|MAIN.4] 
-|12| [2|int|MAIN.4] [3|INDEFIER|MAIN.4] [6|=|MAIN.4] [4|EXPRESSION|MAIN.4] [7|;|MAIN.4] 
-|13| [2|int|MAIN.4] [3|INDEFIER|MAIN.4] [6|=|MAIN.4] [4|EXPRESSION|MAIN.4] [7|;|MAIN.4] 
-|14| [2|bool|MAIN.4] [3|INDEFIER|MAIN.4] [6|=|MAIN.4] [4|EXPRESSION|MAIN.4] [7|;|MAIN.4] 
-|15| [18|if|MAIN.4] [8|(|MAIN.4] [5|LOGIC_EXPRESSION|MAIN.4] [10|)|MAIN.4] [11|{|MAIN.4] 
-|16| [12|}|IF.5] 
-|17| [19|else|MAIN.4] [18|if|MAIN.4] [8|(|MAIN.4] [5|LOGIC_EXPRESSION|MAIN.4] [10|)|MAIN.4] [11|{|MAIN.4] 
-|18| [12|}|ELIF.6] 
-|19| [19|else|MAIN.4] [11|{|MAIN.4] 
-|20| [12|}|ELSE.7] 
-|21| [18|if|MAIN.4] [8|(|MAIN.4] [5|LOGIC_EXPRESSION|MAIN.4] [10|)|MAIN.4] [13|namespace|MAIN.4] [3|INDEFIER|MAIN.4] [11|{|MAIN.4] 
-|22| [12|}|fuck.8] 
-|23| [12|}|MAIN.4] 
-|24| [12|}|JOJO.2] 
-|25| [20|$|] 
+|5| [2|int|GLOBAL.0] [3|INDEFIER|GLOBAL.0] [8|(|GLOBAL.0] [10|)|GLOBAL.0] [11|{|GLOBAL.0] 
+|6| [12|}|FUNC.One.2] 
+|7| [13|namespace|GLOBAL.0] [3|INDEFIER|GLOBAL.0] [11|{|GLOBAL.0] 
+|8| [2|int|JOJO.3] [3|INDEFIER|JOJO.3] [8|(|JOJO.3] [2|int|JOJO.3] [3|INDEFIER|JOJO.3] [14|,|JOJO.3] [2|int|JOJO.3] [3|INDEFIER|JOJO.3] [10|)|JOJO.3] [11|{|JOJO.3] 
+|9| [17|return|FUNC.gay.4] [4|EXPRESSION|FUNC.gay.4] [7|;|FUNC.gay.4] 
+|10| [12|}|FUNC.gay.4] 
+|11| [15|Main|JOJO.3] [11|{|JOJO.3] 
+|12| [2|string|MAIN.5] [3|INDEFIER|MAIN.5] [6|=|MAIN.5] [4|EXPRESSION|MAIN.5] [7|;|MAIN.5] 
+|13| [3|INDEFIER|MAIN.5] [8|(|MAIN.5] [4|EXPRESSION|MAIN.5] [14|,|MAIN.5] [4|EXPRESSION|MAIN.5] [14|,|MAIN.5] [4|EXPRESSION|MAIN.5] [14|,|MAIN.5] [4|EXPRESSION|MAIN.5] [10|)|MAIN.5] [7|;|MAIN.5] 
+|14| [2|int|MAIN.5] [3|INDEFIER|MAIN.5] [6|=|MAIN.5] [4|EXPRESSION|MAIN.5] [7|;|MAIN.5] 
+|15| [2|int|MAIN.5] [3|INDEFIER|MAIN.5] [6|=|MAIN.5] [4|EXPRESSION|MAIN.5] [7|;|MAIN.5] 
+|16| [2|int|MAIN.5] [3|INDEFIER|MAIN.5] [6|=|MAIN.5] [4|EXPRESSION|MAIN.5] [7|;|MAIN.5] 
+|17| [2|bool|MAIN.5] [3|INDEFIER|MAIN.5] [6|=|MAIN.5] [4|EXPRESSION|MAIN.5] [7|;|MAIN.5] 
+|18| [18|if|MAIN.5] [8|(|MAIN.5] [5|LOGIC_EXPRESSION|MAIN.5] [10|)|MAIN.5] [11|{|MAIN.5] 
+|19| [12|}|IF.6] 
+|20| [19|else|MAIN.5] [18|if|MAIN.5] [8|(|MAIN.5] [5|LOGIC_EXPRESSION|MAIN.5] [10|)|MAIN.5] [11|{|MAIN.5] 
+|21| [12|}|ELIF.7] 
+|22| [19|else|MAIN.5] [11|{|MAIN.5] 
+|23| [12|}|ELSE.8] 
+|24| [18|if|MAIN.5] [8|(|MAIN.5] [5|LOGIC_EXPRESSION|MAIN.5] [10|)|MAIN.5] [11|{|MAIN.5] 
+|25| [12|}|IF.9] 
+|26| [12|}|MAIN.5] 
+|27| [12|}|JOJO.3] 
+|28| [20|$|] 
 --------------------------------------------------------
 		   Список литералов | Literals list
 #----Данные---------------------------------------------
@@ -57,30 +60,111 @@
 |7| c
 |8| "word"
 |9| d
-|10| JOJO
-|11| gay
-|12| j
-|13| k
-|14| j + k
-|15| str
-|16| "some text + = - / * () || && ! < > {} []"
-|17| foo
-|18| gay(1, 2)
-|19| '2'
-|20| "asgs"
-|21| true
-|22| gg
-|23| 15
-|24| Int
-|25| gay(gay(12,12) + 10, gg + 72 - (10000 * 63) / 5)
-|26| test
-|27| true
-|28| true == false && 2 > 1 || (Int >= gay(1,1) && !test)
-|29| test == false || !test == true && true != true
-|30| 'T' < 't' && (5<=5|| !test != test)
-|31| fuck
+|10| One
+|11| JOJO
+|12| gay
+|13| j
+|14| k
+|15| j + k
+|16| str
+|17| "some text + = - / * () || && ! < > {} []"
+|18| foo
+|19| gay(1, 2)
+|20| '2'
+|21| "asgs"
+|22| true
+|23| gg
+|24| 15
+|25| i
+|26| One()
+|27| Int
+|28| gay(gay(12,12) + 10, gg + 72 - (10000 * 63) / 5)
+|29| test
+|30| true
+|31| true == false && 2 > 1 || (Int >= gay(1,1) && !test)
+|32| test == false || !test == true && true != true
+|33| 'T' < 't' && (5<=5|| !test != test)
 
-<------------- Информация об ошибке -------------->
-ID: 0
-MESSAGE: Не известное правило!
-Line index: 28, Letter index: 1
+<======= Синтаксический анализ завершен! =======>
+---------------------------------------------------------------------------
+			            Список правил | Rule list
+<--------------------[ИМЯ|ПРОСТРАНСТВО ИМЁН|ЦЕПОЧКА]---------------------->
+<-----------------------[ДЕРЕВО ОБХОДА ВЫРОЖЕНИЙ]------------------------->
+---------------------------------------------------------------------------
+|0|   FuncDeclare          | GLOBAL.0         | [VT|ID|(|VT|ID|,|VT|ID|,|VT|ID|,|VT|ID|)|{]
+|1|   VarAssign            | FUNC.foo.1       | [ID|=|EX|;]
+|       [CHAIN:{C}][TYPE:{Int}][DATA:{12}]
+|2|   VarAssign            | FUNC.foo.1       | [ID|=|EX|;]
+|       [CHAIN:{C}][TYPE:{Int}][DATA:{12}]
+|       [CHAIN:{C}][TYPE:{String}][DATA:{"word"}]
+|3|   Return               | FUNC.foo.1       | [re|EX|;]
+|       [CHAIN:{V}][TYPE:{Bool}][DATA:{d}]
+|4|   CloseSpace           | FUNC.foo.1       | [}]
+|5|   FuncDecNonParams     | GLOBAL.0         | [VT|ID|(|)|{]
+|6|   CloseSpace           | FUNC.One.2       | [}]
+|7|   DeclareNamespace     | GLOBAL.0         | [na|ID|{]
+|8|   FuncDeclare          | JOJO.3           | [VT|ID|(|VT|ID|,|VT|ID|)|{]
+|9|   Return               | FUNC.gay.4       | [re|EX|;]
+|       [CHAIN:{V}][TYPE:{Bool}][DATA:{d}]
+|       [CHAIN:{V|+|V}][TYPE:{Int|Int}][DATA:{j|k}]
+|10|  CloseSpace           | FUNC.gay.4       | [}]
+|11|  MainDeclare          | JOJO.3           | [Ma|{]
+|12|  VarDeclareAndInit    | MAIN.5           | [VT|ID|=|EX|;]
+|13|  FuncUse              | MAIN.5           | [ID|(|EX|,|EX|,|EX|,|EX|)|;]
+|       [CHAIN:{F}][TYPE:{Int}][DATA:{gay}]
+|              [CHAIN:{C}][TYPE:{Int}][DATA:{1}]
+|              [CHAIN:{C}][TYPE:{Int}][DATA:{2}]
+|       [CHAIN:{C}][TYPE:{Char}][DATA:{'2'}]
+|       [CHAIN:{C}][TYPE:{String}][DATA:{"asgs"}]
+|       [CHAIN:{C}][TYPE:{Bool}][DATA:{true}]
+|14|  VarDeclareAndInit    | MAIN.5           | [VT|ID|=|EX|;]
+|15|  VarDeclareAndInit    | MAIN.5           | [VT|ID|=|EX|;]
+|16|  VarDeclareAndInit    | MAIN.5           | [VT|ID|=|EX|;]
+|       [CHAIN:{F}][TYPE:{Int}][DATA:{gay}]
+|              [CHAIN:{F|+|C}][TYPE:{Int|Int}][DATA:{gay|10}]
+|                     [CHAIN:{C}][TYPE:{Int}][DATA:{12}]
+|                     [CHAIN:{C}][TYPE:{Int}][DATA:{12}]
+|              [CHAIN:{V|+|C|-|(|C|*|C|)|/|C}][TYPE:{Int|Int|Int|Int|Int}][DATA:{gg|72|10000|63|5}]
+|17|  VarDeclareAndInit    | MAIN.5           | [VT|ID|=|EX|;]
+|       [CHAIN:{F}][TYPE:{Int}][DATA:{gay}]
+|              [CHAIN:{F|+|C}][TYPE:{Int|Int}][DATA:{gay|10}]
+|                     [CHAIN:{C}][TYPE:{Int}][DATA:{12}]
+|                     [CHAIN:{C}][TYPE:{Int}][DATA:{12}]
+|              [CHAIN:{V|+|C|-|(|C|*|C|)|/|C}][TYPE:{Int|Int|Int|Int|Int}][DATA:{gg|72|10000|63|5}]
+|18|  If                   | MAIN.5           | [if|(|LG|)|{]
+|       [CHAIN:{C|==|C|&&|C|>|C| || |(|V|>=|F|&&|!|V|)}][TYPE:{Bool|Bool|Int|Int|Int|Int|Bool}][DATA:{true|false|2|1|Int|gay|test}]
+|              [CHAIN:{C}][TYPE:{Int}][DATA:{1}]
+|              [CHAIN:{C}][TYPE:{Int}][DATA:{1}]
+|19|  CloseSpace           | IF.6             | [}]
+|20|  ElseIf               | MAIN.5           | [el|if|(|LG|)|{]
+|       [CHAIN:{V|==|C| || |!|V|==|C|&&|C|!=|C}][TYPE:{Bool|Bool|Bool|Bool|Bool|Bool}][DATA:{test|false|test|true|true|true}]
+|21|  CloseSpace           | ELIF.7           | [}]
+|22|  Else                 | MAIN.5           | [el|{]
+|23|  CloseSpace           | ELSE.8           | [}]
+|24|  If                   | MAIN.5           | [if|(|LG|)|{]
+|       [CHAIN:{C|==|C|&&|C|>|C| || |(|V|>=|F|&&|!|V|)}][TYPE:{Bool|Bool|Int|Int|Int|Int|Bool}][DATA:{true|false|2|1|Int|gay|test}]
+|              [CHAIN:{C}][TYPE:{Int}][DATA:{1}]
+|              [CHAIN:{C}][TYPE:{Int}][DATA:{1}]
+|       [CHAIN:{C|<|C|&&|(|C|<=|C| || |!|V|!=|V|)}][TYPE:{Char|Char|Int|Int|Bool|Bool}][DATA:{'T'|'t'|5|5|test|test}]
+|25|  CloseSpace           | IF.9             | [}]
+|26|  CloseSpace           | MAIN.5           | [}]
+|27|  CloseSpace           | JOJO.3           | [}]
+
+---------------------------------------------------------------------------
+				Список индификаторов | Indefiers list
+<--[ИМЯ|ТИП|ВОЗ.ТИП|ПРОСТРАНСTВО ИМЁН|ФУНКЦИЯ?|КОЛ-ВО ПАРАМ.|ИНФОРМАЦИЯ]-->
+---------------------------------------------------------------------------
+|0|   foo          | 1 | 0 | GLOBAL.0     | TRUE  | 4   | $                   
+|1|   a            | 2 | 1 | GLOBAL.0     | FALSE | $$$ | $                   
+|2|   b            | 2 | 2 | GLOBAL.0     | FALSE | $$$ | $                   
+|3|   c            | 2 | 3 | GLOBAL.0     | FALSE | $$$ | $                   
+|4|   d            | 2 | 4 | GLOBAL.0     | FALSE | $$$ | $                   
+|5|   One          | 1 | 1 | GLOBAL.0     | TRUE  | 0   | $                   
+|6|   gay          | 1 | 1 | JOJO.3       | TRUE  | 2   | $                   
+|7|   j            | 2 | 1 | JOJO.3       | FALSE | $$$ | $                   
+|8|   k            | 2 | 1 | JOJO.3       | FALSE | $$$ | $                   
+|9|   str          | 0 | 3 | MAIN.5       | FALSE | $$$ | "some text + = - / * () || && ! < > {} []"
+|10|  gg           | 0 | 1 | MAIN.5       | FALSE | $$$ | 15                  
+|11|  i            | 0 | 1 | MAIN.5       | FALSE | $$$ | One                 
+|12|  Int          | 0 | 1 | MAIN.5       | FALSE | $$$ | $                   
+|13|  test         | 0 | 4 | MAIN.5       | FALSE | $$$ | true                

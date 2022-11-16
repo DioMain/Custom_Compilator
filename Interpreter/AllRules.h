@@ -68,6 +68,14 @@ namespace Data {
 
 		void Action() override;
 	};
+	class FuncDecNonParamsRule : public Rule {
+	public:
+
+		FuncDecNonParamsRule() : Rule("FuncDecNonParams",
+			{ LexemType::VarType, LexemType::Indefier, LexemType::ParamsIn, LexemType::NoneParams, LexemType::ParamsOut, LexemType::SpaceIn }) { }
+
+		void Action() override;
+	};
 	class FuncUseRule : public Rule {
 	public:
 

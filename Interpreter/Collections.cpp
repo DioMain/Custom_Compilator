@@ -80,6 +80,7 @@ namespace Collections {
 		rules.push_back(new Data::CloseSpaceRule());
 		rules.push_back(new Data::NamespaceDeclareRule());
 		rules.push_back(new Data::FuncDeclareRule());
+		rules.push_back(new Data::FuncDecNonParamsRule());
 		rules.push_back(new Data::FuncUseRule());
 		rules.push_back(new Data::MainDeclareRule());
 		rules.push_back(new Data::ReturnRule());
@@ -115,8 +116,10 @@ namespace Collections {
 					intermediate->commonChain.push_back(Data::LexemType::AnyParams);
 				else if (HaveVarInit)
 					intermediate->commonChain.push_back(Data::LexemType::VarInitParams);
-				else
+				else if (OtherExpression)
 					intermediate->commonChain.push_back(Data::LexemType::ExpressionParams);
+				else 
+					intermediate->commonChain.push_back(Data::LexemType::NoneParams);
 
 				params = false;
 			}				

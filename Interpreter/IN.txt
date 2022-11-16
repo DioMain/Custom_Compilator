@@ -6,6 +6,8 @@ void foo (int a, char b, string c, bool d){
 	return d;
 }
 
+int One() { }
+
 namespace JOJO {
 
 int gay(int j, int k) { return j + k; }
@@ -16,6 +18,8 @@ Main {
 	foo(gay(1, 2), '2', "asgs", true);
 	
 	int gg = 15;
+	
+	int i = One();
 	
 	int Int = gay(gay(12,12) + 10, gg + 72 - (10000 * 63) / 5);
 	

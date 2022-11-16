@@ -105,6 +105,21 @@ namespace Data {
 			AddLitIndex();
 		}
 	}
+	void FuncDecNonParamsRule::Action()
+	{
+		if (IndefierIsExist(GetLit(GetCurLitIndex()).data))
+			throw ERROR_THROW_IN_C(0, "Такая идентификатор уже сущетвует!", GetLexemFromChain(0).line, 0);
+
+		VarType var = analysator->GetVarTypeByChain(GetLexemFromChain(0).chain);
+
+		AddNewIndefier(IndefierData(GetLit(GetCurLitIndex()).data, IndefierType::Func, var, initspace, true));
+
+		IndefierData* funcInd = GetLastIndefier();
+
+		analysator->funcStack.push(funcInd);
+
+		AddLitIndex();
+	}
 	void FuncUseRule::Action()
 	{
 		if (!IndefierIsExist(GetLit(GetCurLitIndex()).data)) 
