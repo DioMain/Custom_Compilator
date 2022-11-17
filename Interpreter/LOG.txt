@@ -1,5 +1,5 @@
 <------------------ Протокол ------------------>
- Дата создания протокола: 16.11.2022 19:01:08
+ Дата создания протокола: 17.11.2022 15:02:13
 <------------- Входные параметры -------------->
  -in: IN.txt
  -out: OUT.txt
@@ -7,9 +7,9 @@
 
 <======= Проверка текста на доступность =======>
 <-------------- Исходные данные --------------->
- Кол-во символов: 190
- Кол-во строк: 17
- Проигнорировано: 0
+ Кол-во символов: 255
+ Кол-во строк: 16
+ Проигнорировано: 1
 
 <========= Проверка текста завершена! =========>
 <======== Лексический анализ завершен! ========>
@@ -17,18 +17,18 @@
 			Таблица лексем | Table of lexems
 <------------[ТИП|ЦЕПОЧКА|ПРОСТРАНСТВО ИМЁН]----------->
 --------------------------------------------------------
-|0| [16|//|GLOBAL.0] 
-|1| [2|int|GLOBAL.0] [3|INDEFIER|GLOBAL.0] [7|;|GLOBAL.0] 
-|2| [2|void|GLOBAL.0] [3|INDEFIER|GLOBAL.0] [8|(|GLOBAL.0] [10|)|GLOBAL.0] [11|{|GLOBAL.0] 
-|3| [3|INDEFIER|FUNC.func.1] [6|=|FUNC.func.1] [4|EXPRESSION|FUNC.func.1] [7|;|FUNC.func.1] 
-|4| [12|}|FUNC.func.1] 
-|5| [2|int|GLOBAL.0] [3|INDEFIER|GLOBAL.0] [8|(|GLOBAL.0] [2|int|GLOBAL.0] [3|INDEFIER|GLOBAL.0] [14|,|GLOBAL.0] [2|int|GLOBAL.0] [3|INDEFIER|GLOBAL.0] [10|)|GLOBAL.0] [11|{|GLOBAL.0] 
-|6| [17|return|FUNC.sum.2] [4|EXPRESSION|FUNC.sum.2] [7|;|FUNC.sum.2] 
-|7| [12|}|FUNC.sum.2] 
+|0| [2|int|GLOBAL.0] [3|INDEFIER|GLOBAL.0] [8|(|GLOBAL.0] [2|int|GLOBAL.0] [3|INDEFIER|GLOBAL.0] [10|)|GLOBAL.0] [11|{|GLOBAL.0] 
+|1| [17|return|FUNC.func.1] [4|EXPRESSION|FUNC.func.1] [7|;|FUNC.func.1] 
+|2| [12|}|FUNC.func.1] 
+|3| [2|bool|GLOBAL.0] [3|INDEFIER|GLOBAL.0] [8|(|GLOBAL.0] [10|)|GLOBAL.0] [11|{|GLOBAL.0] 
+|4| [17|return|FUNC.bfunc.2] [4|EXPRESSION|FUNC.bfunc.2] [7|;|FUNC.bfunc.2] 
+|5| [12|}|FUNC.bfunc.2] 
+|6| [2|int|GLOBAL.0] [3|INDEFIER|GLOBAL.0] [6|=|GLOBAL.0] [4|EXPRESSION|GLOBAL.0] [7|;|GLOBAL.0] 
+|7| [2|bool|GLOBAL.0] [3|INDEFIER|GLOBAL.0] [6|=|GLOBAL.0] [4|EXPRESSION|GLOBAL.0] [7|;|GLOBAL.0] 
 |8| [15|Main|GLOBAL.0] [11|{|GLOBAL.0] 
-|9| [3|INDEFIER|MAIN.3] [6|=|MAIN.3] [4|EXPRESSION|MAIN.3] [7|;|MAIN.3] 
-|10| [18|if|MAIN.3] [8|(|MAIN.3] [5|LOGIC_EXPRESSION|MAIN.3] [10|)|MAIN.3] [11|{|MAIN.3] 
-|11| [2|string|IF.4] [3|INDEFIER|IF.4] [6|=|IF.4] [4|EXPRESSION|IF.4] [7|;|IF.4] 
+|9| [2|int|MAIN.3] [3|INDEFIER|MAIN.3] [6|=|MAIN.3] [4|EXPRESSION|MAIN.3] [7|;|MAIN.3] 
+|10| [3|INDEFIER|MAIN.3] [6|=|MAIN.3] [4|EXPRESSION|MAIN.3] [7|;|MAIN.3] 
+|11| [18|if|MAIN.3] [8|(|MAIN.3] [5|LOGIC_EXPRESSION|MAIN.3] [10|)|MAIN.3] [11|{|MAIN.3] 
 |12| [12|}|IF.4] 
 |13| [12|}|MAIN.3] 
 |14| [20|$|] 
@@ -36,19 +36,20 @@
 		   Список литералов | Literals list
 #----Данные---------------------------------------------
 --------------------------------------------------------
-|0| a
-|1| func
-|2| a
-|3| 12
-|4| sum
-|5| a1
-|6| a2
-|7| a1 + a2
-|8| a
-|9| (1 + 2 * (2 + sum(2, 2)) / 3) - a
-|10| a == 2 || sum(2, 2) > 2
-|11| str
-|12| "2 2"
+|0| func
+|1| f
+|2| 2
+|3| bfunc
+|4| false == false
+|5| global
+|6| 500
+|7| bglobal
+|8| false
+|9| a
+|10| (65+func((1+2)*3)/3)*global-13252456
+|11| a
+|12| + 2 3 * 3 3
+|13| 12 > 14 && (!bfunc() == false || bglobal == false) || true
 
 <======= Синтаксический анализ завершен! =======>
 ---------------------------------------------------------------------------
@@ -56,26 +57,24 @@
 <--------------------[ИМЯ|ПРОСТРАНСТВО ИМЁН|ЦЕПОЧКА]---------------------->
 <-----------------------[ДЕРЕВО ОБХОДА ВЫРОЖЕНИЙ]------------------------->
 ---------------------------------------------------------------------------
-|0|   Comment              | GLOBAL.0         | [//]
-|1|   VarDeclare           | GLOBAL.0         | [VT|ID|;]
-|2|   FuncDecNonParams     | GLOBAL.0         | [VT|ID|(|)|{]
-|3|   VarAssign            | FUNC.func.1      | [ID|=|EX|;]
-|       [CHAIN:{C}][TYPE:{Int}][DATA:{12}]
-|4|   CloseSpace           | FUNC.func.1      | [}]
-|5|   FuncDeclare          | GLOBAL.0         | [VT|ID|(|VT|ID|,|VT|ID|)|{]
-|6|   Return               | FUNC.sum.2       | [re|EX|;]
-|       [CHAIN:{V|+|V}][TYPE:{Int|Int}][DATA:{a1|a2}]
-|7|   CloseSpace           | FUNC.sum.2       | [}]
+|0|   FuncDeclare          | GLOBAL.0         | [VT|ID|(|VT|ID|)|{]
+|1|   Return               | FUNC.func.1      | [re|EX|;]
+|       [CHAIN:{C}][TYPE:{Int}][DATA:{2}]
+|2|   CloseSpace           | FUNC.func.1      | [}]
+|3|   FuncDecNonParams     | GLOBAL.0         | [VT|ID|(|)|{]
+|4|   Return               | FUNC.bfunc.2     | [re|EX|;]
+|       [CHAIN:{C|C|==}][TYPE:{Bool|Bool}][DATA:{false|false}]
+|5|   CloseSpace           | FUNC.bfunc.2     | [}]
+|6|   VarDeclareAndInit    | GLOBAL.0         | [VT|ID|=|EX|;]
+|7|   VarDeclareAndInit    | GLOBAL.0         | [VT|ID|=|EX|;]
 |8|   MainDeclare          | GLOBAL.0         | [Ma|{]
-|9|   VarAssign            | MAIN.3           | [ID|=|EX|;]
-|       [CHAIN:{(|C|+|C|*|(|C|+|F|)|/|C|)|-|V}][TYPE:{Int|Int|Int|Int|Int|Int}][DATA:{1|2|2|sum|3|a}]
-|              [CHAIN:{C}][TYPE:{Int}][DATA:{2}]
-|              [CHAIN:{C}][TYPE:{Int}][DATA:{2}]
-|10|  If                   | MAIN.3           | [if|(|LG|)|{]
-|       [CHAIN:{V|==|C| || |F|>|C}][TYPE:{Int|Int|Int|Int}][DATA:{a|2|sum|2}]
-|              [CHAIN:{C}][TYPE:{Int}][DATA:{2}]
-|              [CHAIN:{C}][TYPE:{Int}][DATA:{2}]
-|11|  VarDeclareAndInit    | IF.4             | [VT|ID|=|EX|;]
+|9|   VarDeclareAndInit    | MAIN.3           | [VT|ID|=|EX|;]
+|       [CHAIN:{C|F|C|/|+|V|*|C|-}][TYPE:{Int|Int|Int|Int|Int}][DATA:{65|func|3|global|13252456}]
+|              [CHAIN:{C|C|+|C|*}][TYPE:{Int|Int|Int}][DATA:{1|2|3}]
+|10|  VarAssign            | MAIN.3           | [ID|=|EX|;]
+|       [CHAIN:{C|C|C|C|*|+}][TYPE:{Int|Int|Int|Int}][DATA:{2|3|3|3}]
+|11|  If                   | MAIN.3           | [if|(|LG|)|{]
+|       [CHAIN:{C|C|>|F|!|C|==|V|C|==||||&&|C|||}][TYPE:{Int|Int|Bool|Bool|Bool|Bool|Bool}][DATA:{12|14|bfunc|false|bglobal|false|true}]
 |12|  CloseSpace           | IF.4             | [}]
 |13|  CloseSpace           | MAIN.3           | [}]
 
@@ -83,9 +82,9 @@
 				Список индификаторов | Indefiers list
 <--[ИМЯ|ТИП|ВОЗ.ТИП|ПРОСТРАНСTВО ИМЁН|ФУНКЦИЯ?|КОЛ-ВО ПАРАМ.|ИНФОРМАЦИЯ]-->
 ---------------------------------------------------------------------------
-|0|   a            | 0 | 1 | GLOBAL.0     | FALSE | $$$ | $                   
-|1|   func         | 1 | 0 | GLOBAL.0     | TRUE  | 0   | $                   
-|2|   sum          | 1 | 1 | GLOBAL.0     | TRUE  | 2   | $                   
-|3|   a1           | 2 | 1 | GLOBAL.0     | FALSE | $$$ | $                   
-|4|   a2           | 2 | 1 | GLOBAL.0     | FALSE | $$$ | $                   
-|5|   str          | 0 | 3 | IF.4         | FALSE | $$$ | "2 2"               
+|0|   func         | 1 | 1 | GLOBAL.0     | TRUE  | 1   | $                   
+|1|   f            | 2 | 1 | GLOBAL.0     | FALSE | $$$ | $                   
+|2|   bfunc        | 1 | 4 | GLOBAL.0     | TRUE  | 0   | $                   
+|3|   global       | 0 | 1 | GLOBAL.0     | FALSE | $$$ | 500                 
+|4|   bglobal      | 0 | 4 | GLOBAL.0     | FALSE | $$$ | false               
+|5|   a            | 0 | 1 | MAIN.3       | FALSE | $$$ | $                   

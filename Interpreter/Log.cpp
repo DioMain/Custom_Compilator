@@ -212,7 +212,7 @@ namespace Log {
 			ch = "&&";
 			break;
 		case Data::ExpressionElementType::LOr:
-			ch = " || ";
+			ch = "||";
 			break;
 		case Data::ExpressionElementType::LNot:
 			ch = '!';

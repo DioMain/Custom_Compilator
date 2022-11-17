@@ -15,7 +15,6 @@
 #include "Error.h"
 #include "ParmAnalyzer.h"
 #include "InFile.h"
-#include "PolandNatation.h"
 
 #include "Lexem.h"
 #include "Literal.h"
@@ -29,5 +28,7 @@
 
 #include "LexemAnalyser.h"
 #include "SyntaxAnalysator.h"
+
+#include "PolandNatation.h"
 
 #include "Log.h"

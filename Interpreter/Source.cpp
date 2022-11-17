@@ -75,6 +75,11 @@ int _tmain(int argc, TCHAR* argv[]) {
 
 		synAnalyser.Invoke();
 
+		for (size_t i = 0; i < resultRules->GetSize(); i++)
+		{
+			poland::PolandNatation::TranslateRecursive(resultRules->Get(i).expressionsRoot);
+		}
+
 		cout << "<======= Синтаксический анализ завершен! =======>" << endl << endl;
 		log.WriteLine("\n<======= Синтаксический анализ завершен! =======>", "");
 

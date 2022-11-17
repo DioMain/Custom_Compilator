@@ -1,236 +1,134 @@
 #include "stdafx.h"
 
 using namespace std;
+using namespace Data;
+
+
 
 namespace poland {
-	void PolandNatation::CONVERT()
-	{
-		stack<char> operators;
 
-		string result;
+	void PolandNatation::TranslateRecursive(std::vector<Data::ExpressionNode*> NodeVec) {
 
-		string checkstr;
+		for (size_t i = 0; i < NodeVec.size(); i++)
+		{
+			if (NodeVec[i]->subExpressions.size() > 0)
+				TranslateRecursive(NodeVec[i]->subExpressions);
 
-		bool READING = true,
-			OPERATOR = false,
+			NodeVec[i] = Translate(NodeVec[i]);
+		}
+	}
+
+	ExpressionNode* PolandNatation::Translate(ExpressionNode* node) {
+		stack<EET> operatorsStack;
+
+		vector<EET> result;
+		vector<string> data;
+		vector<VarType> types;
+
+		bool OPERATOR = false,
 			FIND_CLOSE = false;
 
-
-		int i = 0;
-		char cur;
+		int index = 0;
+		int dataIndex = 0;
+		EET current;
 
 		do
 		{
-			cur = str[i];
+			current = node->elementChain[index];
 
-			if (cur == ' ' || IsMathOperator(cur) || cur == '\0') READING = false;
+			if (current != EET::Const && current != EET::Var && current != EET::Func)
+				OPERATOR = true;
 
-			if (IsMathOperator(cur)) OPERATOR = true;
+			if (OPERATOR) {
+				if ((operatorsStack.empty() && current == EET::OutBrack))
+					throw ERROR_THROW_C(0, "Не верное вырожение");
 
-			if (READING) checkstr += cur;
-			else {
-				if (checkstr.size() > 0) {
-					// Ошибка если вырожение не число
-					if (!IsNumber(checkstr)) {
-						error = Error::PolandError(550, "Не верное вырожение", i);
-						failed = true;
+				if (operatorsStack.empty() || current == EET::InBrack) 
+					operatorsStack.push(current);
+				else if (current == EET::OutBrack) {
+					FIND_CLOSE = true;
 
-						return;
-					}					
-
-					result += checkstr;
-					result += ' ';
-
-					checkstr.clear();
-				}
-
-				if (OPERATOR) {
-					// Ошибка если неожиданно вретилась закр. скобка
-					if ((operators.empty() && cur == ')')) {
-						error = Error::PolandError(550, "Не верное вырожение", i);
-						failed = true;
-
-						return;
-					}
-
-					if (operators.empty() || cur == '(') operators.push(cur);
-					else if (cur == ')') {
-						FIND_CLOSE = true;
-
-						while (operators.top() != '(')
-						{
-							result += operators.top();
-							result += ' ';
-
-							operators.pop();
-
-							if (operators.empty()) {
-								FIND_CLOSE = false;
-								break;
-							}
-						}
-
-						// Ошибка если откр. скобка не была закрыта
-						if (!FIND_CLOSE) {
-							error = Error::PolandError(550, "Не верное вырожение", i);
-							failed = true;
-
-							return;
-						}
-
-						operators.pop();
-					}
-					else {
-						while (GetOperatorPriority(cur) <= GetOperatorPriority(operators.top()))
-						{
-							// Ошибка если на этом этапе встретиться откр. или закр. скобка
-							if (operators.top() == '(' || operators.top() == ')') {
-								error = Error::PolandError(550, "Не верное вырожение", i);
-								failed = true;
-
-								return;
-							}
-
-							result += operators.top();
-							result += ' ';
-
-							operators.pop();
-
-							if (operators.empty()) break;
-						}
-
-						operators.push(cur);
-					}
-				}
-			}
-
-			READING = true;
-			OPERATOR = false;
-
-			i++;
-		} while (cur != '\0');
-
-		while (!operators.empty())
-		{
-			// Ошибка если на этом этапе встретиться откр. или закр. скобка
-			if (operators.top() == '(' || operators.top() == ')') {
-				error = Error::PolandError(550, "Не верное вырожение", 0);
-				failed = true;
-
-				return;
-			}
-
-			result += operators.top();
-
-			if (operators.size() > 1) result += ' ';
-
-			operators.pop();
-		}
-
-		str = result;
-	}
-
-	bool PolandNatation::IsMathOperator(char letter)
-	{
-		return letter == '(' || letter == ')' || letter == '+' || letter == '-' || letter == '/' || letter == '*';
-	}
-
-	bool PolandNatation::IsNumber(string str)
-	{
-		for (short i = 0; i < str.size(); i++)
-		{
-			if (!(str[i] >= 0x30 && str[i] <= 0x39)) return false;
-		}
-
-		return true;
-	}
-
-	int PolandNatation::GetOperatorPriority(char oper)
-	{
-		switch (oper)
-		{
-		case '(':
-			return 1;
-		case ')':
-			return 1;
-		case '+':
-			return 2;
-		case '-':
-			return 2;
-		case '/':
-			return 3;
-		case '*':
-			return 3;
-		default:
-			return 0;
-		}
-	}
-
-	int PolandNatation::CalculateResult()
-	{
-		if (str.empty()) return 0;
-
-		strstream stream;
-
-		stack<int> numbers;
-
-		string check;
-
-		int a, b, c;
-
-		for (int i = 0; i < str.size() + 1; i++)
-		{
-			if (str[i] != ' ' && str[i] != '\0') check += str[i];
-			else {
-				if (check.empty()) break;
-
-				if (IsNumber(check)) {
-					a = 0;
-
-					for (int j = 0; j < check.size(); j++)
+					while (operatorsStack.top() != EET::InBrack)
 					{
-						a += (check[j] - 0x30) * (pow(10, check.size() - 1 - j));
+						result.push_back(operatorsStack.top());
+
+						operatorsStack.pop();
+
+						if (operatorsStack.empty()) {
+							FIND_CLOSE = false;
+							break;
+						}
 					}
 
-					numbers.push(a);
+					// Ошибка если откр. скобка не была закрыта
+					if (!FIND_CLOSE) 
+						throw ERROR_THROW_C(0, "Не верное вырожение");
+
+					operatorsStack.pop();
 				}
 				else {
-					// Ошибка если не хватает чисел для вычисления
-					if (numbers.size() < 2) {
-						error = Error::PolandError(550, "Не верное вырожение", i);
-						failed = true;
-
-						return 0;
-					}
-
-					b = numbers.top();
-					numbers.pop();
-					a = numbers.top();
-					numbers.pop();
-
-					switch (check[0])
+					while (GetOperatorPriority(current) <= GetOperatorPriority(operatorsStack.top()))
 					{
-					case '+':
-						c = a + b;
-						break;
-					case '-':
-						c = a - b;
-						break;
-					case '*':
-						c = a * b;
-						break;
-					case '/':
-						c = (int)round(a / b);
-						break;
+						// Ошибка если на этом этапе встретиться откр. или закр. скобка
+						if (operatorsStack.top() == EET::InBrack || operatorsStack.top() == EET::OutBrack) 
+							throw ERROR_THROW_C(0, "Не верное вырожение");
+
+						result.push_back(operatorsStack.top());
+
+						operatorsStack.pop();
+
+						if (operatorsStack.empty()) 
+							break;
 					}
 
-					numbers.push(c);
+					operatorsStack.push(current);
 				}
-
-				check.clear();
 			}
+			else {
+				result.push_back(current);
+				data.push_back(node->elementsData[dataIndex]);
+				types.push_back(node->typeChain[dataIndex]);
+
+				dataIndex++;
+			}
+
+			OPERATOR = false;
+
+			index++;
+
+		} while (index < node->elementChain.size());
+
+		while (!operatorsStack.empty())
+		{
+			// Ошибка если на этом этапе встретиться откр. или закр. скобка
+			if (operatorsStack.top() == EET::InBrack || operatorsStack.top() == EET::OutBrack)
+				throw ERROR_THROW_C(0, "Не верное вырожение");
+
+			result.push_back(operatorsStack.top());
+
+			operatorsStack.pop();
 		}
 
-		return numbers.top();
+		node->elementChain = result;
+		node->elementsData = data;
+		node->typeChain = types;
+
+		return node;
+	}
+
+	int PolandNatation::GetOperatorPriority(ExpressionElementType element) {
+		if (element == EET::Const || element == EET::Var || element == EET::Func)
+			return 0;
+		else if (element == EET::InBrack || element == EET::OutBrack)
+			return 1;
+		else if (element == EET::Plus || element == EET::Minus ||
+			element == EET::LOr || element == EET::LAnd)
+			return 2;
+		else
+			return 3;
+	}
+
+	bool PolandNatation::TryCalculate(ExpressionNode* node) {
+		return true;
 	}
 }

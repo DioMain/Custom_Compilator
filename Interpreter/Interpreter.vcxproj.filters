@@ -45,9 +45,6 @@
     <ClCompile Include="Log.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="PolandNatation.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="InFile.cpp">
       <Filter>Исходные файлы\FirstState</Filter>
     </ClCompile>
@@ -72,6 +69,9 @@
     <ClCompile Include="SyntaxAnalysator.cpp">
       <Filter>Исходные файлы\SyntaxState</Filter>
     </ClCompile>
+    <ClCompile Include="PolandNatation.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -81,9 +81,6 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Log.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="PolandNatation.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="InFile.h">
@@ -121,6 +118,9 @@
     </ClInclude>
     <ClInclude Include="SyntaxAnalysator.h">
       <Filter>Файлы заголовков\SyntaxState_h</Filter>
+    </ClInclude>
+    <ClInclude Include="PolandNatation.h">
+      <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

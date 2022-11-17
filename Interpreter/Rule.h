@@ -1,5 +1,7 @@
 #pragma once
 
+#define EET Data::ExpressionElementType
+
 namespace Data {
 	class Rule;
 

@@ -1,30 +1,17 @@
 #pragma once
 
 namespace poland {
-	class PolandNatation
+
+	static class PolandNatation
 	{
 	public:
 
-		Error::PolandError error;
+		static void TranslateRecursive(std::vector<Data::ExpressionNode*> NodeVec);
 
-		bool failed;
+		static Data::ExpressionNode* Translate(Data::ExpressionNode* node);
 
-		std::string ToString() { return str; }
+		static int GetOperatorPriority(Data::ExpressionElementType element);
 
-		PolandNatation(std::string str) : str(str), error(), failed(false) { CONVERT(); }
-
-		int CalculateResult();
-
-		static int GetOperatorPriority(char oper);
-
-		static bool IsNumber(std::string str);
-
-		static bool IsMathOperator(char letter);
-
-	private:
-
-		std::string str;
-
-		void CONVERT();
+		static bool TryCalculate(Data::ExpressionNode* node);
 	};
 }

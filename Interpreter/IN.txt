@@ -1,18 +1,17 @@
-// fist
+int func(int f) { return 2; }
 
-int a;
+bool bfunc() { return false == false; }
 
-void func() 
-{ 
-	a = 12;
-}
-
-int sum(int a1, int a2) { return a1 + a2; }
+int global = 500;
+bool bglobal = false;
 
 Main {
-	a = (1 + 2 * (2 + sum(2, 2)) / 3) - a;
+
+
+	int a =(65+func((1+2)*3)/3)*global-13252456;
 	
-	if (a == 2 || sum(2, 2) > 2) {
-		string str = "2 2";
+	a = + 2 3 *  3 3;
+	
+	if (12 > 14 && (!bfunc() == false || bglobal == false) || true) {
 	}
 }

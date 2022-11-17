@@ -176,58 +176,59 @@ namespace SyntaxAnalysis {
 							elementReturnType = ind->dataType;
 							elementType = ExpressionElementType::Func;
 
-							while (subLetter != ')' || subExpression)
-							{
-								subLetter = chain[index + offset];
+							if (ind->params.size() == 0)
+								offset = 2;
+							else {
+								while (subLetter != ')' || subExpression)
+								{
+									subLetter = chain[index + offset];
 
-								if (subLetter == '\0')
-									throw ERROR_THROW_IN(212, currentLexemChain[0].line, 0);
+									if (subLetter == '\0')
+										throw ERROR_THROW_IN(212, currentLexemChain[0].line, 0);
 
-								if (subLetter == ')') {
-									if (subBreackets <= 0) subExpression = false;
-									else subBreackets--;
-								}
-
-								if (subLetter == ',' && subExpression && subBreackets <= 0) {
-									if (debag)
-										for (size_t i = 0; i < subWord.size(); i++) // DEBAG
-											deChain0.erase(deChain0.begin()); // DEBAG
-
-									if (!subWord.empty()) {
-										current->subExpressions.push_back(ParsingExpression(rule, subWord, ind->params[paramsCount]->dataType));
-										paramsCount++;
-
-										if (debag)
-											cout << setw(25) << left << "RETURN STATE" // DEBAG
-											<< setw(30) << left << "-------"
-											<< setw(20) << left << "-------" << endl; // DEBAG
+									if (subLetter == ')') {
+										if (subBreackets <= 0) subExpression = false;
+										else subBreackets--;
 									}
-									subWord.clear();
+
+									if (subLetter == ',' && subExpression && subBreackets <= 0) {
+
+										if (!subWord.empty()) {
+											current->subExpressions.push_back(ParsingExpression(rule, subWord, ind->params[paramsCount]->dataType));
+											paramsCount++;
+
+											if (debag)
+												cout << setw(25) << left << "RETURN STATE" // DEBAG
+												<< setw(30) << left << "-------"
+												<< setw(20) << left << "-------" << endl; // DEBAG
+										}
+										subWord.clear();
+									}
+									else if (subExpression)
+										subWord.push_back(subLetter);
+
+									if (subExpression && subLetter == '(') subBreackets++;
+
+									if (subLetter == '(') {
+										subExpression = true;
+									}
+
+									offset++;
 								}
-								else if (subExpression)
-									subWord.push_back(subLetter);
 
-								if (subExpression && subLetter == '(') subBreackets++;
+								if (!subWord.empty()) {
+									current->subExpressions.push_back(ParsingExpression(rule, subWord, ind->params[paramsCount]->dataType));
+									paramsCount++;
 
-								if (subLetter == '(') {
-									subExpression = true;
-									if (debag) deChain0.erase(deChain0.begin()); // DEBAG
+									if (debag)
+										cout << setw(25) << left << "RETURN STATE"	// DEBAG
+										<< setw(30) << left << "-------"
+										<< setw(20) << left << "-------" << endl; // DEBAG
 								}
-
-								offset++;
 							}
 
-							if (!subWord.empty()) {
-								current->subExpressions.push_back(ParsingExpression(rule, subWord, ind->params[paramsCount]->dataType));
-								paramsCount++;
-
-								if (debag)
-									cout << setw(25) << left << "RETURN STATE"	// DEBAG
-									<< setw(30) << left << "-------"
-									<< setw(20) << left << "-------" << endl; // DEBAG
-							}
 							if (debag)
-								for (size_t i = 0; i < subWord.size(); i++)	// DEBAG
+								for (size_t i = 0; i < offset; i++)	// DEBAG
 									deChain0.erase(deChain0.begin());	// DEBAG
 
 							if (paramsCount != ind->params.size())
